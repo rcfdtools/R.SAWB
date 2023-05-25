@@ -4,3 +4,6 @@ tabulate
 dbfread
 geopandas
 matplotlib
+distributed
+xarray
+scipy

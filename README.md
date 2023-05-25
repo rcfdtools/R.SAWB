@@ -1,6 +1,8 @@
 # R.SAWB
 Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)  
-https://cds.climate.copernicus.eu/
+
+Data source: https://cds.climate.copernicus.eu/
+
 
 ## Search1: ERA5-Land monthly averaged data from 1950 to present
 	
@@ -35,3 +37,4 @@ https://cds.climate.copernicus.eu/
 * https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 * [How to calculate PET, SPI, SPEI and Palmer drought indices in Python?](https://www.youtube.com/watch?v=WMF45KQiQAM)
 * [Standardized Precipitation Index (SPI) | Drought & Flood Monitor](https://www.youtube.com/watch?v=zYT5VpQWJAQ)
+* https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi
