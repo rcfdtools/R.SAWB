@@ -56,7 +56,7 @@ year_min = 2010
 year_max = 2012
 p_max_plot = 250  # Maximum value for plotting ramp
 show_plot = False  # Verbose plot
-save_spi_nc = True
+save_spi_nc = False
 
 # Procedure
 da_data = xr.open_dataset(path+nc_file)
@@ -71,12 +71,12 @@ for i in times:
     for year in range(year_min, year_max + 1):
         print('Processing SPI_%s_%s' % (str(i), str(year)))
         if p_plot:
-            da_data[feature_name].sel(time=str(year)).plot(cmap='Blues', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
+            da_data[feature_name].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
             plt.ylim(lim_south, lim_north)
             plt.xlim(lim_west, lim_east)
             plt.savefig('graph/' + 'P_' + str(year) + '.png')
             if show_plot: plt.show()
-        da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='RdBu', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
+        da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='twilight_shifted', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
         plt.ylim(lim_south, lim_north)
         plt.xlim(lim_west, lim_east)
         plt.savefig('graph/' + 'SPI_' + str(i) + '_' + str(year) + '.png')
@@ -84,4 +84,6 @@ for i in times:
         plt.close('all')
     p_plot = False
 print(da_data)
-if save_spi_nc: da_data.to_netcdf('spi.nc')
+if save_spi_nc:
+    print('Exporting spi.nc')
+    da_data.to_netcdf('spi.nc')

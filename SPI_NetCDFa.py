@@ -17,7 +17,8 @@ def spi(ds, thresh, dimension):
 
     # Natural log of moving averages
     ds_In = np.log(ds_ma)
-    ds_In = ds_In.where(np.isinf(ds_In) == False)  # = np.nan  #Change infinity to NaN
+    ds_In = ds_In.where(np.isinf(ds_In) == np.nan)  # = np.nan  #Change infinity to NaN
+    #ds_In = ds_In.where(np.isinf(ds_In) == False)  # = np.nan  #Change infinity to NaN
 
     #ds_mu = ds_ma.mean(dimension)
 
@@ -73,15 +74,17 @@ for i in times:
     for year in range(year_min, year_max + 1):
         print('Processing SPI_%s_%s' % (str(i), str(year)))
         if p_plot:
-            da_data['tp_mm'].sel(time=str(year)).plot(cmap='Blues', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
+            da_data['tp_mm'].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
             plt.ylim(lim_south, lim_north)
             plt.xlim(lim_west, lim_east)
             plt.savefig('.spi/graph/' + 'P_' + str(year) + '.png')
             if show_plot: plt.show()
-        da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='RdBu', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
+        da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='twilight_shifted', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
         plt.savefig('.spi/graph/' + 'SPI_' + str(i) + '_' + str(year) + '.png')
         if show_plot: plt.show()
         plt.close('all')
     p_plot = False
 print(da_data)
-if save_spi_nc: da_data.to_netcdf('.spi/spi.nc')
+if save_spi_nc:
+    print('Exporting spi.nc')
+    da_data.to_netcdf('.spi/spi.nc')
