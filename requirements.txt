@@ -7,3 +7,4 @@ matplotlib
 distributed
 xarray
 scipy
+pandas_profiling

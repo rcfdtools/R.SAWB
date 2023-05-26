@@ -36,7 +36,7 @@ def spi(ds, thresh):
 
     return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
 
-data = pd.read_csv('.temp/new_data.csv', usecols=[2])
+data = pd.read_csv('new_data.csv', usecols=[2])
 data = data.set_index(pd.date_range('1959', '1989', freq='M'))
 print(data)
 show_plot = True  # Verbose plot

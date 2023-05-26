@@ -58,7 +58,7 @@ year_max = 2022
 show_plot = True  # Verbose plot
 
 # SPI calculation
-ds_RR_ze = ds_RR.sel(longitude=slice(lim_west,lim_east), latitude=slice(lim_north, lim_south), time=slice(str(year_min), str(year_max)))
+ds_RR_ze = ds_RR.sel(longitude=slice(lim_west,lim_east), latitude=slice(lim_south, lim_north), time=slice(str(year_min), str(year_max)))
 da_data['spi_'+str(i)] = spi(ds_RR_ze, i, 'time')[0]
 print('\n')
 print(da_data)
