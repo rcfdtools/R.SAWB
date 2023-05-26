@@ -10,4 +10,5 @@
 .venvPython311/
 .grib/*.grib
 .nc/*.nc
+.temp/*.nc
 

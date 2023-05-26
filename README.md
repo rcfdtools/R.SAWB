@@ -38,3 +38,4 @@ Data source: https://cds.climate.copernicus.eu/
 * [How to calculate PET, SPI, SPEI and Palmer drought indices in Python?](https://www.youtube.com/watch?v=WMF45KQiQAM)
 * [Standardized Precipitation Index (SPI) | Drought & Flood Monitor](https://www.youtube.com/watch?v=zYT5VpQWJAQ)
 * https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi
+* https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.03/cruts.1905011326.v4.03/pre/
