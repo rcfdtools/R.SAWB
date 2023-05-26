@@ -11,4 +11,5 @@
 .grib/*.grib
 .nc/*.nc
 .temp/*.nc
+.spi/*.nc
 

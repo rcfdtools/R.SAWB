@@ -60,3 +60,4 @@ Data source: https://cds.climate.copernicus.eu/
 * https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.03/cruts.1905011326.v4.03/pre/
 * https://stackoverflow.com/questions/57507832/unable-to-allocate-array-with-shape-and-data-type
 * https://ado.eurac.edu/spi-6
+* https://matplotlib.org/stable/tutorials/colors/colormaps.html
