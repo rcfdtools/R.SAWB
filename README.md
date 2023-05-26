@@ -40,7 +40,9 @@ Data source: https://cds.climate.copernicus.eu/
 5. Under `Performance Options`, navigate to the `Advanced` tab.
 6. Under the `Virtual memory` section, clic on `Change`.
 7. Uncheck the box `Automatically manage paging file size for all drives`.
-8. Select the Drive C: and set a virtual memory custom size with Initial size in 5120Mb and Maximum size in 10240Mb.  
+8. Select the Drive C: and set a virtual memory custom size with Initial size in 5120Mb and Maximum size in 10240Mb. 
+9. Clic on `OK`, `Apply`, `Ok`.
+10. Restart your Windows system.
 
 > You can also set a custom size virtual memory for the drives where your data processing is running.
 > 
