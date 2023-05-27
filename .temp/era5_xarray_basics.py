@@ -13,7 +13,7 @@ show_plot = True  # Verbose plot
 point_latitude = 4.6
 point_longitude = -73.7
 prefix_file = 'era5'
-# Study zone
+# Study zone limits
 lim_north = 5.735
 lim_south = 3.625
 lim_east = -72.875
