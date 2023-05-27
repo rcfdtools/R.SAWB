@@ -18,6 +18,13 @@ Data source: https://cds.climate.copernicus.eu/
 * Sub-region extraction: North 16°, West -96°, South -58°, East -25°
 * Format:GRIB & NetCDF
 
+Limits for SPI
+
+* lim_north = 16
+* lim_south = -58
+* lim_east = -25
+* lim_west = -96
+
 
 ### Search 2: ERA5 hourly data on single levels from 1940 to present (land & seas)
 
@@ -61,3 +68,6 @@ Data source: https://cds.climate.copernicus.eu/
 * https://stackoverflow.com/questions/57507832/unable-to-allocate-array-with-shape-and-data-type
 * https://ado.eurac.edu/spi-6
 * https://matplotlib.org/stable/tutorials/colors/colormaps.html
+* [Read and plot netCDF file in python | easy method to handle netcdf files - Include vector limits](https://www.youtube.com/watch?v=eoIS68sSvGI)
+* [Xarray Basics | Fundamentals of Xarray That Could Be Helpful for Data Science and Analytics](https://www.youtube.com/watch?v=1a2yqIltVT8)
+* [Timeseries Analysis using Python Xarray](https://www.youtube.com/watch?v=Ndfo967JgSY)

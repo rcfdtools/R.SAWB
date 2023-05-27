@@ -48,12 +48,13 @@ path = ''
 nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
 times = [1, 3]  # SPI index #
 feature_name = 'pre'
-lim_north = 16
-lim_south = -58
-lim_east = -25
-lim_west = -96
+lim_north = 5.735
+lim_south = 3.625
+lim_east = -72.875
+lim_west = -74.875
 year_min = 2010
 year_max = 2012
+dpi = 200  # Save plot resolution
 p_max_plot = 250  # Maximum value for plotting ramp
 show_plot = False  # Verbose plot
 save_spi_nc = False
@@ -74,12 +75,12 @@ for i in times:
             da_data[feature_name].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
             plt.ylim(lim_south, lim_north)
             plt.xlim(lim_west, lim_east)
-            plt.savefig('graph/' + 'P_' + str(year) + '.png')
+            plt.savefig('graph/' + 'P_' + str(year) + '.png', dpi=dpi)
             if show_plot: plt.show()
         da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='twilight_shifted', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
         plt.ylim(lim_south, lim_north)
         plt.xlim(lim_west, lim_east)
-        plt.savefig('graph/' + 'SPI_' + str(i) + '_' + str(year) + '.png')
+        plt.savefig('graph/' + 'SPI_' + str(i) + '_' + str(year) + '.png', dpi=dpi)
         if show_plot: plt.show()
         plt.close('all')
     p_plot = False
