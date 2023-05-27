@@ -1,5 +1,6 @@
-import warnings
+# For ERA-5 reanalysis data
 
+import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
 import xarray as xr
@@ -87,7 +88,7 @@ ds_RR = da_data['tp_mm']
 print(da_data)
 p_plot = True  # Print precipitation control
 for i in times:
-    ds_RR_ze = ds_RR.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_south, lim_north),
+    ds_RR_ze = ds_RR.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_north, lim_south),
                                  time=slice(str(year_min), str(year_max)))
     da_data['spi_' + str(i)] = spi(ds_RR_ze, i, 'time')[9]
     #da_data['spi_' + str(i)] = spi(ds_RR_ze, i, 'time')[0]
@@ -101,6 +102,8 @@ for i in times:
             plt.savefig('.spi/graph/' + 'P_' + str(year) + '.png', dpi=dpi)
             if show_plot: plt.show()
         da_data['spi_' + str(i)].sel(time=str(year)).plot(cmap='twilight_shifted', col='time', col_wrap=4, vmin=-2.5, vmax=2.5)
+        plt.ylim(lim_south, lim_north)
+        plt.xlim(lim_west, lim_east)
         plt.savefig('.spi/graph/' + 'SPI_' + str(i) + '_' + str(year) + '.png', dpi=dpi)
         if show_plot: plt.show()
         plt.close('all')
