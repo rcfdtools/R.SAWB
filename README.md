@@ -3,6 +3,27 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)
 
 Data source: https://cds.climate.copernicus.eu/
 
+
+## Pending tasks
+
+* Log record separators
+* Project point and study zone over R.SAWB/.poi
+* Scientific Markdown report for each poi or zone
+* Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
+
+
+## [spi.py](.src/spi.py) features
+
+* Execution over different data sources as CRU or ERA-5 reanalysis.
+* Maximum precipitation value for map plots
+* Spatial zone to evaluate
+* Temporal time serie segmentation
+* Export the original features and the SPI features in NetCFD (.nc) and comma separated values (.csv)
+* SPI calculation over multiple moving window of n months defined by the user
+* Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
+* Exception control for years outside the available data limit, p.ej, the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
+
+
 ## Searching data from ERA-5
 
 ### Search 1: ERA5-Land monthly averaged data from 1950 to present
@@ -18,12 +39,19 @@ Data source: https://cds.climate.copernicus.eu/
 * Sub-region extraction: North 16°, West -96°, South -58°, East -25°
 * Format:GRIB & NetCDF
 
-Limits for SPI
+Limits for SPI - South America
 
 * lim_north = 16
 * lim_south = -58
 * lim_east = -25
 * lim_west = -96
+
+Limits for SPI - Bogotá Chingaza
+
+* lim_north = 5.735
+* lim_south = 3.625
+* lim_east = -72.875
+* lim_west = -74.875
 
 
 ### Search 2: ERA5 hourly data on single levels from 1940 to present (land & seas)
@@ -56,12 +84,18 @@ Limits for SPI
 > The specific virtual memory size depends on the size of your NetCDF files.
 
 
+## Execution procedure
+
+1. From ArcGIS for Desktop 10.2.2, run the ArcToolBox `SAWB.tbx/a. Monthly Balance`
+2. From Python run the script `.src/spi.py`
+3. From Python run the script `.src/sawb_monthly_poi.py`
+
+
 ## References
 
 * https://www.caee.utexas.edu/prof/maidment/gishyd97/atmos/atmos.htm
 * [Conjoint Analysis of Surface and Atmospheric Water Balances in the Andes-Amazon System](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2017WR021338)
 * https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
-* [How to calculate PET, SPI, SPEI and Palmer drought indices in Python?](https://www.youtube.com/watch?v=WMF45KQiQAM)
 * [Standardized Precipitation Index (SPI) | Drought & Flood Monitor](https://www.youtube.com/watch?v=zYT5VpQWJAQ)
 * https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi
 * https://crudata.uea.ac.uk/cru/data/hrg/cru_ts_4.03/cruts.1905011326.v4.03/pre/
@@ -71,3 +105,5 @@ Limits for SPI
 * [Read and plot netCDF file in python | easy method to handle netcdf files - Include vector limits](https://www.youtube.com/watch?v=eoIS68sSvGI)
 * [Xarray Basics | Fundamentals of Xarray That Could Be Helpful for Data Science and Analytics](https://www.youtube.com/watch?v=1a2yqIltVT8)
 * [Timeseries Analysis using Python Xarray](https://www.youtube.com/watch?v=Ndfo967JgSY)
+* https://docs.xarray.dev/en/stable/user-guide/plotting.html
+* https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia

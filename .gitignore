@@ -12,4 +12,5 @@
 .nc/*.nc
 .temp/*.nc
 .spi/*.nc
+.spi/*.csv
 
