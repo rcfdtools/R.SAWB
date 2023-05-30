@@ -16,7 +16,8 @@
 !era5_ze.csv
 !cru_ze.nc
 !cru_ze.csv
-
+.**/*.nc
+.**/*.csv
 
 # Some samples
 # http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files
