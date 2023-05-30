@@ -6,17 +6,17 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-
-* Conversion units, e.g. m to mm
-* Automatically creates the ppoi folder structure
-* Compress .nc & .csv into .zip files (95MB part files)
-* General statistics over the data source file .nc and the study zone
 * Point processing = True
 * Polygon processing = True
+* Plot title with datasource information
+* Creates the PPOI folder structure
+* Purge last results before a new running
+* Compress .nc & .csv into .zip files (95MB part files)
+* General statistics over the data source file .nc and the study zone
 * Log record separators in console
 * Location map, world. Rectangle data source, rectangle study zone, point
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
-* Ppoi GeoJson map
+* PPOI GeoJson map
 * Gift and video animation for temporal map data
 * Integrated script for run all the proceses
 * Scientific Markdown report for each poi or zone
@@ -34,6 +34,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
 * Research point and study zone over `.ppoi/#/ppoi.py`. Parameters and description over a .py file with client, order #, date and description
+* Units conversion, e.g. m to mm for rain or evaporation parameters
 
 
 ## Searching data from ERA5
@@ -51,14 +52,21 @@ Data source: https://cds.climate.copernicus.eu/
 * Sub-region extraction: North 16°, West -96°, South -58°, East -25°
 * Format:GRIB & NetCDF
 
-Limits for SPI - South America
+Limits - South America
 
-* lim_north = 16
-* lim_south = -58
-* lim_east = -25
-* lim_west = -96
+lim_north = 16
+lim_south = -58
+lim_east = -25
+lim_west = -96
 
-Limits for SPI - Bogotá Chingaza
+Limits - Colombia - South America
+
+lim_north = 14
+lim_south = -4.8
+lim_east = -66
+lim_west = -82.5
+
+Limits - Colombia - South America - Bogotá Chingaza
 
 * lim_north = 5.735
 * lim_south = 3.625

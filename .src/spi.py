@@ -51,7 +51,6 @@ def spi(ds, thresh, dimension):
 ppoi_num = 1  # ppoi number to process
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
-print('Processing %s' %ppoi_path)
 sys.path.insert(0,ppoi_path)
 import ppoi
 nc_file = ppoi.nc_file
@@ -66,6 +65,7 @@ lim_east = ppoi.lim_east
 lim_west = ppoi.lim_west
 year_min = ppoi.year_min
 year_max = ppoi.year_max
+units_mult = ppoi.units_mult
 dpi = 128  # Save plot resolution
 show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
@@ -74,20 +74,24 @@ spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', 
 
 
 # Procedure
+print('Processing PPOI: %s' %ppoi_path,
+      '\nData file: %s' %nc_file,
+      '\nUnits conversion multiplier: %f' %units_mult)
 da_data = xr.open_dataset(data_path+nc_file)
+da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
 ds_RR = da_data[feature_name[data_source_num]]
 year_min_data = da_data['time'].min().values
 year_min_data = pd.to_datetime(year_min_data).year
 year_max_data = da_data['time'].max().values
 year_max_data = pd.to_datetime(year_max_data).year
 if year_min_data > year_min:
-    print('Attention: your enter minimum year value %d has to be change for %d' %(year_min, year_min_data))
+    print('\nAttention: your enter minimum year value %d has to be change for %d' %(year_min, year_min_data))
     year_min = year_min_data
 if year_max_data < year_max:
-    print('Attention: your enter maximum year value %d has to be change for %d' %(year_max, year_max_data))
+    print('\nAttention: your enter maximum year value %d has to be change for %d' %(year_max, year_max_data))
     year_max = year_max_data
-print(da_data)
-p_plot = True  # Print precipitation control
+print('\nNetCDF contents\n',da_data,'\n')
+p_plot = True  # Control the precipitation plot
 for i in times:
     match data_source_num:
         case 0:  # CRU data
@@ -97,7 +101,7 @@ for i in times:
             ds_RR_ze = ds_RR.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_north, lim_south),
                          time=slice(str(year_min), str(year_max)))
         case _:
-            print('Attention: datasource %s doesn''t exist or nor defined' %data_source_num)
+            print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
     # Plot
     da_data['spi_' + str(i)] = spi(ds_RR_ze, i, 'time')[9]
     for year in range(year_min, year_max + 1):
@@ -129,7 +133,7 @@ match data_source_num:
         da_data = da_data.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_north, lim_south),
                          time=slice(str(year_min), str(year_max)))
     case _:
-        print('Attention: datasource %s doesn''t exist or nor defined' %data_source_num)
+        print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
 df = da_data.to_dataframe()
 print('Exporting %s_ze.csv' %data_source[data_source_num])
 df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_ze.csv', encoding='utf-8', index=True)
