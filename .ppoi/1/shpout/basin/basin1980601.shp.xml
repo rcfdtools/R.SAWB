@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="es"><Esri><CreaDate>20230525</CreaDate><CreaTime>10063800</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process Name="Raster to Polygon" ToolSource="c:\program files (x86)\arcgis\desktop10.2\ArcToolbox\Toolboxes\Conversion Tools.tbx\RasterToPolygon" Date="20230525" Time="100638">RasterToPolygon I:\R.SAWB\.poi\1\basin\Basin1980601.tif I:\R.SAWB\.poi\1\shpout\basin\Basin1980601.shp NO_SIMPLIFY Value</Process></lineage></DataProperties></Esri></metadata>

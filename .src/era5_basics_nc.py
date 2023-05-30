@@ -5,8 +5,8 @@ path = '../.nc/'
 nc_file = 'ERA5Land_Monthly_01dd.nc'
 feature_name = 'tp'
 interline = '-'
-intermult = 100
-separator = intermult*interline
+interlen = 100
+separator = interlen*interline
 p_max_plot = 10  # Maximum value for plotting ramp
 show_plot = False  # Verbose plot
 prefix_file = 'era5'
@@ -20,6 +20,7 @@ lim_east = -72.875
 lim_west = -74.875
 year_sample = '2010'
 dpi = 128  # Save plot resolution
+
 
 # Datasets & DataArrays
 ds = xr.open_dataset(path+nc_file)

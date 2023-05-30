@@ -6,8 +6,18 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-* Log record separators
-* Project point and study zone over R.SAWB/.poi
+* Research point and study zone over `.ppoi`. Parameters and description over a .py file with client, order #, date
+* Conversion units, e.g. m to mm
+* Automatically creates the ppoi folder structure
+* General statistics over the data source file .nc and the study zone
+* Point processing = True
+* Polygon processing = True
+* Log record separators in console
+* Location map, world. Rectangle data source, rectangle study zone, point
+* Rain and evaporation time series over point and polygon. P-E. Graph and table
+* Ppoi GeoJson map
+* Gift and video animation for temporal map data
+* Integrated script for run all the proceses
 * Scientific Markdown report for each poi or zone
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 
@@ -21,7 +31,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Export the original features and the SPI features in NetCFD (.nc) and comma separated values (.csv)
 * SPI calculation over multiple moving window of n months defined by the user
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
-* Exception control for years outside the available data limit, p.ej, the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
+* Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
 
 
 ## Searching data from ERA-5
@@ -93,6 +103,10 @@ Limits for SPI - Bogotá Chingaza
 
 ## References
 
+* https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe
+* https://sparkbyexamples.com/pandas/sort-pandas-dataframe-by-date/
+* https://www.dataquest.io/blog/plot-dataframe-pandas/
+* https://www.geeksforgeeks.org/numpy-linspace-python/
 * https://www.caee.utexas.edu/prof/maidment/gishyd97/atmos/atmos.htm
 * [Conjoint Analysis of Surface and Atmospheric Water Balances in the Andes-Amazon System](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2017WR021338)
 * https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
@@ -107,3 +121,4 @@ Limits for SPI - Bogotá Chingaza
 * [Timeseries Analysis using Python Xarray](https://www.youtube.com/watch?v=Ndfo967JgSY)
 * https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia
+* 

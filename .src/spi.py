@@ -7,7 +7,7 @@ import xarray as xr
 import numpy as np
 from scipy import stats as st
 import matplotlib.pyplot as plt
-import datetime
+import sys
 
 
 # Standardized Precipitation Index Function
@@ -48,29 +48,33 @@ def spi(ds, thresh, dimension):
 
 
 # Variables
-path = '../.nc/'
-nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
-nc_file = 'ERA5Land_Monthly_01dd.nc'
-#p_max_plot = 500  # Maximum value for plotting ramp - cru data in milimeters
-p_max_plot = 0.02  # Maximum value for plotting ramp - era5 data in meters
-data_source_num = 1  # 0:cru, 1:era5...
+ppoi_num = 1  # ppoi number to process
+data_path = '../.nc/'
+ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
+print('Processing %s' %ppoi_path)
+sys.path.insert(0,ppoi_path)
+import ppoi
+nc_file = ppoi.nc_file
+p_max_plot = ppoi.p_max_plot
+data_source_num = ppoi.data_source_num
 data_source = ['cru', 'era5']
 feature_name = ['pre', 'tp']
-times = [1, 3, 6, 9, 12]  # SPI index #
-lim_north = 5.735
-lim_south = 3.625
-lim_east = -72.875
-lim_west = -74.875
-year_min = 1970
-year_max = 2030
+times = ppoi.times
+lim_north = ppoi.lim_north
+lim_south = ppoi.lim_south
+lim_east = ppoi.lim_east
+lim_west = ppoi.lim_west
+year_min = ppoi.year_min
+year_max = ppoi.year_max
 dpi = 128  # Save plot resolution
 show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
 
+
 # Procedure
-da_data = xr.open_dataset(path+nc_file)
+da_data = xr.open_dataset(data_path+nc_file)
 ds_RR = da_data[feature_name[data_source_num]]
 year_min_data = da_data['time'].min().values
 year_min_data = pd.to_datetime(year_min_data).year
@@ -89,11 +93,11 @@ for i in times:
         case 0:  # CRU data
             ds_RR_ze = ds_RR.sel(lon=slice(lim_west, lim_east), lat=slice(lim_south, lim_north),
                                      time=slice(str(year_min), str(year_max)))
-        case 1:  # ERA-5 reanalysis
+        case 1:  # ERA5 reanalysis
             ds_RR_ze = ds_RR.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_north, lim_south),
                          time=slice(str(year_min), str(year_max)))
         case _:
-            print('Atention: datasource %s doesn''t exist or nor defined' %data_source_num)
+            print('Attention: datasource %s doesn''t exist or nor defined' %data_source_num)
     # Plot
     da_data['spi_' + str(i)] = spi(ds_RR_ze, i, 'time')[9]
     for year in range(year_min, year_max + 1):
@@ -106,13 +110,13 @@ for i in times:
                 da_count = da_data['spi_' + str(i)].count()
                 plt.ylim(lim_south, lim_north)
                 plt.xlim(lim_west, lim_east)
-                plt.savefig('../.spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
+                plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
                 if show_plot: plt.show()
             # Plotting feature SPI maps
             da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
             plt.ylim(lim_south, lim_north)
             plt.xlim(lim_west, lim_east)
-            plt.savefig('../.spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png', dpi=dpi)
+            plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png', dpi=dpi)
             if show_plot: plt.show()
             plt.close('all')
     p_plot = False
@@ -121,18 +125,18 @@ match data_source_num:
     case 0:  # CRU data
         da_data = da_data.sel(lon=slice(lim_west, lim_east), lat=slice(lim_south, lim_north),
                               time=slice(str(year_min), str(year_max)))
-    case 1:  # ERA-5 reanalysis
+    case 1:  # ERA5 reanalysis
         da_data = da_data.sel(longitude=slice(lim_west, lim_east), latitude=slice(lim_north, lim_south),
                          time=slice(str(year_min), str(year_max)))
     case _:
-        print('Atention: datasource %s doesn''t exist or nor defined' %data_source_num)
+        print('Attention: datasource %s doesn''t exist or nor defined' %data_source_num)
 df = da_data.to_dataframe()
 print('Exporting %s_ze.csv' %data_source[data_source_num])
-df.to_csv('../.spi/'+str(data_source[data_source_num])+'_ze.csv', encoding='utf-8', index=True)
+df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_ze.csv', encoding='utf-8', index=True)
 print(da_data)
 # Export .nc with SPI calculations over ZE as .nc
 if save_spi_nc:
     print('Exporting %s_ze.nc' %data_source[data_source_num])
-    da_data.to_netcdf('../.spi/'+data_source[data_source_num]+'_ze.nc')
+    da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_ze.nc')
 
 # plt.title(plt_title)
