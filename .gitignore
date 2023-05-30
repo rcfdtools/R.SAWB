@@ -14,8 +14,8 @@
 *.csv
 !era5_ze.nc
 !era5_ze.csv
-!cru5_ze.nc
-!cru5_ze.csv
+!cru_ze.nc
+!cru_ze.csv
 
 
 # Some samples
