@@ -8,9 +8,9 @@
 .venv/
 .venvPython310/
 .venvPython311/
-.**/*.nc
-.**/*.csv
-.**/*.grib
+**/*.nc
+**/*.csv
+**/*.grib
 
 # Some samples
 # http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files
