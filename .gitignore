@@ -8,16 +8,9 @@
 .venv/
 .venvPython310/
 .venvPython311/
-.grib/*.grib
-.nc/*.nc
-*.nc
-*.csv
-!era5_ze.nc
-!era5_ze.csv
-!cru_ze.nc
-!cru_ze.csv
 .**/*.nc
 .**/*.csv
+.**/*.grib
 
 # Some samples
 # http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files
