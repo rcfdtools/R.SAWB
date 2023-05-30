@@ -9,6 +9,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Research point and study zone over `.ppoi`. Parameters and description over a .py file with client, order #, date
 * Conversion units, e.g. m to mm
 * Automatically creates the ppoi folder structure
+* Compress .nc & .csv into .zip files (apply for 100MB+ files)
 * General statistics over the data source file .nc and the study zone
 * Point processing = True
 * Polygon processing = True
