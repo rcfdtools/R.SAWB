@@ -9,7 +9,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Research point and study zone over `.ppoi`. Parameters and description over a .py file with client, order #, date
 * Conversion units, e.g. m to mm
 * Automatically creates the ppoi folder structure
-* Compress .nc & .csv into .zip files (apply for 100MB+ files)
+* Compress .nc & .csv into .zip files (95MB part files)
 * General statistics over the data source file .nc and the study zone
 * Point processing = True
 * Polygon processing = True
@@ -122,4 +122,4 @@ Limits for SPI - Bogotá Chingaza
 * [Timeseries Analysis using Python Xarray](https://www.youtube.com/watch?v=Ndfo967JgSY)
 * https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia
-* 
+
