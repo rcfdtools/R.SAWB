@@ -10,11 +10,10 @@
 .venvPython311/
 .grib/*.grib
 .nc/*.nc
-.temp/*.nc
-.spi/*.nc
-.spi/*.csv
 *.nc
 *.csv
+!*.nc
+!*.csv
 
 
 # Some samples

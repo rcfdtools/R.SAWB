@@ -24,7 +24,7 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## [spi.py](.src/spi.py) features
 
-* Execution over different data sources as CRU or ERA-5 reanalysis.
+* Execution over different data sources as CRU or ERA5 reanalysis.
 * Maximum precipitation value for map plots
 * Spatial zone to evaluate
 * Temporal time serie segmentation
@@ -34,7 +34,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
 
 
-## Searching data from ERA-5
+## Searching data from ERA5
 
 ### Search 1: ERA5-Land monthly averaged data from 1950 to present
 	
