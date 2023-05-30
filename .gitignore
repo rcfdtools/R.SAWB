@@ -12,8 +12,10 @@
 .nc/*.nc
 *.nc
 *.csv
-!*.nc
-!*.csv
+!era5_ze.nc
+!era5_ze.csv
+!cru5_ze.nc
+!cru5_ze.csv
 
 
 # Some samples
