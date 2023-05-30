@@ -6,7 +6,7 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-* Research point and study zone over `.ppoi`. Parameters and description over a .py file with client, order #, date
+
 * Conversion units, e.g. m to mm
 * Automatically creates the ppoi folder structure
 * Compress .nc & .csv into .zip files (95MB part files)
@@ -33,6 +33,7 @@ Data source: https://cds.climate.copernicus.eu/
 * SPI calculation over multiple moving window of n months defined by the user
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
+* Research point and study zone over `.ppoi/#/ppoi.py`. Parameters and description over a .py file with client, order #, date and description
 
 
 ## Searching data from ERA5

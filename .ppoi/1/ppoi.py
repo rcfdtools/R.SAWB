@@ -4,7 +4,7 @@
 sawb_client = 'r.cfdtools Research Center'
 sawb_order = '1'
 sawb_date = '2023-05-30'  # yyyy-00-dd
-sawb_desc = ''
+sawb_desc = 'South Americas drought analysis using the Standarized Precipitation Index - SPI and Atmospheric water balance - AWB.'
 
 # Data source NetCDF file
 #nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
