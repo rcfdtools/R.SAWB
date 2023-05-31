@@ -36,7 +36,7 @@ def spi(ds, thresh):
 
     return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
 
-data = pd.read_csv('../.temp/data_sample.csv', usecols=[2])
+data = pd.read_csv('../../.temp/data_sample.csv', usecols=[2])
 data = data.set_index(pd.date_range('1959', '1989', freq='M'))
 print(data)
 show_plot = True  # Verbose plot
@@ -47,7 +47,7 @@ for i in times:
     data['spi_'+str(i)] = x[9]
 print(data)
 
-fig, axes = plt.subplots(nrows=5, figsize=(12, 9))
+fig, axes = plt.subplots(nrows=len(times), figsize=(12, 9))
 plt.subplots_adjust(hspace=0.15)
 for i, ax in enumerate(axes):
     col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')

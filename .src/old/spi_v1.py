@@ -5,15 +5,14 @@
 import warnings
 warnings.filterwarnings('ignore')
 import pandas as pd
-import numpy as np
 import xarray as xr
+import numpy as np
 from scipy import stats as st
 import matplotlib.pyplot as plt
-import matplotlib.dates as mdates
 import sys
 
 
-# Standardized Precipitation Index Function - Polygon with .nc
+# Standardized Precipitation Index Function
 def spi(ds, thresh, dimension):
     # Original function script from https://github.com/jeffjay88/Climate_Indices
     # ds - data ; thresh - time interval / scale; dimension - dimension as a string
@@ -49,49 +48,17 @@ def spi(ds, thresh, dimension):
 
     return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
 
-# Standardized Precipitation Index Function - Point with .csv
-def spi_point(ds, thresh):
-    # ds - data ; thresh - time interval / scale
-
-    # Rolling Mean / Moving Averages
-    ds_ma = ds.rolling(thresh, center=False).mean()
-
-    # Natural log of moving averages
-    ds_In = np.log(ds_ma)
-    ds_In[np.isinf(ds_In) == True] = np.nan  # Change infinity to NaN
-
-    # Overall Mean of Moving Averages
-    ds_mu = np.nanmean(ds_ma)
-
-    # Summation of Natural log of moving averages
-    ds_sum = np.nansum(ds_In)
-
-    # Computing essentials for gamma distribution
-    n = len(ds_In[thresh - 1:])  # size of data
-    A = np.log(ds_mu) - (ds_sum / n)  # Computing A
-    alpha = (1 / (4 * A)) * (1 + (1 + ((4 * A) / 3)) ** 0.5)  # Computing alpha  (a)
-    beta = ds_mu / alpha  # Computing beta (scale)
-
-    # Gamma Distribution (CDF)
-    gamma = st.gamma.cdf(ds_ma, a=alpha, scale=beta)
-
-    # Standardized Precipitation Index   (Inverse of CDF)
-    norm_spi = st.norm.ppf(gamma, loc=0, scale=1)  # loc is mean and scale is standard dev.
-
-    return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
-
 def year_range_eval(data_time, year_min, year_max):
     year_min_data = data_time.min().values
     year_min_data = pd.to_datetime(year_min_data).year
     year_max_data = data_time.max().values
     year_max_data = pd.to_datetime(year_max_data).year
     if year_min_data > year_min:
-        print('\nAttention: your enter minimum year value %d has changed for %d' %(year_min, year_min_data))
+        print('\nAttention: your enter minimum year value %d has to be change for %d' %(year_min, year_min_data))
         year_min = year_min_data
     if year_max_data < year_max:
-        print('Attention: your enter maximum year value %d has changed for %d' %(year_max, year_max_data))
+        print('\nAttention: your enter maximum year value %d has to be change for %d' %(year_max, year_max_data))
         year_max = year_max_data
-    return year_min, year_max
 
 # Variables
 ppoi_num = 1  # ppoi number to process
@@ -117,7 +84,7 @@ units_mult = ppoi.units_mult
 polygon_eval = ppoi.polygon_eval
 point_eval = ppoi.point_eval
 dpi = 128  # Save plot resolution
-show_plot = True  # Verbose plot
+show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
@@ -134,8 +101,19 @@ if polygon_eval:
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
-    year_min = year_range_eval(da_data['time'], year_min, year_max)[0]
-    year_max = year_range_eval(da_data['time'], year_min, year_max)[1]
+    year_range_eval(da_data['time'], year_min, year_max)
+    '''
+    year_min_data = da_data['time'].min().values
+    year_min_data = pd.to_datetime(year_min_data).year
+    year_max_data = da_data['time'].max().values
+    year_max_data = pd.to_datetime(year_max_data).year
+    if year_min_data > year_min:
+        print('\nAttention: your enter minimum year value %d has to be change for %d' %(year_min, year_min_data))
+        year_min = year_min_data
+    if year_max_data < year_max:
+        print('\nAttention: your enter maximum year value %d has to be change for %d' %(year_max, year_max_data))
+        year_max = year_max_data
+    '''
     print('\nNetCDF contents\n',da_data,'\n')
     p_plot = True  # Control the precipitation plot
     for i in times:
@@ -181,66 +159,27 @@ if polygon_eval:
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
     df = da_data.to_dataframe()
-    print('Exporting %s_polygon.csv' %data_source[data_source_num])
-    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_polygon.csv', encoding='utf-8', index=True)
+    print('Exporting %s_ze.csv' %data_source[data_source_num])
+    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_ze.csv', encoding='utf-8', index=True)
     print(da_data)
     # Export .nc with SPI calculations over ZE as .nc
     if save_spi_nc:
-        print('Exporting %s_polygon.nc' %data_source[data_source_num])
-        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_polygon.nc')
+        print('Exporting %s_ze.nc' %data_source[data_source_num])
+        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_ze.nc')
 
 # Point eval
 if point_eval:
-    print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
-    # Extract values from NetCDF
-    da_data = xr.open_dataset(data_path + nc_file)
-    da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
-    ds_rr = da_data[feature_name[data_source_num]]
-    year_min = year_range_eval(da_data['time'], year_min, year_max)[0]
-    year_max = year_range_eval(da_data['time'], year_min, year_max)[1]
-    match data_source_num:
-        case 0:  # CRU data
-            ds_rr_slice = ds_rr.sel(time=slice(str(year_min), str(year_max)))
-            ds_rr_select = ds_rr_slice.sel(lon=point_longitude, lat=point_latitude, method='nearest')
-        case 1:  # ERA5 reanalysis
-            ds_rr_slice = ds_rr.sel(time=slice(str(year_min), str(year_max)))
-            ds_rr_select = ds_rr_slice.sel(longitude=point_longitude, latitude=point_latitude, method='nearest')
-        case _:
-            print('\nAttention: datasource %s doesn''t exist or nor defined' % data_source_num)
-    ds_rr_select.plot(figsize=(10, 6))
-    plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'_point_precipitation.png', dpi=dpi)
+
+    print('\nProcessing point in Latitude: %f°, Longitude: %f°' %(point_latitude, point_longitude))
+    rr_select = rr.sel(longitude=point_longitude, latitude=point_latitude, method='nearest')
+    print('%s\nFeature point: %s in Lat:%f, Lon: %f nearest\n%s\n' % (
+    separator, feature_name, point_latitude, point_longitude, separator), rr_select, '\n')
+    rr_select.plot(figsize=(10, 6))
+    plt.savefig('../.temp/era5/' + 'P_point.png', dpi=dpi)
     if show_plot: plt.show()
-    df = ds_rr_select.to_dataframe()
-    print('\nInitial dataframe\n', df)
-    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_point_precipitation.csv'
-    df.to_csv(point_csv_file, encoding='utf-8', index=True)
-    # SPI calculation
-    #data = pd.read_csv(point_csv_file, index_col='time')
-    #data = pd.read_csv(point_csv_file, header=True, parse_dates='time')
-    data = pd.read_csv(point_csv_file)
-    data['time'] = pd.to_datetime(data['time'])
-    print(data.dtypes)
-    data = data.set_index('time')
-    print(data.dtypes)
-    for i in times:
-        x = spi_point(data[feature_name[data_source_num]], i)
-        data['spi_' + str(i)] = x[9]
-    print('\nDataframe with SPI calcultations\n', data)
-    # Plot SPI data
-    fig, axes = plt.subplots(nrows=len(times), figsize=(12, 9))
-    plt.subplots_adjust(hspace=0.15)
-    for i, ax in enumerate(axes):
-        col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')
-        ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-        ax.bar(data.index, data['spi_' + str(times[i])], width=25, align='center', color=col_scheme, label='SPI ' + str(times[i]))
-        ax.axhline(y=0, color='k')
-        ax.xaxis.set_major_locator(mdates.YearLocator(2))
-        ax.legend(loc='upper right')
-        ax.set_yticks(range(-3, 4), range(-3, 4))
-        ax.set_ylabel('SPI', fontsize=12)
-        if i < len(times) - 1:
-            ax.set_xticks([], [])
-        plt.xticks(rotation=90)
-        #plt.title(plt_title)
-    if show_plot: plt.show()
-    plt.close('all')
+    df = rr_select.to_dataframe()
+    print(df)
+    df.to_csv('../.temp/era5/' + prefix_file + '_xarray_basics_point.csv', encoding='utf-8', index=True)
+
+
+# plt.title(plt_title)

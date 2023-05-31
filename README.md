@@ -7,7 +7,7 @@ Data source: https://cds.climate.copernicus.eu/
 ## Pending tasks
 
 * Point processing = True
-* Polygon processing = True
+* Definitions dictionary over a .py file
 * Plot title with datasource information
 * Creates the PPOI folder structure
 * Purge last results before a new running
@@ -19,7 +19,7 @@ Data source: https://cds.climate.copernicus.eu/
 * PPOI GeoJson map
 * Gift and video animation for temporal map data
 * Integrated script for run all the proceses
-* Scientific Markdown report for each poi or zone
+* Scientific Markdown report for each PPOI
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 
 
@@ -35,6 +35,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
 * Research point and study zone over `.ppoi/#/ppoi.py`. Parameters and description over a .py file with client, order #, date and description
 * Units conversion, e.g. m to mm for rain or evaporation parameters
+* Polygon processing on demand with limits defined by user
 
 
 ## Searching data from ERA5

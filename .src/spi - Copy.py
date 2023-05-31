@@ -232,7 +232,8 @@ if point_eval:
     for i, ax in enumerate(axes):
         col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-        ax.bar(data.index, data['spi_' + str(times[i])], width=25, align='center', color=col_scheme, label='SPI ' + str(times[i]))
+        ax.bar(data.index, data['spi_' + str(times[i])], width=25, align='center', color=col_scheme,
+               label='SPI ' + str(times[i]))
         ax.axhline(y=0, color='k')
         ax.xaxis.set_major_locator(mdates.YearLocator(2))
         ax.legend(loc='upper right')
