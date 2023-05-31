@@ -6,18 +6,16 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-* Purge last results before a new running
-* General statistics over the data source file .nc and the study zone
-* Global definitions dictionary over a .py file
-* Plot title with datasource information
 * Compress .nc & .csv into .zip files (95MB part files)
+* General statistics over the data source file .nc and the study zone
+* Plot title with datasource information
 * Log record separators in console
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
 * PPOI GeoJson map
 * Gift and video animation for temporal map data
 * Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * Integrated script for run all the proceses
-* Scientific Markdown report for each PPOI
+* Scientific Markdown report for each PPOI and data source
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 
 
@@ -31,11 +29,13 @@ Data source: https://cds.climate.copernicus.eu/
 * SPI calculation over multiple moving window of n months defined by the user
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
-* Research point and study zone over `.ppoi/#/ppoi.py`. Parameters and description over a .py file with client, order #, date and description
+* Research point and polygon `ppoi.py` contains the parameters required for the execution, like description, order #, date and description, data source, point location and polygon limits, year ranges, mobile average times, units conversions multipliers and the maximum values used as references for the map global palettes.
 * Units conversion, e.g. m to mm for rain or evaporation parameters
 * Polygon processing on demand with limits defined by user
 * Point processing on demand with coordinates defined by user
-* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py)
+* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py) used as template.
+* Purge last results before a new running
+* Global definitions dictionary as spi_dictionary.py
 
 
 ## Searching data from ERA5

@@ -29,8 +29,7 @@ year_min = 1980
 year_max = 1983
 
 # SPI index mobile average times
-times = [1, 3]
-
+times = [1, 3, 6]
 
 # Units conversion multiplier & Maximum value for plotting ramp
 # CRU data uses precipitation in millimeters

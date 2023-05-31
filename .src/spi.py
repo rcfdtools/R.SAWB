@@ -95,10 +95,10 @@ def year_range_eval(data_time, year_min, year_max):
     return year_min, year_max
 
 # Variables & directories
-ppoi_num = 2  # <<<<<<<< ppoi number to process
+ppoi_num = 1  # <<<<<<<< ppoi number to process
+purge_ppoi_folder = False  # Delete all previous results. Set False if you require run many .nc data sources
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
-purge_ppoi_folder = True  # Delete all previous results. Set False if you require run many .nc data sources
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
     shutil.rmtree(ppoi_path+'spi')
     os.mkdir(ppoi_path + 'spi')
@@ -122,7 +122,7 @@ if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path+'watershed')
     os.mkdir(ppoi_path+'winddir')
     shutil.copyfile('../.ppoi/1/ppoi.py', ppoi_path+'ppoi.py')  # PPOI #1 contains the parameters template
-sys.path.insert(0,ppoi_path)  # PPOI path insert
+sys.path.insert(0,ppoi_path)  # PPOI path insert and parameters to process
 import ppoi
 nc_file = ppoi.nc_file
 p_max_plot = ppoi.p_max_plot

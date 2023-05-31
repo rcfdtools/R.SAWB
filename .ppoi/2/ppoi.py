@@ -31,7 +31,6 @@ year_max = 1983
 # SPI index mobile average times
 times = [1, 3]
 
-
 # Units conversion multiplier & Maximum value for plotting ramp
 # CRU data uses precipitation in millimeters
 # ERA-5 reanalysis data uses precipitation in meters
