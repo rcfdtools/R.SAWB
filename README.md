@@ -6,18 +6,16 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-* Point processing = True
-* Definitions dictionary over a .py file
-* Plot title with datasource information
-* Creates the PPOI folder structure
 * Purge last results before a new running
-* Compress .nc & .csv into .zip files (95MB part files)
 * General statistics over the data source file .nc and the study zone
+* Global definitions dictionary over a .py file
+* Plot title with datasource information
+* Compress .nc & .csv into .zip files (95MB part files)
 * Log record separators in console
-* Location map, world. Rectangle data source, rectangle study zone, point
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
 * PPOI GeoJson map
 * Gift and video animation for temporal map data
+* Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * Integrated script for run all the proceses
 * Scientific Markdown report for each PPOI
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
@@ -36,6 +34,8 @@ Data source: https://cds.climate.copernicus.eu/
 * Research point and study zone over `.ppoi/#/ppoi.py`. Parameters and description over a .py file with client, order #, date and description
 * Units conversion, e.g. m to mm for rain or evaporation parameters
 * Polygon processing on demand with limits defined by user
+* Point processing on demand with coordinates defined by user
+* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py)
 
 
 ## Searching data from ERA5

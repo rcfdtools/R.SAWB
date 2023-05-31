@@ -1,9 +1,10 @@
 # SPI calculations for multiple data sources
 
-
 # Import public libraries
 import warnings
 warnings.filterwarnings('ignore')
+import os
+import shutil
 import pandas as pd
 import numpy as np
 import xarray as xr
@@ -93,11 +94,35 @@ def year_range_eval(data_time, year_min, year_max):
         year_max = year_max_data
     return year_min, year_max
 
-# Variables
-ppoi_num = 1  # ppoi number to process
+# Variables & directories
+ppoi_num = 2  # <<<<<<<< ppoi number to process
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
-sys.path.insert(0,ppoi_path)
+purge_ppoi_folder = True  # Delete all previous results. Set False if you require run many .nc data sources
+if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
+    shutil.rmtree(ppoi_path+'spi')
+    os.mkdir(ppoi_path + 'spi')
+    os.mkdir(ppoi_path+'spi/cru')
+    os.mkdir(ppoi_path+'spi/era5')
+if not os.path.exists(ppoi_path):  # Create folder structure if not exists
+    os.mkdir(ppoi_path)
+    os.mkdir(ppoi_path+'basin')
+    os.mkdir(ppoi_path+'fdr')
+    os.mkdir(ppoi_path+'graph')
+    os.mkdir(ppoi_path+'pflow')
+    os.mkdir(ppoi_path+'qm')
+    os.mkdir(ppoi_path+'shpin')
+    os.mkdir(ppoi_path+'shpout')
+    os.mkdir(ppoi_path+'shpout/basin')
+    os.mkdir(ppoi_path+'shpout/basindissolve')
+    os.mkdir(ppoi_path+'shpout/watershed')
+    os.mkdir(ppoi_path+'spi')
+    os.mkdir(ppoi_path+'spi/cru')
+    os.mkdir(ppoi_path+'spi/era5')
+    os.mkdir(ppoi_path+'watershed')
+    os.mkdir(ppoi_path+'winddir')
+    shutil.copyfile('../.ppoi/1/ppoi.py', ppoi_path+'ppoi.py')  # PPOI #1 contains the parameters template
+sys.path.insert(0,ppoi_path)  # PPOI path insert
 import ppoi
 nc_file = ppoi.nc_file
 p_max_plot = ppoi.p_max_plot
@@ -117,7 +142,7 @@ units_mult = ppoi.units_mult
 polygon_eval = ppoi.polygon_eval
 point_eval = ppoi.point_eval
 dpi = 128  # Save plot resolution
-show_plot = True  # Verbose plot
+show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
@@ -127,8 +152,7 @@ spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', 
 print('Processing PPOI: %s' %ppoi_path,
       '\nData file: %s' %nc_file,
       '\nUnits conversion multiplier: %f' %units_mult)
-
-# Polygon processing
+# SPI - Polygon processing
 if polygon_eval:
     print('\nProcessing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))
     da_data = xr.open_dataset(data_path+nc_file)
@@ -156,17 +180,18 @@ if polygon_eval:
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
-                    da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
+                    p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)
                     plt.xlim(lim_west, lim_east)
-                    plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
+                    plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
+
                     if show_plot: plt.show()
                 # Plotting feature SPI maps
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
                 plt.ylim(lim_south, lim_north)
                 plt.xlim(lim_west, lim_east)
-                plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png', dpi=dpi)
+                plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png', dpi=dpi)
                 if show_plot: plt.show()
                 plt.close('all')
         p_plot = False
@@ -181,15 +206,15 @@ if polygon_eval:
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
     df = da_data.to_dataframe()
-    print('Exporting %s_polygon.csv' %data_source[data_source_num])
-    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_polygon.csv', encoding='utf-8', index=True)
+    print('Exporting %s_polygon_spi.csv' %data_source[data_source_num])
+    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_spi_polygon.csv', encoding='utf-8', index=True)
     print(da_data)
     # Export .nc with SPI calculations over ZE as .nc
     if save_spi_nc:
         print('Exporting %s_polygon.nc' %data_source[data_source_num])
-        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_polygon.nc')
+        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
 
-# Point eval
+# SPI - Point processing
 if point_eval:
     print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
     # Extract values from NetCDF
@@ -207,16 +232,14 @@ if point_eval:
             ds_rr_select = ds_rr_slice.sel(longitude=point_longitude, latitude=point_latitude, method='nearest')
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' % data_source_num)
-    ds_rr_select.plot(figsize=(10, 6))
-    plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'_point_precipitation.png', dpi=dpi)
+    ds_rr_select.plot(figsize=(10, 7))
+    plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.png', dpi=dpi)
     if show_plot: plt.show()
     df = ds_rr_select.to_dataframe()
     print('\nInitial dataframe\n', df)
-    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_point_precipitation.csv'
+    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.csv'
     df.to_csv(point_csv_file, encoding='utf-8', index=True)
     # SPI calculation
-    #data = pd.read_csv(point_csv_file, index_col='time')
-    #data = pd.read_csv(point_csv_file, header=True, parse_dates='time')
     data = pd.read_csv(point_csv_file)
     data['time'] = pd.to_datetime(data['time'])
     print(data.dtypes)
@@ -225,9 +248,10 @@ if point_eval:
     for i in times:
         x = spi_point(data[feature_name[data_source_num]], i)
         data['spi_' + str(i)] = x[9]
-    print('\nDataframe with SPI calcultations\n', data)
+    print('\nDataframe with SPI calculations\n', data)
+    data.to_csv(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_point.csv', encoding='utf-8', index=True)
     # Plot SPI data
-    fig, axes = plt.subplots(nrows=len(times), figsize=(12, 9))
+    fig, axes = plt.subplots(nrows=len(times), figsize=(10, 7))
     plt.subplots_adjust(hspace=0.15)
     for i, ax in enumerate(axes):
         col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')
@@ -242,5 +266,6 @@ if point_eval:
             ax.set_xticks([], [])
         plt.xticks(rotation=90)
         #plt.title(plt_title)
+    plt.savefig(ppoi_path + 'spi/' + data_source[data_source_num] + '_spi_point.png', dpi=dpi)
     if show_plot: plt.show()
     plt.close('all')

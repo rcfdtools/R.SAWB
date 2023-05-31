@@ -11,6 +11,7 @@ from scipy import stats as st
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import sys
+import cartopy.crs as ccrs
 
 
 # Standardized Precipitation Index Function - Polygon with .nc
@@ -117,7 +118,7 @@ units_mult = ppoi.units_mult
 polygon_eval = ppoi.polygon_eval
 point_eval = ppoi.point_eval
 dpi = 128  # Save plot resolution
-show_plot = True  # Verbose plot
+show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
@@ -161,6 +162,7 @@ if polygon_eval:
                     plt.ylim(lim_south, lim_north)
                     plt.xlim(lim_west, lim_east)
                     plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
+                    
                     if show_plot: plt.show()
                 # Plotting feature SPI maps
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
@@ -181,13 +183,13 @@ if polygon_eval:
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
     df = da_data.to_dataframe()
-    print('Exporting %s_polygon.csv' %data_source[data_source_num])
-    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_polygon.csv', encoding='utf-8', index=True)
+    print('Exporting %s_polygon_spi.csv' %data_source[data_source_num])
+    df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_spi_polygon.csv', encoding='utf-8', index=True)
     print(da_data)
     # Export .nc with SPI calculations over ZE as .nc
     if save_spi_nc:
         print('Exporting %s_polygon.nc' %data_source[data_source_num])
-        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_polygon.nc')
+        da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
 
 # Point eval
 if point_eval:
@@ -207,16 +209,14 @@ if point_eval:
             ds_rr_select = ds_rr_slice.sel(longitude=point_longitude, latitude=point_latitude, method='nearest')
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' % data_source_num)
-    ds_rr_select.plot(figsize=(10, 6))
-    plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'_point_precipitation.png', dpi=dpi)
+    ds_rr_select.plot(figsize=(10, 7))
+    plt.savefig(ppoi_path+'spi/graph/'+data_source[data_source_num]+'_p_point.png', dpi=dpi)
     if show_plot: plt.show()
     df = ds_rr_select.to_dataframe()
     print('\nInitial dataframe\n', df)
-    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_point_precipitation.csv'
+    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.csv'
     df.to_csv(point_csv_file, encoding='utf-8', index=True)
     # SPI calculation
-    #data = pd.read_csv(point_csv_file, index_col='time')
-    #data = pd.read_csv(point_csv_file, header=True, parse_dates='time')
     data = pd.read_csv(point_csv_file)
     data['time'] = pd.to_datetime(data['time'])
     print(data.dtypes)
@@ -225,15 +225,15 @@ if point_eval:
     for i in times:
         x = spi_point(data[feature_name[data_source_num]], i)
         data['spi_' + str(i)] = x[9]
-    print('\nDataframe with SPI calcultations\n', data)
+    print('\nDataframe with SPI calculations\n', data)
+    data.to_csv(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_point.csv', encoding='utf-8', index=True)
     # Plot SPI data
-    fig, axes = plt.subplots(nrows=len(times), figsize=(12, 9))
+    fig, axes = plt.subplots(nrows=len(times), figsize=(10, 7))
     plt.subplots_adjust(hspace=0.15)
     for i, ax in enumerate(axes):
         col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')
         ax.xaxis.set_major_formatter(mdates.DateFormatter('%Y'))
-        ax.bar(data.index, data['spi_' + str(times[i])], width=25, align='center', color=col_scheme,
-               label='SPI ' + str(times[i]))
+        ax.bar(data.index, data['spi_' + str(times[i])], width=25, align='center', color=col_scheme, label='SPI ' + str(times[i]))
         ax.axhline(y=0, color='k')
         ax.xaxis.set_major_locator(mdates.YearLocator(2))
         ax.legend(loc='upper right')
@@ -243,5 +243,6 @@ if point_eval:
             ax.set_xticks([], [])
         plt.xticks(rotation=90)
         #plt.title(plt_title)
+    plt.savefig(ppoi_path + 'spi/graph/' + data_source[data_source_num] + '_spi_point.png', dpi=dpi)
     if show_plot: plt.show()
     plt.close('all')
