@@ -7,20 +7,19 @@ Data source: https://cds.climate.copernicus.eu/
 ## Pending tasks
 
 * General statistics over the data source file .nc and the study zone
+* Gift and video animation for temporal map data
 * Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information
 * Log record separators in console
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
 * PPOI GeoJson map
-* Gift and video animation for temporal map data
 * Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
-* Integrated script for run all the proceses
 * Scientific Markdown report for each PPOI and data source
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 * Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 
 
-## [spi.py](.src/spi.py) features
+## [sawb.py](.src/sawb.py) features
 
 * Execution over different data sources as CRU or ERA5 reanalysis.
 * Maximum precipitation value for map plots
@@ -37,6 +36,8 @@ Data source: https://cds.climate.copernicus.eu/
 * Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py) used as template.
 * Purge last results before a new running
 * Global definitions dictionary as spi_dictionary.py
+* Validate and fix range year_min > year_max
+* Integrated script sawb.py for run all the proceses. SPI & AWS post-processing are integrated.
 
 
 ## Searching data from ERA5
@@ -134,4 +135,5 @@ Limits - Colombia - South America - Bogotá Chingaza
 * https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia
 * https://realpython.com/python-zipfile/
+* https://github.com/jeffjay88/Climate_Indices
 

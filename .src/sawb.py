@@ -3,6 +3,7 @@
 # Import public libraries
 import warnings
 warnings.filterwarnings('ignore')
+import glob
 import os
 import shutil
 import pandas as pd
@@ -12,6 +13,7 @@ from scipy import stats as st
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import sys
+from dbfread import DBF
 
 
 # Standardized Precipitation Index Function - Polygon with .nc
@@ -49,6 +51,7 @@ def spi(ds, thresh, dimension):
     norm_spi = xr.apply_ufunc(norminv, gamma)  # loc is mean and scale is standard dev.
 
     return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
+
 
 # Standardized Precipitation Index Function - Point with .csv
 def spi_point(ds, thresh):
@@ -94,9 +97,12 @@ def year_range_eval(data_time, year_min, year_max):
         year_max = year_max_data
     return year_min, year_max
 
-# Variables & directories
-ppoi_num = 2  # <<<<<<<< ppoi number to process
-purge_ppoi_folder = True  # Delete all previous results. Set False if you require run many .nc data sources
+
+# *****************************************************************************************
+# General variables & directories
+# *****************************************************************************************
+ppoi_num = 1  # <<<<<<<< PPOI number to process
+purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -148,12 +154,32 @@ show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
+# AWB parameters
+awb_qm_join_file = 'awb_qm.csv' # Joined file name
+awb_qm_pivot_file = 'awb_qm_pivot.csv' # Joined average flow file name
+awb_aa_pivot_file = 'awb_aa_pivot.csv' # Joined accumulation area file name
+awb_eval = ppoi.awb_eval
 
 
-# Procedure
+# *****************************************************************************************
+# Preliminar and parameters detail
+# *****************************************************************************************
+if year_min > year_max:
+    year_min_aux = year_max
+    year_max = year_min
+    year_min = year_min_aux
 print('Processing PPOI: %s' %ppoi_path,
       '\nData file: %s' %nc_file,
-      '\nUnits conversion multiplier: %f' %units_mult)
+      '\nUnits conversion multiplier: %f' %units_mult,
+      '\nYear from: %d' %year_min,
+      '\nYear to: %d' %year_max
+      )
+
+# *****************************************************************************************
+# Standardized Precipitation Index (SPI) - Procedure
+# *****************************************************************************************
+if polygon_eval or point_eval:
+    print('\nProcessing - Standardized Precipitation Index (SPI)')
 # SPI - Polygon processing
 if polygon_eval:
     print('\nProcessing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))
@@ -215,7 +241,6 @@ if polygon_eval:
     if save_spi_nc:
         print('Exporting %s_polygon.nc' %data_source[data_source_num])
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
-
 # SPI - Point processing
 if point_eval:
     print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
@@ -253,7 +278,7 @@ if point_eval:
     print('\nDataframe with SPI calculations\n', data)
     data.to_csv(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_point.csv', encoding='utf-8', index=True)
     # Plot SPI data
-    fig, axes = plt.subplots(nrows=len(times), figsize=(10, 7))
+    fig, axes = plt.subplots(nrows=len(times), figsize=(10, 8))
     plt.subplots_adjust(hspace=0.15)
     for i, ax in enumerate(axes):
         col_scheme = np.where(data['spi_' + str(times[i])] > 0, 'b', 'r')
@@ -271,3 +296,48 @@ if point_eval:
     plt.savefig(ppoi_path + 'spi/' + data_source[data_source_num] + '_spi_point.png', dpi=dpi)
     if show_plot: plt.show()
     plt.close('all')
+
+
+# *****************************************************************************************
+# AWB - Post-processing procedure (ArcGIS for Desktop SAWB.tbx need to be run before)
+# *****************************************************************************************
+if awb_eval:
+    print('\nPost-processing Atmospheric Water Balance - AWB\n')
+    awb_dbf_files = glob.glob(ppoi_path + 'awb/qm/' + '*.dbf')
+    awb_df = pd.DataFrame()
+    for i in awb_dbf_files:
+        print('AWB - Processing: %s' %i)
+        awb_dbf = DBF(i)
+        awb_data_result = pd.DataFrame(iter(awb_dbf))
+        awb_df = pd.concat([awb_df, awb_data_result], ignore_index=False)
+    awb_year_min = awb_df['year'].min()
+    awb_year_max = awb_df['year'].max()
+    year_list = np.linspace(awb_year_min, awb_year_max, (awb_year_max-awb_year_min+1))
+    print('\nYears found: %s' %year_list)
+    awb_df['date'] = pd.to_datetime(awb_df['date'])
+    awb_df.sort_values(by='date', inplace=True)
+    print('\nDataframe types\n', awb_df.dtypes)
+    awb_df = awb_df.set_index('date')
+    print('\nDataframe sample\n', awb_df)
+    awb_df.to_csv(ppoi_path+'awb/'+awb_qm_join_file, encoding='utf-8', index=True)
+    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric monthly average flow serie', ylabel='Qm, m³/s')
+    plt.savefig(ppoi_path+'awb/graph/awb_qm_serie.png')
+    if show_plot: plt.show()
+    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric monthly accumulation area serie', ylabel='A, km²')
+    plt.savefig(ppoi_path+'awb/graph/awb_aa_serie.png')
+    if show_plot: plt.show()
+    pivot_table_qm = awb_df.pivot_table(index='month', columns='year', values='SUM')
+    print('\nQm (m³/s) pivot table sample\n', pivot_table_qm)
+    pivot_table_qm.to_csv(ppoi_path+'awb/'+awb_qm_pivot_file, encoding='utf-8', index=True)
+    pivot_table_qm.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric monthly average flow by year', ylabel='Qm, m³/s')
+    plt.savefig(ppoi_path+'awb/graph/awb_qm_monthly.png')
+    if show_plot: plt.show()
+    pivot_table_aa = awb_df.pivot_table(index='month', columns='year', values='Akm2')
+    print('\nAa (km²) pivot table sample\n', pivot_table_aa)
+    pivot_table_aa.to_csv(ppoi_path+'awb/'+awb_aa_pivot_file, encoding='utf-8', index=True)
+    pivot_table_aa.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric monthly accumulation area by year', ylabel='A, km²')
+    #plt.xticks(range(len(pivot_table_aa)),labels=range(0, len(pivot_table_aa)))
+    plt.savefig(ppoi_path+'awb/graph/awb_aa_monthly.png')
+    if show_plot: plt.show()
+    plt.close('all')
+

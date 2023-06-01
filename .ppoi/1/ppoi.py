@@ -2,12 +2,12 @@
 
 # Research information
 sawb_client = 'r.cfdtools Research Center'
-sawb_order = '1'
+sawb_order = 'rcfdtools-000000001'
 sawb_date = '2023-05-30'  # yyyy-00-dd
 sawb_title = 'Colombia - South America - Drought analysis using the Standardized Precipitation Index - SPI and Atmospheric water balance - AW'
 sawb_desc = 'The current research.....'
 
-# Data source type and NetCDF file
+# SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
 # nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
 nc_file = 'ERA5Land_Monthly_01dd.nc'
@@ -26,7 +26,7 @@ point_eval = True
 
 # Year range
 year_min = 1980
-year_max = 1983
+year_max = 1982
 
 # SPI index mobile average times
 times = [1, 3]
@@ -38,3 +38,7 @@ units_mult = 1000  # ERA5 reanalysis
 # units_mult = 1  # CRU
 p_max_plot = 20  # ERA5 reanalysis with conversion to millimeters
 # p_max_plot = 500  # CRU
+
+# AWB
+# Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx
+awb_eval = True
