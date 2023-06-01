@@ -6,8 +6,8 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
-* Compress .nc & .csv into .zip files (95MB part files)
 * General statistics over the data source file .nc and the study zone
+* Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information
 * Log record separators in console
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
@@ -17,6 +17,7 @@ Data source: https://cds.climate.copernicus.eu/
 * Integrated script for run all the proceses
 * Scientific Markdown report for each PPOI and data source
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
+* Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 
 
 ## [spi.py](.src/spi.py) features
@@ -132,4 +133,5 @@ Limits - Colombia - South America - Bogotá Chingaza
 * [Timeseries Analysis using Python Xarray](https://www.youtube.com/watch?v=Ndfo967JgSY)
 * https://docs.xarray.dev/en/stable/user-guide/plotting.html
 * https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia
+* https://realpython.com/python-zipfile/
 

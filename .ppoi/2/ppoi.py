@@ -2,7 +2,7 @@
 
 # Research information
 sawb_client = 'r.cfdtools Research Center'
-sawb_order = '2'
+sawb_order = '1'
 sawb_date = '2023-05-30'  # yyyy-00-dd
 sawb_title = 'Colombia - South America - Drought analysis using the Standardized Precipitation Index - SPI and Atmospheric water balance - AW'
 sawb_desc = 'The current research.....'
@@ -29,7 +29,7 @@ year_min = 1980
 year_max = 1983
 
 # SPI index mobile average times
-times = [1, 3]
+times = [1, 3, 6]
 
 # Units conversion multiplier & Maximum value for plotting ramp
 # CRU data uses precipitation in millimeters

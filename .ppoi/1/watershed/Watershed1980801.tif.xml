@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<metadata xml:lang="es"><Esri><CreaDate>20230525</CreaDate><CreaTime>10070400</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process Name="Watershed" ToolSource="c:\program files (x86)\arcgis\desktop10.2\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\Watershed" Date="20230525" Time="100704">Watershed I:\R.SAWB\.poi\1\fdr\FDR1980801.tif I:\R.SAWB\.poi\1\shpin\Point.shp I:\R.SAWB\.poi\1\watershed\Watershed1980801.tif Id</Process></lineage></DataProperties></Esri></metadata>

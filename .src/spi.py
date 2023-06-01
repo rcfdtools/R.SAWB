@@ -95,8 +95,8 @@ def year_range_eval(data_time, year_min, year_max):
     return year_min, year_max
 
 # Variables & directories
-ppoi_num = 1  # <<<<<<<< ppoi number to process
-purge_ppoi_folder = False  # Delete all previous results. Set False if you require run many .nc data sources
+ppoi_num = 2  # <<<<<<<< ppoi number to process
+purge_ppoi_folder = True  # Delete all previous results. Set False if you require run many .nc data sources
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -106,22 +106,24 @@ if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous result
     os.mkdir(ppoi_path+'spi/era5')
 if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path)
-    os.mkdir(ppoi_path+'basin')
-    os.mkdir(ppoi_path+'fdr')
-    os.mkdir(ppoi_path+'graph')
-    os.mkdir(ppoi_path+'pflow')
-    os.mkdir(ppoi_path+'qm')
-    os.mkdir(ppoi_path+'shpin')
-    os.mkdir(ppoi_path+'shpout')
-    os.mkdir(ppoi_path+'shpout/basin')
-    os.mkdir(ppoi_path+'shpout/basindissolve')
-    os.mkdir(ppoi_path+'shpout/watershed')
+    os.mkdir(ppoi_path+'awb')
+    os.mkdir(ppoi_path+'awb/basin')
+    os.mkdir(ppoi_path+'awb/fdr')
+    os.mkdir(ppoi_path+'awb/graph')
+    os.mkdir(ppoi_path+'awb/pflow')
+    os.mkdir(ppoi_path+'awb/qm')
+    os.mkdir(ppoi_path+'awb/shpin')
+    os.mkdir(ppoi_path+'awb/shpout')
+    os.mkdir(ppoi_path+'awb/shpout/basin')
+    os.mkdir(ppoi_path+'awb/shpout/basindissolve')
+    os.mkdir(ppoi_path+'awb/shpout/watershed')
+    os.mkdir(ppoi_path+'awb/watershed')
+    os.mkdir(ppoi_path+'awb/winddir')
+    os.mkdir(ppoi_path+'swb')
     os.mkdir(ppoi_path+'spi')
     os.mkdir(ppoi_path+'spi/cru')
     os.mkdir(ppoi_path+'spi/era5')
-    os.mkdir(ppoi_path+'watershed')
-    os.mkdir(ppoi_path+'winddir')
-    shutil.copyfile('../.ppoi/1/ppoi.py', ppoi_path+'ppoi.py')  # PPOI #1 contains the parameters template
+    shutil.copyfile('../.ppoi/1/ppoi.py', ppoi_path+'ppoi.py')  # PPOI #1 contains the template parameters
 sys.path.insert(0,ppoi_path)  # PPOI path insert and parameters to process
 import ppoi
 nc_file = ppoi.nc_file
@@ -176,7 +178,7 @@ if polygon_eval:
         da_data['spi_' + str(i)] = spi(ds_rr_ze, i, 'time')[9]
         for year in range(year_min, year_max + 1):
             da_count = da_data[feature_name[data_source_num]].sel(time=str(year)).count()
-            print('Processing SPI_%s_%s (%d records)' % (str(i), str(year), da_count))
+            print('Processing %s_spi_%s_%s (%d records)' % (data_source[data_source_num], str(i), str(year), da_count))
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
