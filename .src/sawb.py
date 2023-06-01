@@ -72,7 +72,7 @@ dpi = 128  # Save plot resolution
 show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
-spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#F0F0F0', '#E9CCF9', '#833393', '#0000FF']
+spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#C8C8C8', '#E9CCF9', '#833393', '#0000FF']
 # AWB parameters
 awb_qm_join_file = 'awb_qm.csv' # Joined file name
 awb_qm_pivot_file = 'awb_qm_pivot.csv' # Joined average flow file name
