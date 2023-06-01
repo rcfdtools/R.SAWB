@@ -14,95 +14,14 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import sys
 from dbfread import DBF
-
-
-# Standardized Precipitation Index Function - Polygon with .nc
-def spi(ds, thresh, dimension):
-    # Original function script from https://github.com/jeffjay88/Climate_Indices
-    # ds - data ; thresh - time interval / scale; dimension - dimension as a string
-
-    # Rolling Mean / Moving Averages
-    ds_ma = ds.rolling(time=thresh, center=False).mean(dim=dimension)
-
-    # Natural log of moving averages
-    ds_In = np.log(ds_ma)
-    ds_In = ds_In.where(np.isinf(ds_In) == False)  # = np.nan  #Change infinity to NaN
-
-    #ds_mu = ds_ma.mean(dimension)
-
-    # Overall Mean of Moving Averages
-    ds_mu = ds_ma.mean(dimension)
-
-    # Summation of Natural log of moving averages
-    ds_sum = ds_In.sum(dimension)
-
-    # Computing essentials for gamma distribution
-    n = ds_In[thresh - 1:, :, :].count(dimension)  # size of data
-    A = np.log(ds_mu) - (ds_sum / n)  # Computing A
-    alpha = (1 / (4 * A)) * (1 + (1 + ((4 * A) / 3)) ** 0.5)  # Computing alpha  (a)
-    beta = ds_mu / alpha  # Computing beta (scale)
-
-    # Gamma Distribution (CDF)
-    gamma_func = lambda data, a, scale: st.gamma.cdf(data, a=a, scale=scale)
-    gamma = xr.apply_ufunc(gamma_func, ds_ma, alpha, beta)
-
-    # Standardized Precipitation Index   (Inverse of CDF)
-    norminv = lambda data: st.norm.ppf(data, loc=0, scale=1)
-    norm_spi = xr.apply_ufunc(norminv, gamma)  # loc is mean and scale is standard dev.
-
-    return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
-
-
-# Standardized Precipitation Index Function - Point with .csv
-def spi_point(ds, thresh):
-    # ds - data ; thresh - time interval / scale
-
-    # Rolling Mean / Moving Averages
-    ds_ma = ds.rolling(thresh, center=False).mean()
-
-    # Natural log of moving averages
-    ds_In = np.log(ds_ma)
-    ds_In[np.isinf(ds_In) == True] = np.nan  # Change infinity to NaN
-
-    # Overall Mean of Moving Averages
-    ds_mu = np.nanmean(ds_ma)
-
-    # Summation of Natural log of moving averages
-    ds_sum = np.nansum(ds_In)
-
-    # Computing essentials for gamma distribution
-    n = len(ds_In[thresh - 1:])  # size of data
-    A = np.log(ds_mu) - (ds_sum / n)  # Computing A
-    alpha = (1 / (4 * A)) * (1 + (1 + ((4 * A) / 3)) ** 0.5)  # Computing alpha  (a)
-    beta = ds_mu / alpha  # Computing beta (scale)
-
-    # Gamma Distribution (CDF)
-    gamma = st.gamma.cdf(ds_ma, a=alpha, scale=beta)
-
-    # Standardized Precipitation Index   (Inverse of CDF)
-    norm_spi = st.norm.ppf(gamma, loc=0, scale=1)  # loc is mean and scale is standard dev.
-
-    return ds_ma, ds_In, ds_mu, ds_sum, n, A, alpha, beta, gamma, norm_spi
-
-def year_range_eval(data_time, year_min, year_max):
-    year_min_data = data_time.min().values
-    year_min_data = pd.to_datetime(year_min_data).year
-    year_max_data = data_time.max().values
-    year_max_data = pd.to_datetime(year_max_data).year
-    if year_min_data > year_min:
-        print('\nAttention: your enter minimum year value %d has changed for %d' %(year_min, year_min_data))
-        year_min = year_min_data
-    if year_max_data < year_max:
-        print('Attention: your enter maximum year value %d has changed for %d' %(year_max, year_max_data))
-        year_max = year_max_data
-    return year_min, year_max
+import sawb_functions as sawbf
 
 
 # *****************************************************************************************
 # General variables & directories
 # *****************************************************************************************
 ppoi_num = 1  # <<<<<<<< PPOI number to process
-purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
+purge_ppoi_folder = False  # Delete all previous SPI results. Set False if you require run many .nc data sources
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -186,8 +105,8 @@ if polygon_eval:
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
-    year_min = year_range_eval(da_data['time'], year_min, year_max)[0]
-    year_max = year_range_eval(da_data['time'], year_min, year_max)[1]
+    year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
+    year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
     print('\nNetCDF contents\n',da_data,'\n')
     p_plot = True  # Control the precipitation plot
     for i in times:
@@ -201,7 +120,7 @@ if polygon_eval:
             case _:
                 print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
         # Plot
-        da_data['spi_' + str(i)] = spi(ds_rr_ze, i, 'time')[9]
+        da_data['spi_' + str(i)] = sawbf.spi(ds_rr_ze, i, 'time')[9]
         for year in range(year_min, year_max + 1):
             da_count = da_data[feature_name[data_source_num]].sel(time=str(year)).count()
             print('Processing %s_spi_%s_%s (%d records)' % (data_source[data_source_num], str(i), str(year), da_count))
@@ -241,6 +160,14 @@ if polygon_eval:
     if save_spi_nc:
         print('Exporting %s_polygon.nc' %data_source[data_source_num])
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
+    # Gif animations
+
+    if __name__ == '__main__':
+        print('\nCreating %s_p.gif' %data_source[data_source_num])
+        sawbf.make_gif(ppoi_path+'spi/'+data_source[data_source_num]+'/', data_source[data_source_num]+'_p', '.png')
+        for i in times:
+            print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
+            sawbf.make_gif(ppoi_path + 'spi/' + data_source[data_source_num] + '/', data_source[data_source_num] + '_spi_' + str(i), '.png')
 # SPI - Point processing
 if point_eval:
     print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
@@ -248,8 +175,8 @@ if point_eval:
     da_data = xr.open_dataset(data_path + nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
-    year_min = year_range_eval(da_data['time'], year_min, year_max)[0]
-    year_max = year_range_eval(da_data['time'], year_min, year_max)[1]
+    year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
+    year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
     match data_source_num:
         case 0:  # CRU data
             ds_rr_slice = ds_rr.sel(time=slice(str(year_min), str(year_max)))
@@ -273,7 +200,7 @@ if point_eval:
     data = data.set_index('time')
     print(data.dtypes)
     for i in times:
-        x = spi_point(data[feature_name[data_source_num]], i)
+        x = sawbf.spi_point(data[feature_name[data_source_num]], i)
         data['spi_' + str(i)] = x[9]
     print('\nDataframe with SPI calculations\n', data)
     data.to_csv(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_point.csv', encoding='utf-8', index=True)
@@ -340,4 +267,3 @@ if awb_eval:
     plt.savefig(ppoi_path+'awb/graph/awb_aa_monthly.png')
     if show_plot: plt.show()
     plt.close('all')
-

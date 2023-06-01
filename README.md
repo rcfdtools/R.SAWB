@@ -6,8 +6,8 @@ Data source: https://cds.climate.copernicus.eu/
 
 ## Pending tasks
 
+* Gif and video animation for temporal map data
 * General statistics over the data source file .nc and the study zone
-* Gift and video animation for temporal map data
 * Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information
 * Log record separators in console
@@ -136,4 +136,5 @@ Limits - Colombia - South America - Bogotá Chingaza
 * https://es.wikipedia.org/wiki/Crisis_energ%C3%A9tica_de_1992_en_Colombia
 * https://realpython.com/python-zipfile/
 * https://github.com/jeffjay88/Climate_Indices
+* https://www.blog.pythonlibrary.org/2021/06/23/creating-an-animated-gif-with-python/
 
