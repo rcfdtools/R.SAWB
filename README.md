@@ -137,4 +137,5 @@ Limits - Colombia - South America - Bogotá Chingaza
 * https://realpython.com/python-zipfile/
 * https://github.com/jeffjay88/Climate_Indices
 * https://www.blog.pythonlibrary.org/2021/06/23/creating-an-animated-gif-with-python/
+* https://stackoverflow.com/questions/11067097/7zip-commands-from-python
 
