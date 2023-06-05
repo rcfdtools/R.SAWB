@@ -92,8 +92,7 @@ if year_min > year_max:
     year_max = year_min
     year_min = year_min_aux
 sawbf.print_log(file_log, '# %s\n\n%s' %(ppoi.sawb_title, ppoi.sawb_desc))
-sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
-sawbf.print_log(file_log, '\n\n## Parameters  ' +
+sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n\n| Parameter | Description |' +
                 '\n|:---|:---|' +
                 '\n| PPOI | %d |' %ppoi_num +
@@ -102,16 +101,17 @@ sawbf.print_log(file_log, '\n\n## Parameters  ' +
                 '\n| Date | %s |' %ppoi.sawb_date +
                 '\n| Dataset | %s |' %nc_file +
                 '\n| Units conversion multiplier | %f |' %units_mult +
+                '\n| Precipitation maximum plot value | %f |' %ppoi.p_max_plot +
                 '\n| Year from | %d |' %year_min +
                 '\n| Year to | %d |' %year_max
                 )
-
+sawbf.print_log(file_log, '\n\n' + sawbd.p_max_plot_desc)
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure
 # *****************************************************************************************
 if polygon_eval or point_eval:
-    print('\nProcessing - Standardized Precipitation Index (SPI)')
+    sawbf.print_log(file_log, '\n\n## Standardized Precipitation Index (SPI)\n\n' + sawbd.spi_desc)
 # SPI - Polygon processing
 if polygon_eval:
     print('\nProcessing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))

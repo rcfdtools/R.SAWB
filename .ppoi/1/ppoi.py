@@ -28,7 +28,7 @@ lim_north = 5.735
 lim_south = 3.625
 lim_east = -72.875
 lim_west = -74.875
-polygon_eval = False
+polygon_eval = True
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
