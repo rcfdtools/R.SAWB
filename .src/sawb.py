@@ -93,7 +93,7 @@ if year_min > year_max:
     year_min = year_min_aux
 sawbf.print_log(file_log, '# %s\n\n%s' %(ppoi.sawb_title, ppoi.sawb_desc))
 sawbf.print_log(file_log, '\n\n## General parameters  ' +
-                '\n\n<div align="center">\n' +
+                '\n\n<div align="center">' +
                 '\n\n| Parameter | Description |' +
                 '\n|:---|:---|' +
                 '\n| PPOI | %d |' %ppoi_num +
@@ -104,7 +104,7 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Units conversion multiplier | %f |' %units_mult +
                 '\n| Precipitation maximum plot value | %f |' %ppoi.p_max_plot +
                 '\n| Year from | %d |' %year_min +
-                '\n| Year to | %d |' %year_max,
+                '\n| Year to | %d |' %year_max +
                 '\n\n</div>\n'
                 )
 sawbf.print_log(file_log, '\n\n' + sawbd.p_max_plot_desc)

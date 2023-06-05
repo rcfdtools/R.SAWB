@@ -1,4 +1,4 @@
-# Colombia - South America - Drought analysis using the Standardized Precipitation Index (SPI) and Atmospheric water balance (AWB)
+# Colombia - South America - Drought analysis with the Standardized Precipitation Index (SPI) and Atmospheric water balance (AWB)
 
 The current research.....
 
@@ -6,7 +6,6 @@ The current research.....
 ## General parameters  
 
 <div align="center">
-
 
 | Parameter | Description |
 |:---|:---|
@@ -19,6 +18,9 @@ The current research.....
 | Precipitation maximum plot value | 20.000000 |
 | Year from | 1980 |
 | Year to | 1981 |
+
+</div>
+
 
 
 > The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.
