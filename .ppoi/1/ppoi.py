@@ -10,7 +10,7 @@ sawb_desc = 'The current research.....'
 # SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
 # nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
-nc_file = 'ERA5Land_Monthly_01dd.nc'
+nc_file = 'ERA5Land_Monthly_01dd_ds1.nc'
 
 # SPI index mobile average times
 times = [1, 3]

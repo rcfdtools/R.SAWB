@@ -132,7 +132,6 @@ if polygon_eval:
                     plt.ylim(lim_south, lim_north)
                     plt.xlim(lim_west, lim_east)
                     plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
-
                     if show_plot: plt.show()
                 # Plotting feature SPI maps
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)

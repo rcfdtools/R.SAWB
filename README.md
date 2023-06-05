@@ -4,8 +4,8 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)
 
 ## Pending tasks
 
-* Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 * General statistics over the data source file .nc and the study zone
+* Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information
 * Log record separators in console
@@ -15,6 +15,7 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)
 * Scientific Markdown report for each PPOI and data source
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 * Download ERA5 1 hour 0.25dd with full Earth coverage. 1 day aggregation
+* Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 
 
 ## [sawb.py](.src/sawb.py) features
@@ -37,74 +38,6 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)
 * Validate and fix range year_min > year_max
 * Integrated script sawb.py for run all the proceses. SPI & AWS post-processing are integrated
 * Gif animations for time-series data map
-
-
-## Searching data from ERA5
-
-Data source: https://cds.climate.copernicus.eu/
-
-**Limits - South America**
-
-lim_north = 16
-lim_south = -58
-lim_east = -25
-lim_west = -96
-
-**Limits - Colombia - South America**
-
-lim_north = 14
-lim_south = -4.8
-lim_east = -66
-lim_west = -82.5
-
-**Limits - Colombia - South America - Bogotá Chingaza**
-
-lim_north = 5.735
-lim_south = 3.625
-lim_east = -72.875
-lim_west = -74.875
-
-
-
-### Search 1: ERA5-Land monthly averaged data from 1950 to present
-
-Local file: .nc/ERA5Land_Monthly_01dd.nc
-Coverage: land
-
-* Resolution: 0.1dd x 0.1dd
-* Submission date: 2023-05-06 10:13:33
-* Size: 1.0 GB+
-* Product type: Monthly averaged reanalysis
-* Variables: 10m u-component of wind, 10m v-component of wind, 2m temperature, Total evaporation, Total precipitation
-* Year: 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2022
-* Month: January, February, March, April, May, June, July, August, September, October, November, December
-* Time: 00:00
-* Sub-region extraction: North 16°, West -96°, South -58°, East -25°
-* Format: NetCDF
-
-
-### Search 2: ERA5 hourly data on single levels from 1940 to present
-
-Local file:
-Coverage: land & sea
-
-* Resolution: 0.25dd x 0.25dd
-* Variables: 10m u-component of wind, 10m v-component of wind, 2m temperature, Evaporation, Total precipitation
-
-
-### Search 3: ERA5 monthly averaged data on single levels from 1940 to present
-
-Local file:
-Coverage: land & sea
-	
-* Resolution: 0.25dd x 0.25dd
-* Product type: Monthly averaged reanalysis
-* Variable: 10m u-component of wind, 10m v-component of wind, 2m temperature, Evaporation, Total precipitation
-* Year: 1940, 1941, 1942, 1943, 1944, 1945, 1946, 1947, 1948, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023
-* Month: January, February, March, April, May, June, July, August, September, October, November, December
-* Time:00:00
-* Whole available region
-* Format:NetCDF (experimental)
 
 
 ## System configuration for big NetCDF files over Windows 11
@@ -134,7 +67,7 @@ Coverage: land & sea
 
 ## File compression
 
-Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "C:\R.SAWB\.nc\File.zip" "C:\R.SAWB\.nc\cru_ts4.03.1901.2018.pre.dat.nc"
+Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.zip" "D:\R.SAWB\.nc\cru_ts4.03.1901.2018.pre.dat.nc"
 
 
 ## References
@@ -161,4 +94,5 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "C:\R.SAWB\.nc\File.
 * https://github.com/jeffjay88/Climate_Indices
 * https://www.blog.pythonlibrary.org/2021/06/23/creating-an-animated-gif-with-python/
 * https://stackoverflow.com/questions/11067097/7zip-commands-from-python
+* https://www.datacamp.com/tutorial/python-subprocess
 
