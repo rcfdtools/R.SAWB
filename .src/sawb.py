@@ -91,18 +91,19 @@ if year_min > year_max:
     year_min_aux = year_max
     year_max = year_min
     year_min = year_min_aux
-sawbf.print_log(file_log, '# %s' %ppoi.sawb_title)
+sawbf.print_log(file_log, '# %s\n\n%s' %(ppoi.sawb_title, ppoi.sawb_desc))
 sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
-sawbf.print_log(file_log, '\n## Parameters  ' +
-                '\n\n* PPOI: %d' %ppoi_num +
-                '\n* Client: '+ppoi.sawb_client +
-                '\n* Order: '+ppoi.sawb_order +
-                '\n* Date: '+ppoi.sawb_date +
-                '\n* Dataset: '+nc_file +
-                '\n* Units conversion multiplier: %f' %units_mult +
-                '\n* Year from: %d' %year_min +
-                '\n* Year to: %d' %year_max +
-                '\n\n'+ppoi.sawb_desc
+sawbf.print_log(file_log, '\n\n## Parameters  ' +
+                '\n\n| Parameter | Description |' +
+                '\n|:---|:---|' +
+                '\n| PPOI | %d |' %ppoi_num +
+                '\n| Client | %s |' %ppoi.sawb_client +
+                '\n| Order | %s |' %ppoi.sawb_order +
+                '\n| Date | %s |' %ppoi.sawb_date +
+                '\n| Dataset | %s |' %nc_file +
+                '\n| Units conversion multiplier | %f |' %units_mult +
+                '\n| Year from | %d |' %year_min +
+                '\n| Year to | %d |' %year_max
                 )
 
 
