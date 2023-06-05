@@ -15,13 +15,14 @@ import matplotlib.dates as mdates
 import sys
 from dbfread import DBF
 import sawb_functions as sawbf
+import sawb_dictionary as sawbd
 
 
 # *****************************************************************************************
 # General variables & directories
 # *****************************************************************************************
 ppoi_num = 1  # <<<<<<<< PPOI number to process
-purge_ppoi_folder = False  # Delete all previous SPI results. Set False if you require run many .nc data sources
+purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
 data_path = '../.nc/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -78,15 +79,19 @@ awb_qm_join_file = 'awb_qm.csv' # Joined file name
 awb_qm_pivot_file = 'awb_qm_pivot.csv' # Joined average flow file name
 awb_aa_pivot_file = 'awb_aa_pivot.csv' # Joined accumulation area file name
 awb_eval = ppoi.awb_eval
-
+file_log_name = ppoi_path + data_source[data_source_num] + '_readme.md'  # Markdown file log
+file_log = open(file_log_name, 'w+')   # w+ create the file if it doesn't exist
 
 # *****************************************************************************************
-# Preliminar and parameters detail
+# Preliminar details & parameters
 # *****************************************************************************************
 if year_min > year_max:
     year_min_aux = year_max
     year_max = year_min
     year_min = year_min_aux
+sawbf.print_log(file_log, '# Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)')
+sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
+
 print('Processing PPOI: %s' %ppoi_path,
       '\nData file: %s' %nc_file,
       '\nUnits conversion multiplier: %f' %units_mult,

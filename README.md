@@ -1,5 +1,8 @@
 # R.SAWB
-Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB)  
+Keywords: `SWB` `AWB` `SPI` `ERA5` `CRU` 
+
+Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)
+
 
 
 ## Pending tasks
