@@ -91,9 +91,9 @@ if year_min > year_max:
     year_min_aux = year_max
     year_max = year_min
     year_min = year_min_aux
-sawbf.print_log(file_log, '# Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)')
+sawbf.print_log(file_log, '# %s' %ppoi.sawb_title)
 sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
-sawbf.print_log(file_log, '\n* Study case: %s' %ppoi.sawb_title +
+sawbf.print_log(file_log, '\n## Parameters<br><br>' +
                 '\n* PPOI: %d' %ppoi_num +
                 '\n* Client: '+ppoi.sawb_client +
                 '\n* Order: '+ppoi.sawb_order +
