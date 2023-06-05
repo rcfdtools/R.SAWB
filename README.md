@@ -114,7 +114,7 @@ Limits - Colombia - South America - Bogotá Chingaza
 3. From Python run the script `.src/sawb_monthly_poi.py`
 
 
-## File compresion
+## File compression
 
 Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "C:\R.SAWB\.nc\File.zip" "C:\R.SAWB\.nc\cru_ts4.03.1901.2018.pre.dat.nc"
 
