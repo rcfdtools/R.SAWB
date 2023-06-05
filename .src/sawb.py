@@ -93,6 +93,7 @@ if year_min > year_max:
     year_min = year_min_aux
 sawbf.print_log(file_log, '# %s\n\n%s' %(ppoi.sawb_title, ppoi.sawb_desc))
 sawbf.print_log(file_log, '\n\n## General parameters  ' +
+                '\n\n<div align="center">\n' +
                 '\n\n| Parameter | Description |' +
                 '\n|:---|:---|' +
                 '\n| PPOI | %d |' %ppoi_num +
@@ -103,7 +104,8 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Units conversion multiplier | %f |' %units_mult +
                 '\n| Precipitation maximum plot value | %f |' %ppoi.p_max_plot +
                 '\n| Year from | %d |' %year_min +
-                '\n| Year to | %d |' %year_max
+                '\n| Year to | %d |' %year_max,
+                '\n\n</div>\n'
                 )
 sawbf.print_log(file_log, '\n\n' + sawbd.p_max_plot_desc)
 
@@ -145,7 +147,7 @@ if polygon_eval:
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
-                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year, center_div=True)
+                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year, center_div=False)
                     p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)
@@ -155,7 +157,7 @@ if polygon_eval:
                     if show_plot: plt.show()
                     sawbf.print_log(file_log, '![R.SAWB](%s)\n' % p_fig)
                 # Plotting feature SPI maps
-                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=True)
+                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=False)
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
                 spi_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png'
                 plt.ylim(lim_south, lim_north)

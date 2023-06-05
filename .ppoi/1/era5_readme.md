@@ -5,6 +5,9 @@ The current research.....
 
 ## General parameters  
 
+<div align="center">
+
+
 | Parameter | Description |
 |:---|:---|
 | PPOI | 1 |
@@ -18,7 +21,7 @@ The current research.....
 | Year to | 1981 |
 
 
-> The maximum plot value of precipitation is used for truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.
+> The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.
 
 
 ## Standardized Precipitation Index (SPI)
@@ -32,64 +35,28 @@ SPI index mobile average times: [1, 3]
 
 ### Processing polygon over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
 
-<div align="center">
-
-
 1980 precipitation map
-
-
-</div>
 
 ![R.SAWB](spi/era5/era5_p_1980.png)
 
-
-<div align="center">
-
 1980 SPI-1 map
-
-</div>
-
 
 ![R.SAWB](spi/era5/era5_spi_1_1980.png)
 
 
-<div align="center">
-
-
 1981 precipitation map
-
-
-</div>
 
 ![R.SAWB](spi/era5/era5_p_1981.png)
 
-
-<div align="center">
-
 1981 SPI-1 map
-
-</div>
-
 
 ![R.SAWB](spi/era5/era5_spi_1_1981.png)
 
-
-<div align="center">
-
 1980 SPI-3 map
-
-</div>
-
 
 ![R.SAWB](spi/era5/era5_spi_3_1980.png)
 
-
-<div align="center">
-
 1981 SPI-3 map
-
-</div>
-
 
 ![R.SAWB](spi/era5/era5_spi_3_1981.png)
 
