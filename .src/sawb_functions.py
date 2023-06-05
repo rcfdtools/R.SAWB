@@ -93,7 +93,7 @@ def make_gif(frame_folder, key_name, file_ext):
     frame_len = len(glob.glob(f'{frame_folder}/{key_name_c}'))
     print('Frames: %d' %frame_len)
     seconds_frame = 2
-    duration = frame_len * seconds_frame * 60  # miliseconds
+    duration = frame_len * seconds_frame * 60  # milliseconds
     frames = [Image.open(image) for image in glob.glob(f'{frame_folder}/{key_name_c}')]
     frame_one = frames[0]
     frame_one.save(frame_folder+key_name+'.gif', format='GIF', append_images=frames, save_all=True, duration=duration, loop=0)
