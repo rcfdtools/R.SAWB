@@ -14,8 +14,10 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import sys
 from dbfread import DBF
+import tabulate
 import sawb_functions as sawbf
 import sawb_dictionary as sawbd
+
 
 
 # *****************************************************************************************
@@ -91,13 +93,18 @@ if year_min > year_max:
     year_min = year_min_aux
 sawbf.print_log(file_log, '# Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)')
 sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
+sawbf.print_log(file_log, '\n* Study case: %s' %ppoi.sawb_title +
+                '\n* PPOI: %d' %ppoi_num +
+                '\n* Client: '+ppoi.sawb_client +
+                '\n* Order: '+ppoi.sawb_order +
+                '\n* Date: '+ppoi.sawb_date +
+                '\n* Dataset: '+nc_file +
+                '\n* Units conversion multiplier: %f' %units_mult +
+                '\n* Year from: %d' %year_min +
+                '\n* Year to: %d' %year_max +
+                '\n\n'+ppoi.sawb_desc
+                )
 
-print('Processing PPOI: %s' %ppoi_path,
-      '\nData file: %s' %nc_file,
-      '\nUnits conversion multiplier: %f' %units_mult,
-      '\nYear from: %d' %year_min,
-      '\nYear to: %d' %year_max
-      )
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure

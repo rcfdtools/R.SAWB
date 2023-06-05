@@ -7,6 +7,7 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standard
 
 ## Pending tasks
 
+* Scientific Markdown report for each PPOI and data source
 * General statistics over the data source file .nc and the study zone
 * Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Merge atmospheric basin shapefiles into a unique shapefile
@@ -15,7 +16,6 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standard
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
 * PPOI GeoJson map
 * Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
-* Scientific Markdown report for each PPOI and data source
 * Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 * Download ERA5 1 hour 0.25dd with full Earth coverage. 1 day aggregation
 * Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)

@@ -28,12 +28,12 @@ lim_north = 5.735
 lim_south = 3.625
 lim_east = -72.875
 lim_west = -74.875
-polygon_eval = True
+polygon_eval = False
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
 point_longitude = -73.7
-point_eval = True
+point_eval = False
 
 # Year range
 year_min = 1980
