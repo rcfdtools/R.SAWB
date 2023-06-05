@@ -153,15 +153,17 @@ if polygon_eval:
                     p_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png'
                     plt.savefig(ppoi_path+p_fig, dpi=dpi)
                     if show_plot: plt.show()
-                    sawbf.print_log(file_log, '\n![R.SAWB](%s)' %p_fig)
+                    sawbf.print_log(file_log, '![R.SAWB](%s)\n' % p_fig)
                 # Plotting feature SPI maps
-                sawbf.print_log(file_log, '\n\n%d SPI map\n' % year)
+                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i))
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
+                spi_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png'
                 plt.ylim(lim_south, lim_north)
                 plt.xlim(lim_west, lim_east)
-                plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png', dpi=dpi)
+                plt.savefig(ppoi_path+spi_fig, dpi=dpi)
                 if show_plot: plt.show()
                 plt.close('all')
+                sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % spi_fig)
         p_plot = False
     sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
     # Export .nc with SPI calculations over ZE as .csv
