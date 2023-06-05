@@ -93,7 +93,7 @@ if year_min > year_max:
     year_min = year_min_aux
 sawbf.print_log(file_log, '# %s' %ppoi.sawb_title)
 sawbf.print_log(file_log, '\n'+sawbd.spi_desc)
-sawbf.print_log(file_log, '\n## Parameters<br><br>' +
+sawbf.print_log(file_log, '\n## Parameters\n' +
                 '\n* PPOI: %d' %ppoi_num +
                 '\n* Client: '+ppoi.sawb_client +
                 '\n* Order: '+ppoi.sawb_order +
