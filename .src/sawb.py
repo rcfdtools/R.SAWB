@@ -187,13 +187,15 @@ if polygon_eval:
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
     if __name__ == '__main__':
-        sawbf.print_log(file_log, '\n**Animations**')
+        sawbf.print_log(file_log, '\n**Animations (%s)**' %data_source[data_source_num] +
+                        '\n\nPrecipitation')
         p_gif = 'spi/'+data_source[data_source_num]+'/'
         key_name = data_source[data_source_num]+'_p'
         sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
         sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(p_gif+key_name+'.gif'))
         for i in times:
             print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
+            sawbf.print_log(file_log, '\nSPI-%d' % i)
             spi_gif = 'spi/' + data_source[data_source_num] + '/'
             key_name = data_source[data_source_num] + '_spi_' + str(i)
             sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
