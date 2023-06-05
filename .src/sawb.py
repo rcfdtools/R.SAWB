@@ -145,7 +145,7 @@ if polygon_eval:
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
-                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year)
+                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year, center_div=True)
                     p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)
@@ -155,7 +155,7 @@ if polygon_eval:
                     if show_plot: plt.show()
                     sawbf.print_log(file_log, '![R.SAWB](%s)\n' % p_fig)
                 # Plotting feature SPI maps
-                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i))
+                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=True)
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
                 spi_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png'
                 plt.ylim(lim_south, lim_north)
