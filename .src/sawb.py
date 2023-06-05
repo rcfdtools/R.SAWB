@@ -111,10 +111,13 @@ sawbf.print_log(file_log, '\n\n' + sawbd.p_max_plot_desc)
 # Standardized Precipitation Index (SPI) - Procedure
 # *****************************************************************************************
 if polygon_eval or point_eval:
-    sawbf.print_log(file_log, '\n\n## Standardized Precipitation Index (SPI)\n\n' + sawbd.spi_desc)
+    sawbf.print_log(file_log, '\n\n## Standardized Precipitation Index (SPI)\n\n' +
+                    sawbd.spi_desc +
+                    '\n\n%s' %sawbd.precipitation_desc +
+                    '\n\nSPI index mobile average times: %s' %ppoi.times)
 # SPI - Polygon processing
 if polygon_eval:
-    print('\nProcessing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))
+    sawbf.print_log(file_log, '\n\n### Processing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
@@ -122,6 +125,7 @@ if polygon_eval:
     year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
     print('\nNetCDF contents\n',da_data,'\n')
     p_plot = True  # Control the precipitation plot
+    records = 0
     for i in times:
         match data_source_num:
             case 0:  # CRU data
@@ -137,16 +141,21 @@ if polygon_eval:
         for year in range(year_min, year_max + 1):
             da_count = da_data[feature_name[data_source_num]].sel(time=str(year)).count()
             print('Processing %s_spi_%s_%s (%d records)' % (data_source[data_source_num], str(i), str(year), da_count))
+            records += da_count
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
+                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year)
                     p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)
                     plt.xlim(lim_west, lim_east)
-                    plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png', dpi=dpi)
+                    p_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png'
+                    plt.savefig(ppoi_path+p_fig, dpi=dpi)
                     if show_plot: plt.show()
+                    sawbf.print_log(file_log, '\n![R.SAWB](%s)' %p_fig)
                 # Plotting feature SPI maps
+                sawbf.print_log(file_log, '\n\n%d SPI map\n' % year)
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
                 plt.ylim(lim_south, lim_north)
                 plt.xlim(lim_west, lim_east)
@@ -154,6 +163,7 @@ if polygon_eval:
                 if show_plot: plt.show()
                 plt.close('all')
         p_plot = False
+    sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
     # Export .nc with SPI calculations over ZE as .csv
     match data_source_num:
         case 0:  # CRU data
@@ -173,7 +183,6 @@ if polygon_eval:
         print('Exporting %s_polygon.nc' %data_source[data_source_num])
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
-
     if __name__ == '__main__':
         print('\nCreating %s_p.gif' %data_source[data_source_num])
         sawbf.make_gif(ppoi_path+'spi/'+data_source[data_source_num]+'/', data_source[data_source_num]+'_p', '.png')
