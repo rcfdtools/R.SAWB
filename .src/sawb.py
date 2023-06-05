@@ -167,7 +167,6 @@ if polygon_eval:
                 plt.close('all')
                 sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % spi_fig)
         p_plot = False
-    sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
     # Export .nc with SPI calculations over ZE as .csv
     match data_source_num:
         case 0:  # CRU data
@@ -188,11 +187,18 @@ if polygon_eval:
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
     if __name__ == '__main__':
-        print('\nCreating %s_p.gif' %data_source[data_source_num])
-        sawbf.make_gif(ppoi_path+'spi/'+data_source[data_source_num]+'/', data_source[data_source_num]+'_p', '.png')
+        sawbf.print_log(file_log, '\n**Animations**')
+        p_gif = 'spi/'+data_source[data_source_num]+'/'
+        key_name = data_source[data_source_num]+'_p'
+        sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
+        sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(p_gif+key_name+'.gif'))
         for i in times:
             print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
-            sawbf.make_gif(ppoi_path + 'spi/' + data_source[data_source_num] + '/', data_source[data_source_num] + '_spi_' + str(i), '.png')
+            spi_gif = 'spi/' + data_source[data_source_num] + '/'
+            key_name = data_source[data_source_num] + '_spi_' + str(i)
+            sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
+            sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
+    sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
 # SPI - Point processing
 if point_eval:
     print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))

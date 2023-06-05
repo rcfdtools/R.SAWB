@@ -63,5 +63,13 @@ SPI index mobile average times: [1, 3]
 ![R.SAWB](spi/era5/era5_spi_3_1981.png)
 
 
+**Animations**
+
+![R.SAWB](spi/era5/era5_p.gif)
+
+![R.SAWB](spi/era5/era5_spi_1.gif)
+
+![R.SAWB](spi/era5/era5_spi_3.gif)
+
 
 Records processed: 7584000
