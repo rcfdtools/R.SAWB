@@ -147,7 +147,7 @@ if polygon_eval:
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
-                    sawbf.print_log(file_log, '\n%d precipitation map\n' % year, center_div=False)
+                    sawbf.print_log(file_log, '\n%d precipitation map (%d records)\n' %(year, da_count), center_div=False)
                     p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)

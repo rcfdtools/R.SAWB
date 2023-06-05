@@ -1,4 +1,4 @@
-# Colombia - South America - Drought analysis with the Standardized Precipitation Index (SPI) and Atmospheric water balance (AWB)
+# Colombia - South America - Atmospheric water balance (AWB) and Drought analysis with the Standardized Precipitation Index (SPI)
 
 The current research.....
 
@@ -37,7 +37,7 @@ SPI index mobile average times: [1, 3]
 
 ### Processing polygon over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
 
-1980 precipitation map
+1980 precipitation map (1896000 records)
 
 ![R.SAWB](spi/era5/era5_p_1980.png)
 
@@ -46,7 +46,7 @@ SPI index mobile average times: [1, 3]
 ![R.SAWB](spi/era5/era5_spi_1_1980.png)
 
 
-1981 precipitation map
+1981 precipitation map (1896000 records)
 
 ![R.SAWB](spi/era5/era5_p_1981.png)
 

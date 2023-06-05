@@ -4,7 +4,7 @@
 sawb_client = 'r.cfdtools Research Center'
 sawb_order = 'rcfdtools-000000001'
 sawb_date = '2023-05-30'  # yyyy-00-dd
-sawb_title = 'Colombia - South America - Drought analysis with the Standardized Precipitation Index (SPI) and Atmospheric water balance (AWB)'
+sawb_title = 'Colombia - South America - Atmospheric water balance (AWB) and Drought analysis with the Standardized Precipitation Index (SPI)'
 sawb_desc = 'The current research.....'
 
 # SPI - Data source type and NetCDF file
