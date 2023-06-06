@@ -25,7 +25,7 @@ import sawb_dictionary as sawbd
 # *****************************************************************************************
 ppoi_num = 1  # <<<<<<<< PPOI number to process
 purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
-data_path = '../.nc/'
+data_path = '../.netcdf/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
     shutil.rmtree(ppoi_path+'spi')
