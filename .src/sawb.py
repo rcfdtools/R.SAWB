@@ -116,16 +116,16 @@ if polygon_eval or point_eval:
     sawbf.print_log(file_log, '\n\n## Standardized Precipitation Index (SPI)\n\n' +
                     sawbd.spi_desc +
                     '\n\n%s' %sawbd.precipitation_desc +
-                    '\n\nSPI index mobile average times: %s' %ppoi.times)
+                    '\n\n* SPI index mobile average times: %s' %ppoi.times)
 # SPI - Polygon processing
 if polygon_eval:
-    sawbf.print_log(file_log, '\n\n### Processing polygon over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
+    sawbf.print_log(file_log, '\n\n### Polygon analysis over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
     year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
     year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
-    print('\nNetCDF contents\n',da_data,'\n')
+    sawbf.print_log(file_log, '**NetCDF contents**\n%s\n\n' %da_data)
     p_plot = True  # Control the precipitation plot
     records = 0
     for i in times:
@@ -142,7 +142,7 @@ if polygon_eval:
         da_data['spi_' + str(i)] = sawbf.spi(ds_rr_ze, i, 'time')[9]
         for year in range(year_min, year_max + 1):
             da_count = da_data[feature_name[data_source_num]].sel(time=str(year)).count()
-            print('Processing %s_spi_%s_%s (%d records)' % (data_source[data_source_num], str(i), str(year), da_count))
+            #print('Processing %s_spi_%s_%s (%d records)' % (data_source[data_source_num], str(i), str(year), da_count))
             records += da_count
             if da_count:
                 # Plotting feature yearly maps
@@ -202,7 +202,7 @@ if polygon_eval:
     sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
 # SPI - Point processing
 if point_eval:
-    print('\nProcessing point in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
+    sawbf.print_log(file_log, '\n## Point analysis in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
     # Extract values from NetCDF
     da_data = xr.open_dataset(data_path + nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult

@@ -92,7 +92,7 @@ def make_gif(frame_folder, key_name, file_ext):
     key_name_c = '*' + key_name + '*' + file_ext
     frame_len = len(glob.glob(f'{frame_folder}/{key_name_c}'))
     print('Frames: %d' %frame_len)
-    seconds_frame = 2
+    seconds_frame = 3
     duration = frame_len * seconds_frame * 60  # milliseconds
     frames = [Image.open(image) for image in glob.glob(f'{frame_folder}/{key_name_c}')]
     frame_one = frames[0]
@@ -109,12 +109,3 @@ def print_log(file_log, txt_print, on_screen=True, center_div=False):
     if center_div:
         file_log.write('\n</div>\n' + '\n')
 
-# Function for print and show results in a log file
-def print_log_n(file_log, txt_print, on_screen=True, center_div=False):
-    if on_screen:
-        print(txt_print)
-    if center_div:
-        file_log.write('\n<div align="center">\n' + '\n')
-    file_log.write(txt_print + '\n')
-    if center_div:
-        file_log.write('\n</div>\n' + '\n')
