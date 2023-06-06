@@ -155,7 +155,7 @@ if polygon_eval:
                     p_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png'
                     plt.savefig(ppoi_path+p_fig, dpi=dpi)
                     if show_plot: plt.show()
-                    sawbf.print_log(file_log, '[`P-%d`](%s)' %(year, p_fig))
+                    sawbf.print_log(file_log, '[`P-%d`](%s) ' %(year, p_fig))
                 # Plotting feature SPI maps
                 #sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=False)
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
@@ -165,7 +165,7 @@ if polygon_eval:
                 plt.savefig(ppoi_path+spi_fig, dpi=dpi)
                 if show_plot: plt.show()
                 plt.close('all')
-                sawbf.print_log(file_log, '[`SPI-%d-%d`](%s)' %(i,year,spi_fig))
+                sawbf.print_log(file_log, '[`SPI-%d-%d`](%s) ' %(i,year,spi_fig))
         p_plot = False
     # Export .nc with SPI calculations over ZE as .csv
     match data_source_num:

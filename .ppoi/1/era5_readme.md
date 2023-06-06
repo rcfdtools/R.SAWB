@@ -33,7 +33,7 @@ SPI index mobile average times: [1, 3]
 
 ### Processing polygon over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
 
-[`P-1980`](spi/era5/era5_p_1980.png)[`SPI-1-1980`](spi/era5/era5_spi_1_1980.png)[`P-1981`](spi/era5/era5_p_1981.png)[`SPI-1-1981`](spi/era5/era5_spi_1_1981.png)[`P-1982`](spi/era5/era5_p_1982.png)[`SPI-1-1982`](spi/era5/era5_spi_1_1982.png)[`SPI-3-1980`](spi/era5/era5_spi_3_1980.png)[`SPI-3-1981`](spi/era5/era5_spi_3_1981.png)[`SPI-3-1982`](spi/era5/era5_spi_3_1982.png)
+[`P-1980`](spi/era5/era5_p_1980.png) [`SPI-1-1980`](spi/era5/era5_spi_1_1980.png) [`P-1981`](spi/era5/era5_p_1981.png) [`SPI-1-1981`](spi/era5/era5_spi_1_1981.png) [`P-1982`](spi/era5/era5_p_1982.png) [`SPI-1-1982`](spi/era5/era5_spi_1_1982.png) [`SPI-3-1980`](spi/era5/era5_spi_3_1980.png) [`SPI-3-1981`](spi/era5/era5_spi_3_1981.png) [`SPI-3-1982`](spi/era5/era5_spi_3_1982.png) 
 
 Precipitation
 ![R.SAWB](spi/era5/era5_p.gif)
