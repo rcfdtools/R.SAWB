@@ -8,7 +8,7 @@ Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standard
 ## Pending tasks
 
 * Scientific Markdown report for each PPOI and data source
-* General statistics over the data source file .nc and the study zone
+* General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
 * Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information

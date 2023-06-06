@@ -100,7 +100,7 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Client | %s |' %ppoi.sawb_client +
                 '\n| Order | %s |' %ppoi.sawb_order +
                 '\n| Date | %s |' %ppoi.sawb_date +
-                '\n| Dataset | [%s](%s) |' % (nc_file, '../../.nc/') +
+                '\n| Dataset | [%s](%s) |' % (nc_file, '../../.netcdf/') +
                 '\n| Units conversion multiplier | %f |' %units_mult +
                 '\n| Precipitation maximum plot value | %f |' %ppoi.p_max_plot +
                 '\n| Year from | %d |' %year_min +
