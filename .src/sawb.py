@@ -117,6 +117,7 @@ if polygon_eval or point_eval:
                     sawbd.spi_desc +
                     '\n\n%s' %sawbd.precipitation_desc +
                     '\n\n* SPI index mobile average times: %s' %ppoi.times)
+
 # SPI - Polygon processing
 if polygon_eval:
     sawbf.print_log(file_log, '\n\n### Zonal analysis over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
@@ -192,16 +193,17 @@ if polygon_eval:
     sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
     sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(p_gif+key_name+'.gif'))
     for i in times:
-        print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
-        sawbf.print_log(file_log, '\nSPI-%d' % i)
+        # print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
+        sawbf.print_log(file_log, '\n\nSPI-%d' % i)
         spi_gif = 'spi/' + data_source[data_source_num] + '/'
         key_name = data_source[data_source_num] + '_spi_' + str(i)
         sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
-        sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
+        sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
     sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
+
 # SPI - Point processing
 if point_eval:
-    sawbf.print_log(file_log, '\n## Point analysis in Latitude: %f°, Longitude: %f° for nearest' %(point_latitude, point_longitude))
+    sawbf.print_log(file_log, '\n\n### Point analysis in Latitude: %f°, Longitude: %f° or nearest' %(point_latitude, point_longitude))
     # Extract values from NetCDF
     da_data = xr.open_dataset(data_path + nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
@@ -218,10 +220,13 @@ if point_eval:
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' % data_source_num)
     ds_rr_select.plot(figsize=(10, 7))
-    plt.savefig(ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.png', dpi=dpi)
+    p_fig = 'spi/'+data_source[data_source_num]+'_p_point.png'
+    plt.savefig(ppoi_path+p_fig, dpi=dpi)
     if show_plot: plt.show()
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % p_fig)
     df = ds_rr_select.to_dataframe()
-    print('\nInitial dataframe\n', df)
+    sawbf.print_log(file_log, '\n\n#### Initial dataframe\n\n')
+    sawbf.print_log(file_log, df.T.to_markdown(), center_div=True)
     point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.csv'
     df.to_csv(point_csv_file, encoding='utf-8', index=True)
     # SPI calculation

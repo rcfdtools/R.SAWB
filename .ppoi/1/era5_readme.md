@@ -13,7 +13,7 @@ The current research.....
 | Client | r.cfdtools Researching Area |
 | Order | rcfdtools-000000001 |
 | Date | 2023-05-30 |
-| Dataset | [ERA5Land_Monthly_01dd_ds1.nc](../../.nc/) |
+| Dataset | [ERA5Land_Monthly_01dd_ds1.nc](../../.netcdf/) |
 | Units conversion multiplier | 1000.000000 |
 | Precipitation maximum plot value | 20.000000 |
 | Year from | 1980 |
@@ -31,67 +31,19 @@ Precipitation: accumulated liquid and frozen water, including rain and snow, tha
 
 * SPI index mobile average times: [1, 3]
 
-### Zonal analysis over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
+### Point analysis in Latitude: 4.600000°, Longitude: -73.700000° or nearest
 
-#### NetCDF initial dataset
+![R.SAWB](spi/era5_p_point.png)
 
-```
-<xarray.Dataset>
-Dimensions:    (longitude: 711, latitude: 741, time: 468)
-Coordinates:
-  * longitude  (longitude) float32 -96.0 -95.9 -95.8 -95.7 ... -25.2 -25.1 -25.0
-  * latitude   (latitude) float32 16.0 15.9 15.8 15.7 ... -57.8 -57.9 -58.0
-  * time       (time) datetime64[ns] 1980-01-01 1980-02-01 ... 2022-12-01
-Data variables:
-    u10        (time, latitude, longitude) float32 ...
-    v10        (time, latitude, longitude) float32 ...
-    t2m        (time, latitude, longitude) float32 ...
-    e          (time, latitude, longitude) float32 ...
-    tp         (time, latitude, longitude) float32 0.949 0.7166 ... nan nan
-Attributes:
-    Conventions:  CF-1.6
-    history:      2023-05-15 19:06:50 GMT by grib_to_netcdf-2.24.0: /opt/ecmw...
-```
-
-#### Individual plots
-
-[`P-1980`](spi/era5/era5_p_1980.png) [`SPI-1-1980`](spi/era5/era5_spi_1_1980.png) [`P-1981`](spi/era5/era5_p_1981.png) [`SPI-1-1981`](spi/era5/era5_spi_1_1981.png) [`P-1982`](spi/era5/era5_p_1982.png) [`SPI-1-1982`](spi/era5/era5_spi_1_1982.png) [`SPI-3-1980`](spi/era5/era5_spi_3_1980.png) [`SPI-3-1981`](spi/era5/era5_spi_3_1981.png) [`SPI-3-1982`](spi/era5/era5_spi_3_1982.png) 
-
-#### Output datasets
-
-* Dataset as comma-separated values: [era5_spi_polygon.csv](spi/)
-* Dataset as NetCDF: [era5_spi_polygon.nc](spi/)
-
-```
-<xarray.Dataset>
-Dimensions:    (longitude: 20, latitude: 21, time: 36)
-Coordinates:
-  * longitude  (longitude) float32 -74.8 -74.7 -74.6 -74.5 ... -73.1 -73.0 -72.9
-  * latitude   (latitude) float32 5.7 5.6 5.5 5.4 5.3 ... 4.1 4.0 3.9 3.8 3.7
-  * time       (time) datetime64[ns] 1980-01-01 1980-02-01 ... 1982-12-01
-Data variables:
-    u10        (time, latitude, longitude) float32 0.9342 0.6416 ... -1.223
-    v10        (time, latitude, longitude) float32 -0.1936 0.06651 ... -1.555
-    t2m        (time, latitude, longitude) float32 298.7 299.6 ... 298.1 298.2
-    e          (time, latitude, longitude) float32 -0.003726 ... -0.00392
-    tp         (time, latitude, longitude) float32 2.395 2.049 ... 4.29 3.809
-    spi_1      (time, latitude, longitude) float64 -0.6862 -0.8545 ... -0.5416
-    spi_3      (time, latitude, longitude) float64 nan nan ... -0.6664 -0.6678
-Attributes:
-    Conventions:  CF-1.6
-    history:      2023-05-15 19:06:50 GMT by grib_to_netcdf-2.24.0: /opt/ecmw...
-```
+#### Initial dataframe
 
 
-#### Animations
+<div align="center">
 
-Precipitation
-![R.SAWB](spi/era5/era5_p.gif)
-SPI-1
+|           |   1980-01-01 00:00:00 |   1980-02-01 00:00:00 |   1980-03-01 00:00:00 |   1980-04-01 00:00:00 |   1980-05-01 00:00:00 |   1980-06-01 00:00:00 |   1980-07-01 00:00:00 |   1980-08-01 00:00:00 |   1980-09-01 00:00:00 |   1980-10-01 00:00:00 |   1980-11-01 00:00:00 |   1980-12-01 00:00:00 |   1981-01-01 00:00:00 |   1981-02-01 00:00:00 |   1981-03-01 00:00:00 |   1981-04-01 00:00:00 |   1981-05-01 00:00:00 |   1981-06-01 00:00:00 |   1981-07-01 00:00:00 |   1981-08-01 00:00:00 |   1981-09-01 00:00:00 |   1981-10-01 00:00:00 |   1981-11-01 00:00:00 |   1981-12-01 00:00:00 |   1982-01-01 00:00:00 |   1982-02-01 00:00:00 |   1982-03-01 00:00:00 |   1982-04-01 00:00:00 |   1982-05-01 00:00:00 |   1982-06-01 00:00:00 |   1982-07-01 00:00:00 |   1982-08-01 00:00:00 |   1982-09-01 00:00:00 |   1982-10-01 00:00:00 |   1982-11-01 00:00:00 |   1982-12-01 00:00:00 |
+|:----------|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|----------------------:|
+| longitude |             -73.7     |             -73.7     |             -73.7     |              -73.7    |              -73.7    |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |              -73.7    |              -73.7    |              -73.7    |              -73.7    |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |             -73.7     |              -73.7    |              -73.7    |              -73.7    |              -73.7    |             -73.7     |             -73.7     |              -73.7    |             -73.7     |               -73.7   |             -73.7     |             -73.7     |
+| latitude  |               4.6     |               4.6     |               4.6     |                4.6    |                4.6    |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |                4.6    |                4.6    |                4.6    |                4.6    |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |               4.6     |                4.6    |                4.6    |                4.6    |                4.6    |               4.6     |               4.6     |                4.6    |               4.6     |                 4.6   |               4.6     |               4.6     |
+| tp        |               5.77634 |               4.53302 |               9.47385 |               11.3496 |               10.2874 |               9.79279 |               8.11161 |               5.94932 |               6.86559 |               7.95484 |               6.84937 |               6.50881 |               3.44917 |               9.36574 |               8.02241 |               12.5984 |               13.3092 |               13.5849 |               10.1874 |               8.05485 |               7.27102 |               7.04398 |               9.01166 |               6.80072 |               8.39812 |               12.5632 |               13.0227 |               15.5012 |               11.0226 |               8.46839 |               8.05756 |                5.3655 |               5.98175 |                 7.817 |               9.24141 |               6.67639 |
+</div>
 
-![R.SAWB](spi/era5/era5_spi_1.gif)
-SPI-3
-
-![R.SAWB](spi/era5/era5_spi_3.gif)
-
-Records processed: 11376000
