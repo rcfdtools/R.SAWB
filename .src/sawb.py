@@ -119,13 +119,13 @@ if polygon_eval or point_eval:
                     '\n\n* SPI index mobile average times: %s' %ppoi.times)
 # SPI - Polygon processing
 if polygon_eval:
-    sawbf.print_log(file_log, '\n\n### Polygon analysis over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
+    sawbf.print_log(file_log, '\n\n### Zonal analysis over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
     year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
     year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
-    sawbf.print_log(file_log, '**NetCDF contents**\n%s\n\n' %da_data)
+    sawbf.print_log(file_log, '#### NetCDF initial content\n\n%s\n\n#### Individual plots\n\n' %da_data)
     p_plot = True  # Control the precipitation plot
     records = 0
     for i in times:
@@ -187,7 +187,7 @@ if polygon_eval:
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
     if __name__ == '__main__':
-        sawbf.print_log(file_log, '\n\nPrecipitation')
+        sawbf.print_log(file_log, '\n\n#### Animations\n\nPrecipitation')
         p_gif = 'spi/'+data_source[data_source_num]+'/'
         key_name = data_source[data_source_num]+'_p'
         sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')

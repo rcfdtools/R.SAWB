@@ -31,9 +31,10 @@ Precipitation: accumulated liquid and frozen water, including rain and snow, tha
 
 * SPI index mobile average times: [1, 3]
 
-### Polygon analysis over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
+### Zonal analysis over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
 
-**NetCDF contents**
+#### NetCDF initial content
+
 <xarray.Dataset>
 Dimensions:    (longitude: 711, latitude: 741, time: 468)
 Coordinates:
@@ -50,7 +51,11 @@ Attributes:
     Conventions:  CF-1.6
     history:      2023-05-15 19:06:50 GMT by grib_to_netcdf-2.24.0: /opt/ecmw...
 
+#### Individual plots
+
 [`P-1980`](spi/era5/era5_p_1980.png) [`SPI-1-1980`](spi/era5/era5_spi_1_1980.png) [`P-1981`](spi/era5/era5_p_1981.png) [`SPI-1-1981`](spi/era5/era5_spi_1_1981.png) [`P-1982`](spi/era5/era5_p_1982.png) [`SPI-1-1982`](spi/era5/era5_spi_1_1982.png) [`SPI-3-1980`](spi/era5/era5_spi_3_1980.png) [`SPI-3-1981`](spi/era5/era5_spi_3_1981.png) [`SPI-3-1982`](spi/era5/era5_spi_3_1982.png) 
+
+#### Animations
 
 Precipitation
 ![R.SAWB](spi/era5/era5_p.gif)
