@@ -177,28 +177,27 @@ if polygon_eval:
                              time=slice(str(year_min), str(year_max)))
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
+    # Export .nc with SPI calculations over ZE as .csv & .nc
     df = da_data.to_dataframe()
-    print('Exporting %s_polygon_spi.csv' %data_source[data_source_num])
+    sawbf.print_log(file_log, '\n\n#### Output datasets\n\n* Dataset as comma-separated values: [%s_spi_polygon.csv](spi/)' % data_source[data_source_num])
     df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_spi_polygon.csv', encoding='utf-8', index=True)
     print(da_data)
-    # Export .nc with SPI calculations over ZE as .nc
     if save_spi_nc:
-        print('Exporting %s_polygon.nc' %data_source[data_source_num])
+        sawbf.print_log(file_log, '\n* Dataset as NetCDF: [%s_spi_polygon.nc](spi/)' % data_source[data_source_num])
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
-    if __name__ == '__main__':
-        sawbf.print_log(file_log, '\n\n#### Animations\n\nPrecipitation')
-        p_gif = 'spi/'+data_source[data_source_num]+'/'
-        key_name = data_source[data_source_num]+'_p'
-        sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
-        sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(p_gif+key_name+'.gif'))
-        for i in times:
-            print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
-            sawbf.print_log(file_log, '\nSPI-%d' % i)
-            spi_gif = 'spi/' + data_source[data_source_num] + '/'
-            key_name = data_source[data_source_num] + '_spi_' + str(i)
-            sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
-            sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
+    sawbf.print_log(file_log, '\n\n#### Animations\n\nPrecipitation')
+    p_gif = 'spi/'+data_source[data_source_num]+'/'
+    key_name = data_source[data_source_num]+'_p'
+    sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
+    sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(p_gif+key_name+'.gif'))
+    for i in times:
+        print('\nCreating %s_spi_%d.gif' %(data_source[data_source_num], i))
+        sawbf.print_log(file_log, '\nSPI-%d' % i)
+        spi_gif = 'spi/' + data_source[data_source_num] + '/'
+        key_name = data_source[data_source_num] + '_spi_' + str(i)
+        sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
+        sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
     sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
 # SPI - Point processing
 if point_eval:
