@@ -107,7 +107,7 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Year to | %d |' %year_max +
                 '\n\n</div>\n'
                 )
-sawbf.print_log(file_log, '\n\n' + sawbd.p_max_plot_desc)
+sawbf.print_log(file_log, '\n' + sawbd.p_max_plot_desc)
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure
@@ -119,7 +119,7 @@ if polygon_eval or point_eval:
                     '\n\nSPI index mobile average times: %s' %ppoi.times)
 # SPI - Polygon processing
 if polygon_eval:
-    sawbf.print_log(file_log, '\n\n### Processing polygon over N: %f°, S: %f°, E: %f°, W: %f°' % (lim_north, lim_south, lim_east, lim_west))
+    sawbf.print_log(file_log, '\n\n### Processing polygon over N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]
@@ -147,7 +147,7 @@ if polygon_eval:
             if da_count:
                 # Plotting feature yearly maps
                 if p_plot:
-                    sawbf.print_log(file_log, '\n%d precipitation map (%d records)\n' %(year, da_count), center_div=False)
+                    #sawbf.print_log(file_log, '\n%d precipitation map (%d records)\n' %(year, da_count), center_div=False)
                     p = da_data[feature_name[data_source_num]].sel(time=str(year)).plot(cmap='YlGnBu', col='time', col_wrap=4, vmin=0, vmax=p_max_plot)
                     da_count = da_data['spi_' + str(i)].count()
                     plt.ylim(lim_south, lim_north)
@@ -155,9 +155,9 @@ if polygon_eval:
                     p_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_p_'+str(year)+'.png'
                     plt.savefig(ppoi_path+p_fig, dpi=dpi)
                     if show_plot: plt.show()
-                    sawbf.print_log(file_log, '![R.SAWB](%s)\n' % p_fig)
+                    sawbf.print_log(file_log, '[P-%d](%s) ' %(year, p_fig))
                 # Plotting feature SPI maps
-                sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=False)
+                #sawbf.print_log(file_log, '%d SPI-%s map' %(year, i), center_div=False)
                 da_data['spi_' + str(i)].sel(time=str(year)).plot(col='time', col_wrap=4, vmin=-2.5, vmax=2.5, levels=[-2, -1.5, -1, 1, 1.5, 2], colors=spi_colors)
                 spi_fig = 'spi/'+data_source[data_source_num]+'/'+data_source[data_source_num]+'_spi_'+str(i)+'_'+str(year)+'.png'
                 plt.ylim(lim_south, lim_north)
@@ -165,7 +165,7 @@ if polygon_eval:
                 plt.savefig(ppoi_path+spi_fig, dpi=dpi)
                 if show_plot: plt.show()
                 plt.close('all')
-                sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % spi_fig)
+                sawbf.print_log(file_log, '[SPI-%d-%d](%s) ' %(i,year,spi_fig))
         p_plot = False
     # Export .nc with SPI calculations over ZE as .csv
     match data_source_num:
@@ -187,8 +187,7 @@ if polygon_eval:
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
     # Gif animations
     if __name__ == '__main__':
-        sawbf.print_log(file_log, '\n**Animations (%s)**' %data_source[data_source_num] +
-                        '\n\nPrecipitation')
+        sawbf.print_log(file_log, '\n\nPrecipitation')
         p_gif = 'spi/'+data_source[data_source_num]+'/'
         key_name = data_source[data_source_num]+'_p'
         sawbf.make_gif(ppoi_path+p_gif, key_name, '.png')
@@ -199,7 +198,7 @@ if polygon_eval:
             spi_gif = 'spi/' + data_source[data_source_num] + '/'
             key_name = data_source[data_source_num] + '_spi_' + str(i)
             sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
-            sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
+            sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
     sawbf.print_log(file_log, '\n\nRecords processed: %d' %records)
 # SPI - Point processing
 if point_eval:

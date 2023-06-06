@@ -1,7 +1,7 @@
 # Project point and polygon limits
 
 # Research case information
-sawb_client = 'r.cfdtools Research Center'
+sawb_client = 'r.cfdtools Researching Area'
 sawb_order = 'rcfdtools-000000001'
 sawb_date = '2023-05-30'  # yyyy-00-dd
 sawb_title = 'Colombia - South America - Atmospheric water balance (AWB) and Drought analysis with the Standardized Precipitation Index (SPI)'
@@ -13,7 +13,7 @@ data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
 nc_file = 'ERA5Land_Monthly_01dd_ds1.nc'
 
 # SPI index mobile average times
-times = [1, 3, 6]
+times = [1, 3]
 
 # Units conversion multiplier & Maximum value for plotting ramp
 # CRU data uses precipitation in millimeters
@@ -37,7 +37,7 @@ point_eval = False
 
 # Year range
 year_min = 1980
-year_max = 1989
+year_max = 1982
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx

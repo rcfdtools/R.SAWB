@@ -105,6 +105,16 @@ def print_log(file_log, txt_print, on_screen=True, center_div=False):
         print(txt_print)
     if center_div:
         file_log.write('\n<div align="center">\n' + '\n')
+    file_log.write(txt_print)
+    if center_div:
+        file_log.write('\n</div>\n' + '\n')
+
+# Function for print and show results in a log file
+def print_log_n(file_log, txt_print, on_screen=True, center_div=False):
+    if on_screen:
+        print(txt_print)
+    if center_div:
+        file_log.write('\n<div align="center">\n' + '\n')
     file_log.write(txt_print + '\n')
     if center_div:
         file_log.write('\n</div>\n' + '\n')
