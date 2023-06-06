@@ -35,6 +35,7 @@ Precipitation: accumulated liquid and frozen water, including rain and snow, tha
 
 #### NetCDF initial content
 
+```
 <xarray.Dataset>
 Dimensions:    (longitude: 711, latitude: 741, time: 468)
 Coordinates:
@@ -50,6 +51,7 @@ Data variables:
 Attributes:
     Conventions:  CF-1.6
     history:      2023-05-15 19:06:50 GMT by grib_to_netcdf-2.24.0: /opt/ecmw...
+```
 
 #### Individual plots
 

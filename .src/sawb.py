@@ -125,7 +125,7 @@ if polygon_eval:
     ds_rr = da_data[feature_name[data_source_num]]
     year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
     year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
-    sawbf.print_log(file_log, '#### NetCDF initial content\n\n%s\n\n#### Individual plots\n\n' %da_data)
+    sawbf.print_log(file_log, '#### NetCDF initial content\n\n```\n%s\n```\n\n#### Individual plots\n\n' %da_data)
     p_plot = True  # Control the precipitation plot
     records = 0
     for i in times:
