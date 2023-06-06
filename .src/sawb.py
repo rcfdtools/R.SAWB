@@ -100,7 +100,7 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Client | %s |' %ppoi.sawb_client +
                 '\n| Order | %s |' %ppoi.sawb_order +
                 '\n| Date | %s |' %ppoi.sawb_date +
-                '\n| Dataset | %s |' %nc_file +
+                '\n| Dataset | [%s](%s) |' % (nc_file, '../../.nc/') +
                 '\n| Units conversion multiplier | %f |' %units_mult +
                 '\n| Precipitation maximum plot value | %f |' %ppoi.p_max_plot +
                 '\n| Year from | %d |' %year_min +
@@ -125,7 +125,7 @@ if polygon_eval:
     ds_rr = da_data[feature_name[data_source_num]]
     year_min = sawbf.year_range_eval(da_data['time'], year_min, year_max)[0]
     year_max = sawbf.year_range_eval(da_data['time'], year_min, year_max)[1]
-    sawbf.print_log(file_log, '#### NetCDF initial content\n\n```\n%s\n```\n\n#### Individual plots\n\n' %da_data)
+    sawbf.print_log(file_log, '#### NetCDF initial dataset\n\n```\n%s\n```\n\n#### Individual plots\n\n' %da_data)
     p_plot = True  # Control the precipitation plot
     records = 0
     for i in times:
@@ -167,7 +167,7 @@ if polygon_eval:
                 plt.close('all')
                 sawbf.print_log(file_log, '[`SPI-%d-%d`](%s) ' %(i,year,spi_fig))
         p_plot = False
-    # Export .nc with SPI calculations over ZE as .csv
+    # Export dataset with SPI calculations over ZE as .csv
     match data_source_num:
         case 0:  # CRU data
             da_data = da_data.sel(lon=slice(lim_west, lim_east), lat=slice(lim_south, lim_north),
@@ -181,10 +181,10 @@ if polygon_eval:
     df = da_data.to_dataframe()
     sawbf.print_log(file_log, '\n\n#### Output datasets\n\n* Dataset as comma-separated values: [%s_spi_polygon.csv](spi/)' % data_source[data_source_num])
     df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_spi_polygon.csv', encoding='utf-8', index=True)
-    print(da_data)
     if save_spi_nc:
         sawbf.print_log(file_log, '\n* Dataset as NetCDF: [%s_spi_polygon.nc](spi/)' % data_source[data_source_num])
         da_data.to_netcdf(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_polygon.nc')
+    sawbf.print_log(file_log, '\n\n```\n%s\n```' % da_data)
     # Gif animations
     sawbf.print_log(file_log, '\n\n#### Animations\n\nPrecipitation')
     p_gif = 'spi/'+data_source[data_source_num]+'/'

@@ -13,11 +13,11 @@ The current research.....
 | Client | r.cfdtools Researching Area |
 | Order | rcfdtools-000000001 |
 | Date | 2023-05-30 |
-| Dataset | ERA5Land_Monthly_01dd_ds1.nc |
+| Dataset | [ERA5Land_Monthly_01dd_ds1.nc](../../.nc/) |
 | Units conversion multiplier | 1000.000000 |
 | Precipitation maximum plot value | 20.000000 |
 | Year from | 1980 |
-| Year to | 1989 |
+| Year to | 1982 |
 
 </div>
 
@@ -33,7 +33,7 @@ Precipitation: accumulated liquid and frozen water, including rain and snow, tha
 
 ### Zonal analysis over N: 5.735000°, S: 3.625000°, E: -72.875000°, W: -74.875000°
 
-#### NetCDF initial content
+#### NetCDF initial dataset
 
 ```
 <xarray.Dataset>
@@ -55,12 +55,33 @@ Attributes:
 
 #### Individual plots
 
-[`P-1980`](spi/era5/era5_p_1980.png) [`SPI-1-1980`](spi/era5/era5_spi_1_1980.png) [`P-1981`](spi/era5/era5_p_1981.png) [`SPI-1-1981`](spi/era5/era5_spi_1_1981.png) [`P-1982`](spi/era5/era5_p_1982.png) [`SPI-1-1982`](spi/era5/era5_spi_1_1982.png) [`P-1983`](spi/era5/era5_p_1983.png) [`SPI-1-1983`](spi/era5/era5_spi_1_1983.png) [`P-1984`](spi/era5/era5_p_1984.png) [`SPI-1-1984`](spi/era5/era5_spi_1_1984.png) [`P-1985`](spi/era5/era5_p_1985.png) [`SPI-1-1985`](spi/era5/era5_spi_1_1985.png) [`P-1986`](spi/era5/era5_p_1986.png) [`SPI-1-1986`](spi/era5/era5_spi_1_1986.png) [`P-1987`](spi/era5/era5_p_1987.png) [`SPI-1-1987`](spi/era5/era5_spi_1_1987.png) [`P-1988`](spi/era5/era5_p_1988.png) [`SPI-1-1988`](spi/era5/era5_spi_1_1988.png) [`P-1989`](spi/era5/era5_p_1989.png) [`SPI-1-1989`](spi/era5/era5_spi_1_1989.png) [`SPI-3-1980`](spi/era5/era5_spi_3_1980.png) [`SPI-3-1981`](spi/era5/era5_spi_3_1981.png) [`SPI-3-1982`](spi/era5/era5_spi_3_1982.png) [`SPI-3-1983`](spi/era5/era5_spi_3_1983.png) [`SPI-3-1984`](spi/era5/era5_spi_3_1984.png) [`SPI-3-1985`](spi/era5/era5_spi_3_1985.png) [`SPI-3-1986`](spi/era5/era5_spi_3_1986.png) [`SPI-3-1987`](spi/era5/era5_spi_3_1987.png) [`SPI-3-1988`](spi/era5/era5_spi_3_1988.png) [`SPI-3-1989`](spi/era5/era5_spi_3_1989.png) 
+[`P-1980`](spi/era5/era5_p_1980.png) [`SPI-1-1980`](spi/era5/era5_spi_1_1980.png) [`P-1981`](spi/era5/era5_p_1981.png) [`SPI-1-1981`](spi/era5/era5_spi_1_1981.png) [`P-1982`](spi/era5/era5_p_1982.png) [`SPI-1-1982`](spi/era5/era5_spi_1_1982.png) [`SPI-3-1980`](spi/era5/era5_spi_3_1980.png) [`SPI-3-1981`](spi/era5/era5_spi_3_1981.png) [`SPI-3-1982`](spi/era5/era5_spi_3_1982.png) 
 
 #### Output datasets
 
 * Dataset as comma-separated values: [era5_spi_polygon.csv](spi/)
 * Dataset as NetCDF: [era5_spi_polygon.nc](spi/)
+
+```
+<xarray.Dataset>
+Dimensions:    (longitude: 20, latitude: 21, time: 36)
+Coordinates:
+  * longitude  (longitude) float32 -74.8 -74.7 -74.6 -74.5 ... -73.1 -73.0 -72.9
+  * latitude   (latitude) float32 5.7 5.6 5.5 5.4 5.3 ... 4.1 4.0 3.9 3.8 3.7
+  * time       (time) datetime64[ns] 1980-01-01 1980-02-01 ... 1982-12-01
+Data variables:
+    u10        (time, latitude, longitude) float32 0.9342 0.6416 ... -1.223
+    v10        (time, latitude, longitude) float32 -0.1936 0.06651 ... -1.555
+    t2m        (time, latitude, longitude) float32 298.7 299.6 ... 298.1 298.2
+    e          (time, latitude, longitude) float32 -0.003726 ... -0.00392
+    tp         (time, latitude, longitude) float32 2.395 2.049 ... 4.29 3.809
+    spi_1      (time, latitude, longitude) float64 -0.6862 -0.8545 ... -0.5416
+    spi_3      (time, latitude, longitude) float64 nan nan ... -0.6664 -0.6678
+Attributes:
+    Conventions:  CF-1.6
+    history:      2023-05-15 19:06:50 GMT by grib_to_netcdf-2.24.0: /opt/ecmw...
+```
+
 
 #### Animations
 
@@ -73,4 +94,4 @@ SPI-3
 
 ![R.SAWB](spi/era5/era5_spi_3.gif)
 
-Records processed: 37920000
+Records processed: 11376000
