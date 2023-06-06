@@ -180,7 +180,7 @@ if polygon_eval:
             print('\nAttention: datasource %s doesn''t exist or nor defined' %data_source_num)
     # Export .nc with SPI calculations over ZE as .csv & .nc
     df = da_data.to_dataframe()
-    sawbf.print_log(file_log, '\n\n#### Output datasets\n\n* Dataset as comma-separated values: [%s_spi_polygon.csv](spi/)' % data_source[data_source_num])
+    sawbf.print_log(file_log, '\n\n#### Output sliced datasets\n\n* Dataset as comma-separated values: [%s_spi_polygon.csv](spi/)' % data_source[data_source_num])
     df.to_csv(ppoi_path+'spi/'+str(data_source[data_source_num])+'_spi_polygon.csv', encoding='utf-8', index=True)
     if save_spi_nc:
         sawbf.print_log(file_log, '\n* Dataset as NetCDF: [%s_spi_polygon.nc](spi/)' % data_source[data_source_num])
@@ -220,26 +220,29 @@ if point_eval:
         case _:
             print('\nAttention: datasource %s doesn''t exist or nor defined' % data_source_num)
     ds_rr_select.plot(figsize=(10, 7))
-    p_fig = 'spi/'+data_source[data_source_num]+'_p_point.png'
-    plt.savefig(ppoi_path+p_fig, dpi=dpi)
+    p_fig = 'spi/'+data_source[data_source_num]+'_p_point'
+    plt.savefig(ppoi_path+p_fig+'.png', dpi=dpi)
     if show_plot: plt.show()
-    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % p_fig)
+    #sawbf.print_log(file_log, '\n\n#### Initial sliced dataframe')
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)\n' % (p_fig+'.png'))
     df = ds_rr_select.to_dataframe()
-    sawbf.print_log(file_log, '\n\n#### Initial dataframe\n\n')
+    sawbf.print_log(file_log,'\nDataset as comma-separated values: [%s_point.csv](spi/)' % data_source[data_source_num])
     sawbf.print_log(file_log, df.T.to_markdown(), center_div=True)
-    point_csv_file = ppoi_path+'spi/'+data_source[data_source_num]+'_p_point.csv'
+    point_csv_file = ppoi_path+p_fig+'.csv'
     df.to_csv(point_csv_file, encoding='utf-8', index=True)
     # SPI calculation
     data = pd.read_csv(point_csv_file)
     data['time'] = pd.to_datetime(data['time'])
-    print(data.dtypes)
+    #print(data.dtypes)
     data = data.set_index('time')
-    print(data.dtypes)
+    #print('\n\nData types:\n%s' %data.dtypes)
     for i in times:
         x = sawbf.spi_point(data[feature_name[data_source_num]], i)
         data['spi_' + str(i)] = x[9]
-    print('\nDataframe with SPI calculations\n', data)
+    #print('\nDataframe with SPI calculations\n', data)
     data.to_csv(ppoi_path+'spi/'+data_source[data_source_num]+'_spi_point.csv', encoding='utf-8', index=True)
+    sawbf.print_log(file_log,'\nDataset with SPI calculations as comma-separated values: [%s_spi_point.csv](spi/)\n' % data_source[data_source_num])
+    sawbf.print_log(file_log, data.T.to_markdown(), center_div=True)
     # Plot SPI data
     fig, axes = plt.subplots(nrows=len(times), figsize=(10, 8))
     plt.subplots_adjust(hspace=0.15)
@@ -256,9 +259,11 @@ if point_eval:
             ax.set_xticks([], [])
         plt.xticks(rotation=90)
         #plt.title(plt_title)
-    plt.savefig(ppoi_path + 'spi/' + data_source[data_source_num] + '_spi_point.png', dpi=dpi)
+    spi_fig = 'spi/' + data_source[data_source_num] + '_spi_point.png'
+    plt.savefig(ppoi_path+spi_fig, dpi=dpi)
     if show_plot: plt.show()
     plt.close('all')
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)\n' %spi_fig)
 
 
 # *****************************************************************************************
