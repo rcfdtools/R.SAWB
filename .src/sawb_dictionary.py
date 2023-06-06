@@ -7,3 +7,5 @@ precipitation_desc = 'Precipitation: accumulated liquid and frozen water, includ
 evaporation_desc = 'Evaporation: accumulated amount of water that has evaporated from the Earth''s surface, including a simplified representation of transpiration (from vegetation), into vapour in the air above. This variable is accumulated from the beginning of the forecast to the end of the forecast step. The ECMWF Integrated Forecasting System convention is that downward fluxes are positive. Therefore, negative values indicate evaporation and positive values indicate condensation. [www.copernicus.eu](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land-monthly-means)'
 
 p_max_plot_desc = '> The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.'
+
+sawb_keywords = '`SWB` `AWB` `SPI` `ERA5` `CRU`'
