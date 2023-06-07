@@ -24,7 +24,7 @@ import sawb_dictionary as sawbd
 # General variables & directories
 # *****************************************************************************************
 ppoi_num = 1  # <<<<<<<< PPOI number to process
-purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
+purge_ppoi_folder = False  # Delete all previous SPI results. Set False if you require run many .nc data sources
 data_path = '../.netcdf/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -38,8 +38,8 @@ if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path+'awb/basin')
     os.mkdir(ppoi_path+'awb/fdr')
     os.mkdir(ppoi_path+'awb/graph')
-    os.mkdir(ppoi_path+'awb/pflow')
-    os.mkdir(ppoi_path+'awb/qm')
+    os.mkdir(ppoi_path+'awb/qpot')
+    os.mkdir(ppoi_path+'awb/q')
     os.mkdir(ppoi_path+'awb/shpin')
     os.mkdir(ppoi_path+'awb/shpout')
     os.mkdir(ppoi_path+'awb/shpout/basin')
@@ -77,9 +77,9 @@ save_spi_nc = True  # Export .nc with SPI values
 plt_title = 'https://github.com/rcfdtools/R.SAWB'
 spi_colors = ['#FF0000', '#FFAA00', '#FFFF00', '#C8C8C8', '#E9CCF9', '#833393', '#0000FF']
 # AWB parameters
-awb_qm_join_file = 'awb_qm.csv' # Joined file name
-awb_qm_pivot_file = 'awb_qm_pivot.csv' # Joined average flow file name
-awb_aa_pivot_file = 'awb_aa_pivot.csv' # Joined accumulation area file name
+awb_q_join_file = 'awb_q.csv' # Joined file name
+awb_q_pivot_file = 'awb_q_pivot.csv' # Joined average flow file name
+awb_a_pivot_file = 'awb_a_pivot.csv' # Joined accumulation area file name
 awb_eval = ppoi.awb_eval
 file_log_name = ppoi_path + data_source[data_source_num] + '_readme.md'  # Markdown file log
 file_log = open(file_log_name, 'w+')   # w+ create the file if it doesn't exist
@@ -270,8 +270,8 @@ if point_eval:
 # AWB - Post-processing procedure (ArcGIS for Desktop SAWB.tbx need to be run before)
 # *****************************************************************************************
 if awb_eval:
-    print('\nPost-processing Atmospheric Water Balance - AWB\n')
-    awb_dbf_files = glob.glob(ppoi_path + 'awb/qm/' + '*.dbf')
+    sawbf.print_log(file_log, '\n\n## Atmospheric Water Balance (AWB) for ERA5 monthly\n')
+    awb_dbf_files = glob.glob(ppoi_path + 'awb/q/' + '*.dbf')
     awb_df = pd.DataFrame()
     for i in awb_dbf_files:
         print('AWB - Processing: %s' %i)
@@ -281,30 +281,48 @@ if awb_eval:
     awb_year_min = awb_df['year'].min()
     awb_year_max = awb_df['year'].max()
     year_list = np.linspace(awb_year_min, awb_year_max, (awb_year_max-awb_year_min+1))
-    print('\nYears found: %s' %year_list)
+    sawbf.print_log(file_log, '\nProcessed years: %s' %year_list)
     awb_df['date'] = pd.to_datetime(awb_df['date'])
     awb_df.sort_values(by='date', inplace=True)
     print('\nDataframe types\n', awb_df.dtypes)
     awb_df = awb_df.set_index('date')
-    print('\nDataframe sample\n', awb_df)
-    awb_df.to_csv(ppoi_path+'awb/'+awb_qm_join_file, encoding='utf-8', index=True)
-    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric monthly average flow serie', ylabel='Qm, m³/s')
-    plt.savefig(ppoi_path+'awb/graph/awb_qm_serie.png')
+    sawbf.print_log(file_log, '\n\n### Initial processed dataset\n\n%s' %awb_df.T.to_markdown())
+    # Vapor flux serie
+    awb_df.to_csv(ppoi_path+'awb/'+awb_q_join_file, encoding='utf-8', index=True)
+    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric vapor flux (Q)', ylabel='Q, mm')
+    q_fig = 'awb/graph/awb_q_serie.png'
+    plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
-    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric monthly accumulation area serie', ylabel='A, km²')
-    plt.savefig(ppoi_path+'awb/graph/awb_aa_serie.png')
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % q_fig )
+    # Accumulation area serie
+    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric accumulation area (A)', ylabel='A, km²')
+    a_fig = 'awb/graph/awb_a_serie.png'
+    plt.savefig(ppoi_path+a_fig)
     if show_plot: plt.show()
-    pivot_table_qm = awb_df.pivot_table(index='month', columns='year', values='SUM')
-    print('\nQm (m³/s) pivot table sample\n', pivot_table_qm)
-    pivot_table_qm.to_csv(ppoi_path+'awb/'+awb_qm_pivot_file, encoding='utf-8', index=True)
-    pivot_table_qm.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric monthly average flow by year', ylabel='Qm, m³/s')
-    plt.savefig(ppoi_path+'awb/graph/awb_qm_monthly.png')
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
+    # Vapor flux pivot
+    pivot_table_q = awb_df.pivot_table(index='month', columns='year', values='SUM')
+    sawbf.print_log(file_log, '\n### Atmospheric vapor flux (Q) - Pivot table\n\n')
+    q_pivot = ppoi_path+'awb/'+awb_q_pivot_file
+    pivot_table_q.to_csv(q_pivot, encoding='utf-8', index=True)
+    q_pivot_df = pd.read_csv(q_pivot, low_memory=False, index_col='month')
+    sawbf.print_log(file_log, q_pivot_df.to_markdown())
+    pivot_table_q.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric vapor flux (Q)', ylabel='Q, mm')
+    q_fig = 'awb/graph/awb_q_monthly.png'
+    plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
-    pivot_table_aa = awb_df.pivot_table(index='month', columns='year', values='Akm2')
-    print('\nAa (km²) pivot table sample\n', pivot_table_aa)
-    pivot_table_aa.to_csv(ppoi_path+'awb/'+awb_aa_pivot_file, encoding='utf-8', index=True)
-    pivot_table_aa.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric monthly accumulation area by year', ylabel='A, km²')
-    #plt.xticks(range(len(pivot_table_aa)),labels=range(0, len(pivot_table_aa)))
-    plt.savefig(ppoi_path+'awb/graph/awb_aa_monthly.png')
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % q_fig)
+    # Accumulation area pivot
+    pivot_table_a = awb_df.pivot_table(index='month', columns='year', values='Akm2')
+    sawbf.print_log(file_log, '\n### Atmospheric accumulation area (A) - Pivot table\n\n')
+    a_pivot = ppoi_path+'awb/'+awb_a_pivot_file
+    pivot_table_a.to_csv(a_pivot, encoding='utf-8', index=True)
+    a_pivot_df = pd.read_csv(a_pivot, low_memory=False, index_col='month')
+    sawbf.print_log(file_log, a_pivot_df.to_markdown())
+    pivot_table_a.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric accumulation area(A)', ylabel='A, km²')
+    # plt.xticks(range(len(pivot_table_a)),labels=range(0, len(pivot_table_a)))
+    a_fig ='awb/graph/awb_a_monthly.png'
+    plt.savefig(ppoi_path+a_fig)
     if show_plot: plt.show()
+    sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
     plt.close('all')

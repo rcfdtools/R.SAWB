@@ -3,6 +3,11 @@ Keywords: `SWB` `AWB` `SPI` `ERA5` `CRU`
 
 Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)
 
+AWB
+
+P: precipitation in millimeters
+E: evaporation in millimeters
+Q: vapor flux vector in millimeters
 
 
 ## Pending tasks
@@ -75,12 +80,15 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 
 ## References
 
+* [Conjoint Analysis of Surface and Atmospheric Water Balances in the Andes-Amazon System](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2017WR021338)
+* [An Atmospheric Water Balance Perspective on Extreme Rainfall Potential for the Contiguous US](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020WR028387)
+* [Atmospheric water balance over oceanic regions as estimated from satellite, merged, and reanalysis data](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/jgrd.50414)
+* Global Atmospheric Water Balance and Runoff from Large River Basins
 * https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe
 * https://sparkbyexamples.com/pandas/sort-pandas-dataframe-by-date/
 * https://www.dataquest.io/blog/plot-dataframe-pandas/
 * https://www.geeksforgeeks.org/numpy-linspace-python/
 * https://www.caee.utexas.edu/prof/maidment/gishyd97/atmos/atmos.htm
-* [Conjoint Analysis of Surface and Atmospheric Water Balances in the Andes-Amazon System](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2017WR021338)
 * https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
 * [Standardized Precipitation Index (SPI) | Drought & Flood Monitor](https://www.youtube.com/watch?v=zYT5VpQWJAQ)
 * https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi
@@ -98,4 +106,3 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://www.blog.pythonlibrary.org/2021/06/23/creating-an-animated-gif-with-python/
 * https://stackoverflow.com/questions/11067097/7zip-commands-from-python
 * https://www.datacamp.com/tutorial/python-subprocess
-
