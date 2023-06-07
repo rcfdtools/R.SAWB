@@ -270,7 +270,7 @@ if point_eval:
 # AWB - Post-processing procedure (ArcGIS for Desktop SAWB.tbx need to be run before)
 # *****************************************************************************************
 if awb_eval:
-    sawbf.print_log(file_log, '\n\n## Atmospheric Water Balance (AWB) for ERA5 monthly\n')
+    sawbf.print_log(file_log, '\n\n## Atmospheric Water Balance (AWB) with ERA5 monthly over Latitude: %f°, Longitude: %f° or nearest\n' %(point_latitude, point_longitude))
     awb_dbf_files = glob.glob(ppoi_path + 'awb/q/' + '*.dbf')
     awb_df = pd.DataFrame()
     for i in awb_dbf_files:
