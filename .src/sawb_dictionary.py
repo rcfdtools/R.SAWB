@@ -10,3 +10,4 @@ evaporation_desc = 'Evaporation: accumulated amount of water that has evaporated
 
 p_max_plot_desc = '> The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.'
 
+awb_dataset_vars = '> Dataset vars description: `Value` 1 represents atmospheric wind direction cells over the study point, `COUNT` converged atmospheric pixels to the study point,  `AREA` spatial aportation area in decimal degrees `SUM` vapor flux sum, `day` day of study, `month` month of study, `year` year of study, `Akm2` spatial aportation area in square kilometers'

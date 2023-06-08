@@ -287,6 +287,7 @@ if awb_eval:
     print('\nDataframe types\n', awb_df.dtypes)
     awb_df = awb_df.set_index('date')
     sawbf.print_log(file_log, '\n\n### Initial processed dataset\n\n%s' %awb_df.T.to_markdown())
+    sawbf.print_log(file_log, '\n\n%s' %sawbd.awb_dataset_vars)
     # Vapor flux serie
     awb_df.to_csv(ppoi_path+'awb/'+awb_q_join_file, encoding='utf-8', index=True)
     awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric vapor flux (Q)', ylabel='Q, mm')
