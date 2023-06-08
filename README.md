@@ -73,6 +73,8 @@ Q: vapor flux vector in millimeters
 2. From Python run the script `.src/spi.py`
 3. From Python run the script `.src/sawb_monthly_poi.py`
 
+> Python requires a Virtual Environment for the script executions and the libraries described in the file `Requirements.txt`. From the Terminal execute `pip install -r requirements.txt`
+
 
 ## File compression
 
