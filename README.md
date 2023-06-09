@@ -12,7 +12,7 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* Scientific Markdown report for each PPOI and data source. (SPI can be run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder. General localization map (polygon and point). AWB post-processing - year list from q folder.
+* General localization map (polygon and point). AWB post-processing - year list from q folder.
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
 * Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Merge atmospheric basin shapefiles into a unique shapefile
@@ -46,7 +46,7 @@ Q: vapor flux vector in millimeters
 * Validate and fix range year_min > year_max
 * Integrated script sawb.py for run all the proceses. SPI & AWS post-processing are integrated
 * Gif animations for time-series data map
-
+* Scientific Markdown report for each PPOI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder. 
 
 
 ## System configuration for big NetCDF files over Windows 11
