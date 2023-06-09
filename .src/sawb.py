@@ -290,13 +290,13 @@ if awb_eval:
     sawbf.print_log(file_log, '\n\n%s' %sawbd.awb_dataset_vars)
     # Vapor flux serie
     awb_df.to_csv(ppoi_path+'awb/'+awb_q_join_file, encoding='utf-8', index=True)
-    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric vapor flux (Q)', ylabel='Q, mm')
+    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric accumulated vapor flux (Q, mm) over Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
     q_fig = 'awb/graph/awb_q_serie.png'
     plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % q_fig )
     # Accumulation area serie
-    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric accumulation area (A)', ylabel='A, km²')
+    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric accumulation area (A, km²) over Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='A, km²')
     a_fig = 'awb/graph/awb_a_serie.png'
     plt.savefig(ppoi_path+a_fig)
     if show_plot: plt.show()
@@ -308,7 +308,7 @@ if awb_eval:
     pivot_table_q.to_csv(q_pivot, encoding='utf-8', index=True)
     q_pivot_df = pd.read_csv(q_pivot, low_memory=False, index_col='month')
     sawbf.print_log(file_log, q_pivot_df.to_markdown())
-    pivot_table_q.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric vapor flux (Q)', ylabel='Q, mm')
+    pivot_table_q.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric vapor flux (Q) over Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
     q_fig = 'awb/graph/awb_q_monthly.png'
     plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
@@ -320,7 +320,7 @@ if awb_eval:
     pivot_table_a.to_csv(a_pivot, encoding='utf-8', index=True)
     a_pivot_df = pd.read_csv(a_pivot, low_memory=False, index_col='month')
     sawbf.print_log(file_log, a_pivot_df.to_markdown())
-    pivot_table_a.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric accumulation area(A)', ylabel='A, km²')
+    pivot_table_a.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric accumulation area (A) over Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='A, km²')
     # plt.xticks(range(len(pivot_table_a)),labels=range(0, len(pivot_table_a)))
     a_fig ='awb/graph/awb_a_monthly.png'
     plt.savefig(ppoi_path+a_fig)
