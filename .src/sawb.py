@@ -199,7 +199,7 @@ if polygon_eval:
         key_name = data_source[data_source_num] + '_spi_' + str(i)
         sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
         sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
-    sawbf.print_log(file_log, '\n\nRecords processed: %d\n' %records)
+    sawbf.print_log(file_log, '\n\nSPI Records processed: %d\n' %records)
 
 # SPI - Point processing
 if point_eval:
@@ -290,25 +290,25 @@ if awb_eval:
     sawbf.print_log(file_log, '%s' %sawbd.awb_dataset_vars)
     # Vapor flux serie
     awb_df.to_csv(ppoi_path+'awb/'+awb_q_join_file, encoding='utf-8', index=True)
-    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric accumulated vapor flux (Q, mm) through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
+    awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric accumulated vapor flux through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
     q_fig = 'awb/graph/awb_q_serie.png'
     plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % q_fig )
     # Accumulation area serie
-    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric accumulation area (A, km²) through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='A, km²')
+    awb_df.plot(y='Akm2', figsize=(10,6), title='AWB - Atmospheric accumulation area through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='A, km²')
     a_fig = 'awb/graph/awb_a_serie.png'
     plt.savefig(ppoi_path+a_fig)
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
     # Vapor flux pivot
     pivot_table_q = awb_df.pivot_table(index='month', columns='year', values='SUM')
-    sawbf.print_log(file_log, '\n\n### Atmospheric vapor flux (Q) - Pivot table ([%s](awb/))\n\n' % awb_q_pivot_file)
+    sawbf.print_log(file_log, '\n\n### Atmospheric vapor flux - Pivot table ([%s](awb/))\n\n' % awb_q_pivot_file)
     q_pivot = ppoi_path+'awb/'+awb_q_pivot_file
     pivot_table_q.to_csv(q_pivot, encoding='utf-8', index=True)
     q_pivot_df = pd.read_csv(q_pivot, low_memory=False, index_col='month')
     sawbf.print_log(file_log, q_pivot_df.to_markdown())
-    pivot_table_q.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric vapor flux (Q) through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
+    pivot_table_q.plot(y=year_list, figsize=(10,6), title='AWB - Atmospheric vapor flux through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
     q_fig = 'awb/graph/awb_q_monthly.png'
     plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
@@ -327,3 +327,4 @@ if awb_eval:
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
     plt.close('all')
+    sawbf.print_log(file_log, '\n\nAWB Records processed: %d\n' % len(awb_df))
