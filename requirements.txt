@@ -10,3 +10,4 @@ scipy
 pandas_profiling
 # zipfile36 # Python 3.6 or higher
 tabulate
+basemap

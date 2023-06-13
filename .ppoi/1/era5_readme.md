@@ -22,6 +22,18 @@ The current research.....
 </div>
 
 > The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color.
+<div align="center">
+
+![R.SAWB](graph/global_map.png)
+</div>
+
+
+<div align="center">
+
+![R.SAWB](graph/regional_map.png)
+</div>
+
+
 
 ## Standardized Precipitation Index (SPI)
 
@@ -97,7 +109,7 @@ SPI-3
 SPI-6
 ![R.SAWB](spi/era5/era5_spi_6.gif)
 
-SPI Records processed: 17064000
+SPI records processed: 17064000
 
 ### Point analysis in Latitude: 4.600000°, Longitude: -73.700000° or nearest
 
@@ -191,4 +203,4 @@ Processed years: [1980. 1981. 1982. 1983. 1984. 1985. 1986. 1987. 1988. 1989.]
 
 ![R.SAWB](awb/graph/awb_a_monthly.png)
 
-AWB Records processed: 120
+AWB records processed: 120

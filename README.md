@@ -109,3 +109,8 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://www.blog.pythonlibrary.org/2021/06/23/creating-an-animated-gif-with-python/
 * https://stackoverflow.com/questions/11067097/7zip-commands-from-python
 * https://www.datacamp.com/tutorial/python-subprocess
+* https://www.kdnuggets.com/2020/09/geographical-plots-python.html
+* https://jakevdp.github.io/PythonDataScienceHandbook/04.13-geographic-data-with-basemap.html
+* https://notebook.community/milancurcic/lunch-bytes/Fall_2019/LB33/Basemap_v_Cartopy
+* https://matplotlib.org/basemap/users/examples.html
+* https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap

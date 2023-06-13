@@ -15,6 +15,8 @@ import matplotlib.dates as mdates
 import sys
 from dbfread import DBF
 import tabulate
+from matplotlib.patches import Polygon
+from mpl_toolkits.basemap import Basemap
 import sawb_functions as sawbf
 import sawb_dictionary as sawbd
 
@@ -47,6 +49,7 @@ if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path+'awb/shpout/watershed')
     os.mkdir(ppoi_path+'awb/watershed')
     os.mkdir(ppoi_path+'awb/winddir')
+    os.mkdir(ppoi_path+'graph')
     os.mkdir(ppoi_path+'swb')
     os.mkdir(ppoi_path+'spi')
     os.mkdir(ppoi_path+'spi/cru')
@@ -71,6 +74,7 @@ year_max = ppoi.year_max
 units_mult = ppoi.units_mult
 polygon_eval = ppoi.polygon_eval
 point_eval = ppoi.point_eval
+meridians_sep = ppoi.meridians_sep
 dpi = 128  # Save plot resolution
 show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
@@ -108,6 +112,42 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n\n</div>\n'
                 )
 sawbf.print_log(file_log, '\n' + sawbd.p_max_plot_desc)
+
+# *****************************************************************************************
+# General map locations
+# *****************************************************************************************
+projection = ['ortho', 'lcc']
+for i in projection:
+    if i == 'ortho':
+        fig = plt.figure(figsize=(8, 8))
+        title = 'Global location'
+        map_file = 'global_map.png'
+        meridians_sep = meridians_sep * 2
+    else:
+        fig = plt.figure(figsize=(10, 8))
+        title = 'Regional location'
+        map_file = 'regional_map.png'
+        meridians_sep = meridians_sep
+    map = Basemap(projection=i, lat_0=point_latitude, lon_0=point_longitude, resolution='l', width=5E6, height=4E6)
+    map.drawcountries(linewidth=0.25)
+    map.drawcoastlines(linewidth=0.35)
+    map.fillcontinents(color='coral', lake_color='aqua', alpha=1)
+    map.drawmapboundary(fill_color='aqua')
+    map.drawmeridians(np.arange(0,360,meridians_sep))
+    map.drawparallels(np.arange(-90,90,meridians_sep))
+    x, y = map(point_longitude, point_latitude)
+    plt.plot(x, y, 'ok', markersize=3)
+    plt.text(x, y, ' PPOI (Lat: %s, Lon: %s)' %(point_latitude, point_longitude), fontsize=10);
+    plt.title(title)
+    parallels = np.arange(0., 81, meridians_sep)
+    map.drawparallels(parallels, labels=[False, True, True, False])
+    meridians = np.arange(10., 351., meridians_sep)
+    map.drawmeridians(meridians, labels=[True, False, False, True], rotation=45)
+    if show_plot: plt.show()
+    map_fig = ''
+    plt.savefig(ppoi_path + 'graph/' + map_file, dpi=dpi)
+    plt.close()
+    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=True)
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure
@@ -199,7 +239,7 @@ if polygon_eval:
         key_name = data_source[data_source_num] + '_spi_' + str(i)
         sawbf.make_gif(ppoi_path+spi_gif, key_name, '.png')
         sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(spi_gif+key_name+'.gif'))
-    sawbf.print_log(file_log, '\n\nSPI Records processed: %d\n' %records)
+    sawbf.print_log(file_log, '\n\nSPI records processed: %d\n' %records)
 
 # SPI - Point processing
 if point_eval:
@@ -327,4 +367,4 @@ if awb_eval:
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
     plt.close('all')
-    sawbf.print_log(file_log, '\n\nAWB Records processed: %d\n' % len(awb_df))
+    sawbf.print_log(file_log, '\n\nAWB records processed: %d\n' % len(awb_df))

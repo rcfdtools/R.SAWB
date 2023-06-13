@@ -7,6 +7,9 @@ sawb_date = '2023-05-30'  # yyyy-00-dd
 sawb_title = 'Colombia - South America - Atmospheric water balance (AWB) and Drought analysis with the Standardized Precipitation Index (SPI)'
 sawb_desc = 'The current research.....'
 
+# Global parameters
+meridians_sep = 10  # Separation between meridians or parallels in decimal degrees
+
 # SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
 # nc_file = 'cru_ts4.03.1901.2018.pre.dat.nc'
