@@ -111,7 +111,7 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
                 '\n| Year to | %d |' %year_max +
                 '\n\n</div>\n'
                 )
-sawbf.print_log(file_log, '\n' + sawbd.p_max_plot_desc)
+sawbf.print_log(file_log, '\n%s \n\n' %sawbd.p_max_plot_desc)
 
 # *****************************************************************************************
 # General map locations
@@ -119,12 +119,12 @@ sawbf.print_log(file_log, '\n' + sawbd.p_max_plot_desc)
 projection = ['ortho', 'lcc']
 for i in projection:
     if i == 'ortho':
-        fig = plt.figure(figsize=(8, 8))
+        fig = plt.figure(figsize=(5, 5))
         title = 'Global location'
         map_file = 'global_map.png'
         meridians_sep = meridians_sep * 2
     else:
-        fig = plt.figure(figsize=(10, 8))
+        fig = plt.figure(figsize=(5, 5))
         title = 'Regional location'
         map_file = 'regional_map.png'
         meridians_sep = meridians_sep
@@ -147,7 +147,7 @@ for i in projection:
     map_fig = ''
     plt.savefig(ppoi_path + 'graph/' + map_file, dpi=dpi)
     plt.close()
-    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=True)
+    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=False)
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure
@@ -304,7 +304,6 @@ if point_eval:
     if show_plot: plt.show()
     plt.close('all')
     sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' %spi_fig)
-
 
 # *****************************************************************************************
 # AWB - Post-processing procedure (ArcGIS for Desktop SAWB.tbx need to be run before)
