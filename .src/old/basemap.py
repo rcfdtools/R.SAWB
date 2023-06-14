@@ -107,8 +107,8 @@ for i in projection:
 # Polygon location
 # https://matplotlib.org/basemap/users/examples.html
 # https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
-meridians_sep = meridians_sep * 2
 map_polygon_scale_factor = 4  # 1 for Colombia country, 4 for South America
+meridians_sep = meridians_sep * 2
 lat_0 = lim_north-(lim_north-lim_south)/2
 lon_0 = lim_east-(lim_east-lim_west)/2
 width = abs((lim_east-lim_west)/map_polygon_scale_factor)*1e6

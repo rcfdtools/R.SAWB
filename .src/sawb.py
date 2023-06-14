@@ -75,6 +75,7 @@ units_mult = ppoi.units_mult
 polygon_eval = ppoi.polygon_eval
 point_eval = ppoi.point_eval
 meridians_sep = ppoi.meridians_sep
+map_polygon_scale_factor = ppoi.map_polygon_scale_factor
 dpi = 128  # Save plot resolution
 show_plot = False  # Verbose plot
 save_spi_nc = True  # Export .nc with SPI values
@@ -117,7 +118,7 @@ sawbf.print_log(file_log, '\n%s \n\n' %sawbd.p_max_plot_desc)
 # General map locations
 # *****************************************************************************************
 projection = ['ortho', 'lcc']
-figsize = (6, 6)
+figsize = (5, 5)
 for i in projection:
     if i == 'ortho':
         fig = plt.figure(figsize=figsize)
@@ -145,11 +146,10 @@ for i in projection:
     meridians = np.arange(10., 351., meridians_sep)
     map.drawmeridians(meridians, labels=[True, False, False, True], rotation=45)
     if show_plot: plt.show()
-    map_fig = ''
     plt.savefig(ppoi_path + 'graph/' + map_file, dpi=dpi)
     plt.close()
-    #sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=False, div50=True)
-    sawbf.print_log(file_log, '<img alt="R.LTWB" src="graph/%s" width="500"></img>' % map_file, center_div=False, div50=False)
+    #sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=False)
+    sawbf.print_log(file_log, '<img alt="R.LTWB" src="graph/%s" width="500"></img>' % map_file)
 
 
 # *****************************************************************************************
@@ -164,6 +164,48 @@ if polygon_eval or point_eval:
 # SPI - Polygon processing
 if polygon_eval:
     sawbf.print_log(file_log, '\n### Zonal analysis through N: %f°, S: %f°, E: %f°, W: %f°\n\n' % (lim_north, lim_south, lim_east, lim_west))
+    # Plot map
+    meridians_sep = meridians_sep * 2
+    lat_0 = lim_north - (lim_north - lim_south) / 2
+    lon_0 = lim_east - (lim_east - lim_west) / 2
+    width = abs((lim_east - lim_west) / map_polygon_scale_factor) * 1e6
+    height = abs((lim_north - lim_south) / map_polygon_scale_factor) * 1e6
+    base_value = 8
+    aspect_ratio = abs(height / width)
+    if height > width:
+        fig_size_height = base_value * aspect_ratio
+        fig_size_width = base_value
+    else:
+        fig_size_height = base_value
+        fig_size_width = base_value * aspect_ratio
+    fig = plt.figure(figsize=(fig_size_width, fig_size_height))
+    map = Basemap(projection='stere', lat_0=lat_0, lon_0=lon_0, resolution='l', width=width, height=height)
+    map.drawcountries(linewidth=0.25)
+    map.drawcoastlines(linewidth=0.35)
+    map.fillcontinents(color='coral', lake_color='aqua')
+    map.drawmapboundary(fill_color='aqua')
+    map.drawmeridians(np.arange(0, 360, meridians_sep))
+    map.drawparallels(np.arange(-90, 90, meridians_sep))
+    x1, y1 = map(lim_east, lim_north)
+    x2, y2 = map(lim_west, lim_north)
+    x3, y3 = map(lim_west, lim_south)
+    x4, y4 = map(lim_east, lim_south)
+    poly = Polygon([(x1, y1), (x2, y2), (x3, y3), (x4, y4)], facecolor=None, edgecolor='black', linewidth=1.5,
+                   alpha=0.5)
+    plt.gca().add_patch(poly)
+    x, y = map(lon_0, lat_0)
+    plt.plot(x, y, 'ok', markersize=0)
+    plt.text(x, y, ' Case zone (centroid Lat: %s, Lon: %s)' % (lat_0, lon_0), fontsize=10);
+    plt.title('Polygon location')
+    parallels = np.arange(0., 81, meridians_sep)
+    map.drawparallels(parallels, labels=[False, True, True, False])
+    meridians = np.arange(10., 351., meridians_sep)
+    map.drawmeridians(meridians, labels=[True, False, False, True], rotation=45)
+    if show_plot: plt.show()
+    plt.savefig(ppoi_path + 'graph/polygon_map.png', dpi=dpi)
+    plt.close()
+    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=True)
+    # Data processing
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
     ds_rr = da_data[feature_name[data_source_num]]

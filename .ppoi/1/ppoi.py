@@ -9,6 +9,7 @@ sawb_desc = 'The current research.....'
 
 # Global parameters
 meridians_sep = 10  # Separation between meridians or parallels in decimal degrees
+map_polygon_scale_factor = 1  # e.g. 1 for Colombia country, 4 for South America
 
 # SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
@@ -26,12 +27,12 @@ units_mult = 1000  # ERA5 reanalysis
 p_max_plot = 20  # ERA5 reanalysis with conversion to millimeters
 # p_max_plot = 500  # CRU
 
-# Study zone limit in decimal degrees, °dd
+# Study zone limits in decimal degrees, °dd
 lim_north = 5.735
 lim_south = 3.625
 lim_east = -72.875
 lim_west = -74.875
-polygon_eval = False
+polygon_eval = True
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6

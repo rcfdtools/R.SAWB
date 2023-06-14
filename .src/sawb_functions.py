@@ -100,16 +100,12 @@ def make_gif(frame_folder, key_name, file_ext):
 
 
 # Function for print and show results in a log file
-def print_log(file_log, txt_print, on_screen=True, center_div=False, div50=False):
+def print_log(file_log, txt_print, on_screen=True, center_div=False):
     # div50 is use for show 2 plots in the same line
     if on_screen:
         print(txt_print)
     if center_div:
         file_log.write('\n<div align="center">\n' + '\n')
-    if div50:
-        file_log.write('<div align="center" width="50%">')
     file_log.write(txt_print)
     if center_div:
-        file_log.write('\n</div>\n' + '\n')
-    if div50:
-        file_log.write('</div>')
+        file_log.write('\n\n</div>\n' + '\n')
