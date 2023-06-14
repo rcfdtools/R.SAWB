@@ -12,10 +12,11 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* General localization map (polygon and point). AWB post-processing - year list from q folder.
+* Merge atmospheric basin shapefiles into a unique shapefile
+* Plot atmospheric areas
+* AWB post-processing - year list from q folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
 * Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
-* Merge atmospheric basin shapefiles into a unique shapefile
 * Plot title with datasource information
 * Log record separators in console
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
@@ -28,7 +29,7 @@ Q: vapor flux vector in millimeters
 
 ## [sawb.py](.src/sawb.py) features
 
-* Execution over different data sources as CRU or ERA5 reanalysis.
+* Execution over different data sources as CRU or ERA5 reanalysis
 * Maximum precipitation value for map plots
 * Spatial zone to evaluate
 * Temporal time serie segmentation
@@ -36,17 +37,18 @@ Q: vapor flux vector in millimeters
 * SPI calculation over multiple moving window of n months defined by the user
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
-* Research point and polygon `ppoi.py` contains the parameters required for the execution, like description, order #, date and description, data source, point location and polygon limits, year ranges, mobile average times, units conversions multipliers and the maximum values used as references for the map global palettes.
+* Research point and polygon `ppoi.py` contains the parameters required for the execution, like description, order #, date and description, data source, point location and polygon limits, year ranges, mobile average times, units conversions multipliers and the maximum values used as references for the map global palettes
 * Units conversion, e.g. m to mm for rain or evaporation parameters
 * Polygon processing on demand with limits defined by user
 * Point processing on demand with coordinates defined by user
-* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py) used as template.
+* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py) used as template
 * Purge last results before a new running
 * Global definitions dictionary as spi_dictionary.py
 * Validate and fix range year_min > year_max
 * Integrated script sawb.py for run all the proceses. SPI & AWS post-processing are integrated
 * Gif animations for time-series data map
-* Scientific Markdown report for each PPOI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder. 
+* Scientific Markdown report for each PPOI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder
+* General localization map (polygon and point)
 
 
 ## System configuration for big NetCDF files over Windows 11
@@ -114,3 +116,5 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://notebook.community/milancurcic/lunch-bytes/Fall_2019/LB33/Basemap_v_Cartopy
 * https://matplotlib.org/basemap/users/examples.html
 * https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
+* https://spatial-dev.guru/2022/06/05/merging-multiple-shapefiles-into-one-shapefile-using-python-and-geopandas/
+* https://gis.stackexchange.com/questions/433708/writing-empty-geodataframe-to-shapefile-using-python

@@ -12,6 +12,15 @@
 **/*.csv
 **/*.grib
 __pycache__/
+.ppoi/1/awb/shpout/basindissolve/merge/*.shp
+.ppoi/1/awb/shpout/basindissolve/merge/*.shx
+.ppoi/1/awb/shpout/basindissolve/merge/*.dbf
+.ppoi/1/awb/shpout/basindissolve/merge/*.prj
+.ppoi/1/awb/shpout/watershed/merge/*.shp
+.ppoi/1/awb/shpout/watershed/merge/*.shx
+.ppoi/1/awb/shpout/watershed/merge/*.dbf
+.ppoi/1/awb/shpout/watershed/merge/*.prj
+
 
 # Some samples
 # http://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#Ignoring-Files

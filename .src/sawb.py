@@ -17,9 +17,9 @@ from dbfread import DBF
 import tabulate
 from matplotlib.patches import Polygon
 from mpl_toolkits.basemap import Basemap
+import geopandas as gpd
 import sawb_functions as sawbf
 import sawb_dictionary as sawbd
-
 
 
 # *****************************************************************************************
@@ -46,7 +46,9 @@ if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path+'awb/shpout')
     os.mkdir(ppoi_path+'awb/shpout/basin')
     os.mkdir(ppoi_path+'awb/shpout/basindissolve')
+    os.mkdir(ppoi_path+'awb/shpout/basindissolve/merge')
     os.mkdir(ppoi_path+'awb/shpout/watershed')
+    os.mkdir(ppoi_path+'awb/shpout/watershed/merge')
     os.mkdir(ppoi_path+'awb/watershed')
     os.mkdir(ppoi_path+'awb/winddir')
     os.mkdir(ppoi_path+'graph')
