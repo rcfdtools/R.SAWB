@@ -204,7 +204,7 @@ if polygon_eval:
     if show_plot: plt.show()
     plt.savefig(ppoi_path + 'graph/polygon_map.png', dpi=dpi)
     plt.close()
-    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=True)
+    sawbf.print_log(file_log, '![R.SAWB](graph/polygon_map.png)', center_div=True)
     # Data processing
     da_data = xr.open_dataset(data_path+nc_file)
     da_data[feature_name[data_source_num]] = da_data[feature_name[data_source_num]] * units_mult
