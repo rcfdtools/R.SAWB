@@ -16,10 +16,14 @@ __pycache__/
 .ppoi/1/awb/shpout/basindissolve/merge/*.shx
 .ppoi/1/awb/shpout/basindissolve/merge/*.dbf
 .ppoi/1/awb/shpout/basindissolve/merge/*.prj
+.ppoi/1/awb/shpout/basindissolve/merge/*.cpg
+.ppoi/1/awb/shpout/basindissolve/merge/*.xml
 .ppoi/1/awb/shpout/watershed/merge/*.shp
 .ppoi/1/awb/shpout/watershed/merge/*.shx
 .ppoi/1/awb/shpout/watershed/merge/*.dbf
 .ppoi/1/awb/shpout/watershed/merge/*.prj
+.ppoi/1/awb/shpout/watershed/merge/*.cpg
+.ppoi/1/awb/shpout/watershed/merge/*.xml
 
 
 # Some samples
