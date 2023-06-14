@@ -117,7 +117,7 @@ sawbf.print_log(file_log, '\n%s \n\n' %sawbd.p_max_plot_desc)
 # General map locations
 # *****************************************************************************************
 projection = ['ortho', 'lcc']
-figsize = (4.1, 4.1)
+figsize = (6, 6)
 for i in projection:
     if i == 'ortho':
         fig = plt.figure(figsize=figsize)
