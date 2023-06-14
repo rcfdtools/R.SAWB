@@ -41,7 +41,7 @@ point_eval = True
 
 # Year range
 year_min = 1980
-year_max = 1982
+year_max = 1983
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx

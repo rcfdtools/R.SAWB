@@ -26,7 +26,7 @@ import sawb_dictionary as sawbd
 # General variables & directories
 # *****************************************************************************************
 ppoi_num = 1  # <<<<<<<< PPOI number to process
-purge_ppoi_folder = False  # Delete all previous SPI results. Set False if you require run many .nc data sources
+purge_ppoi_folder = True  # Delete all previous SPI results. Set False if you require run many .nc data sources
 data_path = '../.netcdf/'
 ppoi_path = '../.ppoi/'+str(ppoi_num)+'/'
 if purge_ppoi_folder and os.path.exists(ppoi_path):  # Purge all previous results
@@ -139,7 +139,7 @@ for i in projection:
     map.drawparallels(np.arange(-90,90,meridians_sep))
     x, y = map(point_longitude, point_latitude)
     plt.plot(x, y, 'ok', markersize=3)
-    plt.text(x, y, ' PPOI (Lat: %s, Lon: %s)' %(point_latitude, point_longitude), fontsize=10);
+    plt.text(x, y, ' PPOI\nLat: %s\nLon: %s)' %(point_latitude, point_longitude), fontsize=10);
     plt.title(title)
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
@@ -170,7 +170,7 @@ if polygon_eval:
     lon_0 = lim_east - (lim_east - lim_west) / 2
     width = abs((lim_east - lim_west) / map_polygon_scale_factor) * 1e6
     height = abs((lim_north - lim_south) / map_polygon_scale_factor) * 1e6
-    base_value = 8
+    base_value = 5
     aspect_ratio = abs(height / width)
     if height > width:
         fig_size_height = base_value * aspect_ratio
@@ -195,7 +195,7 @@ if polygon_eval:
     plt.gca().add_patch(poly)
     x, y = map(lon_0, lat_0)
     plt.plot(x, y, 'ok', markersize=0)
-    plt.text(x, y, ' Case zone (centroid Lat: %s, Lon: %s)' % (lat_0, lon_0), fontsize=10);
+    plt.text(x, y, 'Centroid\nLat: %s\nLon: %s' % (lat_0, lon_0), fontsize=10);
     plt.title('Polygon location')
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
