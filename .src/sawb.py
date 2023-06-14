@@ -148,7 +148,8 @@ for i in projection:
     map_fig = ''
     plt.savefig(ppoi_path + 'graph/' + map_file, dpi=dpi)
     plt.close()
-    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=False)
+    sawbf.print_log(file_log, '![R.SAWB](graph/%s)' % map_file, center_div=False, div50=True)
+
 
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure

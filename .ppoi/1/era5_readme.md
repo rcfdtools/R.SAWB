@@ -23,4 +23,4 @@ The current research.....
 
 > The maximum plot value of precipitation is used to truncate the palette colors in the geographic map representations, pixels or cells over these values are displayed in a single color. 
 
-![R.SAWB](graph/global_map.png)![R.SAWB](graph/regional_map.png)
+<div align="center" width="50%">![R.SAWB](graph/global_map.png)</div><div align="center" width="50%">![R.SAWB](graph/regional_map.png)</div>
