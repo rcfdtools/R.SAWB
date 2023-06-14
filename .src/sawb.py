@@ -119,12 +119,12 @@ sawbf.print_log(file_log, '\n%s \n\n' %sawbd.p_max_plot_desc)
 projection = ['ortho', 'lcc']
 for i in projection:
     if i == 'ortho':
-        fig = plt.figure(figsize=(3, 3))
+        fig = plt.figure(figsize=(4, 4))
         title = 'Global location'
         map_file = 'global_map.png'
         meridians_sep = meridians_sep * 2
     else:
-        fig = plt.figure(figsize=(3, 3))
+        fig = plt.figure(figsize=(4, 4))
         title = 'Regional location'
         map_file = 'regional_map.png'
         meridians_sep = meridians_sep
