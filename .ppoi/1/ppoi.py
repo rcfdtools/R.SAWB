@@ -10,6 +10,8 @@ sawb_desc = 'The current research.....'
 # Global parameters
 meridians_sep = 10  # Separation between meridians or parallels in decimal degrees
 map_polygon_scale_factor = 3  # e.g. 1 for Colombia country, 4 for South America
+year_min = 1980  # Year range
+year_max = 1982  # Year range
 
 # SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
@@ -32,16 +34,12 @@ lim_north = 14
 lim_south = -4.8
 lim_east = -66
 lim_west = -82.5
-polygon_eval = True
+polygon_eval = False
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
 point_longitude = -73.7
-point_eval = True
-
-# Year range
-year_min = 1980
-year_max = 1983
+point_eval = False
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx

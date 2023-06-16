@@ -118,3 +118,6 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
 * https://spatial-dev.guru/2022/06/05/merging-multiple-shapefiles-into-one-shapefile-using-python-and-geopandas/
 * https://gis.stackexchange.com/questions/433708/writing-empty-geodataframe-to-shapefile-using-python
+* https://towardsdatascience.com/plotting-maps-with-geopandas-428c97295a73
+* https://geopandas.org/en/stable/docs/user_guide/mapping.html
+* https://matplotlib.org/stable/tutorials/colors/colormaps.html

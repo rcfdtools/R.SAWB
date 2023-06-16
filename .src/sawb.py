@@ -47,8 +47,10 @@ if not os.path.exists(ppoi_path):  # Create folder structure if not exists
     os.mkdir(ppoi_path+'awb/shpout/basin')
     os.mkdir(ppoi_path+'awb/shpout/basindissolve')
     os.mkdir(ppoi_path+'awb/shpout/basindissolve/merge')
+    os.mkdir(ppoi_path+'awb/shpout/basindissolve/graph')
     os.mkdir(ppoi_path+'awb/shpout/watershed')
     os.mkdir(ppoi_path+'awb/shpout/watershed/merge')
+    os.mkdir(ppoi_path+'awb/shpout/watershed/graph')
     os.mkdir(ppoi_path+'awb/watershed')
     os.mkdir(ppoi_path+'awb/winddir')
     os.mkdir(ppoi_path+'graph')
@@ -90,6 +92,7 @@ awb_a_pivot_file = 'awb_a_pivot.csv' # Joined accumulation area file name
 awb_eval = ppoi.awb_eval
 file_log_name = ppoi_path + data_source[data_source_num] + '_readme.md'  # Markdown file log
 file_log = open(file_log_name, 'w+')   # w+ create the file if it doesn't exist
+figsize = (5, 5)
 
 # *****************************************************************************************
 # Preliminar details & parameters
@@ -117,10 +120,9 @@ sawbf.print_log(file_log, '\n\n## General parameters  ' +
 sawbf.print_log(file_log, '\n%s \n\n' %sawbd.p_max_plot_desc)
 
 # *****************************************************************************************
-# General map locations
+# General map plotting locations
 # *****************************************************************************************
 projection = ['ortho', 'lcc']
-figsize = (5, 5)
 for i in projection:
     if i == 'ortho':
         fig = plt.figure(figsize=figsize)
@@ -374,6 +376,7 @@ if awb_eval:
     awb_df = awb_df.set_index('date')
     sawbf.print_log(file_log, '\n\n### Initial processed dataset ([%s](awb/))\n\n%s\n\n' %(awb_q_join_file, awb_df.T.to_markdown()))
     sawbf.print_log(file_log, '%s' %sawbd.awb_dataset_vars)
+
     # Vapor flux serie
     awb_df.to_csv(ppoi_path+'awb/'+awb_q_join_file, encoding='utf-8', index=True)
     awb_df.plot(y='SUM', figsize=(10,6), title='AWB - Atmospheric accumulated vapor flux through Lat.: %f°, Lon.: %f° ' %(point_latitude, point_longitude), ylabel='Q, mm')
@@ -387,6 +390,7 @@ if awb_eval:
     plt.savefig(ppoi_path+a_fig)
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
+
     # Vapor flux pivot
     pivot_table_q = awb_df.pivot_table(index='month', columns='year', values='SUM')
     sawbf.print_log(file_log, '\n\n### Atmospheric vapor flux - Pivot table ([%s](awb/))\n\n' % awb_q_pivot_file)
@@ -399,6 +403,7 @@ if awb_eval:
     plt.savefig(ppoi_path+q_fig)
     if show_plot: plt.show()
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % q_fig)
+
     # Accumulation area pivot
     pivot_table_a = awb_df.pivot_table(index='month', columns='year', values='Akm2')
     sawbf.print_log(file_log, '\n\n### Atmospheric accumulation area (A) - Pivot table ([%s](awb/))\n\n' % awb_a_pivot_file)
@@ -414,3 +419,40 @@ if awb_eval:
     sawbf.print_log(file_log, '\n\n![R.SAWB](%s)' % a_fig)
     plt.close('all')
     sawbf.print_log(file_log, '\n\nAWB records processed: %d\n' % len(awb_df))
+
+    # Merge and show basin & watershed shapefiles
+    shpout_class = ['basindissolve', 'watershed']
+    for d in shpout_class:
+        shpout_path = ppoi_path + 'awb/shpout/' + d + '/'
+        shp_files = glob.glob(shpout_path + '*.shp')
+        # print(shp_files)
+        # Creating the merged empty shapefile
+        shp_merge = d + '.shp'
+        # schema = {"geometry": "Polygon", "properties": {"id": "int"}}
+        schema = {"geometry": "Polygon"}
+        crs = "EPSG:4326"
+        shp = gpd.GeoDataFrame(geometry=[])
+        shp.to_file(shpout_path + 'merge/' + shp_merge, driver='ESRI Shapefile', schema=schema, crs=crs)
+        shp = gpd.read_file(shpout_path + 'merge/' + shp_merge)
+        shp.to_crs(epsg=4326)
+        # Concatenating the shapefiles (required for time-series representations over ArcGIS or QGIS)
+        for i in shp_files:
+            print('Processing: %s' % i)
+            basename = os.path.basename(i)
+            gdf = gpd.read_file(i)
+            legend = True
+            cmap = 'rainbow'
+            if d == 'watershed':
+                legend = False
+                cmap = 'coolwarm'
+            gdf.plot(column='GRIDCODE', linewidth=0.0, legend=legend, edgecolor=None, figsize=figsize, alpha=1,
+                     cmap=cmap, legend_kwds={'label': 'Gridcode', 'orientation': 'vertical'})
+            if show_plot: plt.show()
+            plt.title('AWB - ' + basename)
+            plt.xlabel('Lon.°')
+            plt.ylabel('Lat.°')
+            # plt.legend(title='Gridcode')
+            plt.savefig(ppoi_path + 'awb/shpout/' + d + '/graph/' + basename + '.png', dpi=dpi)
+            plt.close()
+            shp = gpd.GeoDataFrame(pd.concat([gdf, shp]))
+        shp.to_file(shpout_path + 'merge/' + shp_merge)
