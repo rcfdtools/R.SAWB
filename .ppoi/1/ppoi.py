@@ -34,12 +34,12 @@ lim_north = 14
 lim_south = -4.8
 lim_east = -66
 lim_west = -82.5
-polygon_eval = False
+polygon_eval = True
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
 point_longitude = -73.7
-point_eval = False
+point_eval = True
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx

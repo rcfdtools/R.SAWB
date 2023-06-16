@@ -12,7 +12,7 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* Merge atmospheric basin shapefiles into a unique shapefile
+* Merge atmospheric basin shapefiles into a unique shapefile (check .gif frames speed)
 * Plot atmospheric areas
 * AWB post-processing - year list from q folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
