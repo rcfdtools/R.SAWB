@@ -459,5 +459,5 @@ if awb_eval:
         shp.to_file(shpout_path + 'merge/' + shp_merge)
         q_fig = 'awb/shpout/' + d + '/graph/'
         sawbf.make_gif(ppoi_path+q_fig, d, '.png')
-        sawbf.print_log(file_log, '\n![R.SAWB](%s)' %(q_fig+d+'.gif'))
+        sawbf.print_log(file_log, '<img alt="R.LTWB" src="%s" width="500"></img>' %(q_fig+d+'.gif'))
         # Shapefile animations

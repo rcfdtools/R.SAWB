@@ -90,6 +90,4 @@ AWB records processed: 36
 
 ### Atmospheric basins and watersheds
 
-
-![R.SAWB](awb/shpout/basindissolve/graph/basindissolve.gif)
-![R.SAWB](awb/shpout/watershed/graph/watershed.gif)
+<img alt="R.LTWB" src="awb/shpout/basindissolve/graph/basindissolve.gif" width="500"></img><img alt="R.LTWB" src="awb/shpout/watershed/graph/watershed.gif" width="500"></img>
