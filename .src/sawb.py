@@ -421,11 +421,12 @@ if awb_eval:
     sawbf.print_log(file_log, '\n\nAWB records processed: %d\n' % len(awb_df))
 
     # Merge and show basin & watershed shapefiles
+    sawbf.print_log(file_log,'\n\n### Atmospheric basins and watersheds\n\n')
     shpout_class = ['basindissolve', 'watershed']
     for d in shpout_class:
         shpout_path = ppoi_path + 'awb/shpout/' + d + '/'
         shp_files = glob.glob(shpout_path + '*.shp')
-        # print(shp_files)
+        print('%s\n' % shp_files)
         # Creating the merged empty shapefile
         shp_merge = d + '.shp'
         # schema = {"geometry": "Polygon", "properties": {"id": "int"}}
@@ -456,3 +457,5 @@ if awb_eval:
             plt.close()
             shp = gpd.GeoDataFrame(pd.concat([gdf, shp]))
         shp.to_file(shpout_path + 'merge/' + shp_merge)
+        sawbf.make_gif(ppoi_path + 'awb/shpout/' + d + '/graph/', d, '.png')
+        # Shapefile animations
