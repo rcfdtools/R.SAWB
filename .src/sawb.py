@@ -457,6 +457,7 @@ if awb_eval:
             plt.title('AWB - ' + basename)
             plt.xlabel('Lon.°')
             plt.ylabel('Lat.°')
+            plt.xticks(rotation=45)
             # plt.legend(title='Gridcode')
             plt.savefig(ppoi_path + 'awb/shpout/' + d + '/graph/' + basename + '.png', dpi=dpi)
             plt.close()
@@ -469,7 +470,7 @@ if awb_eval:
     sawbf.print_log(file_log, '\n\nMerged shafefiles: ')
     for d in shpout_class:
         shpout_path = 'awb/shpout/' + d + '/'
-        sawbf.print_log(file_log, '[`%s.shp`](%smerge)' %(d, shpout_path))
+        sawbf.print_log(file_log, '[`%s.shp`](%smerge) ' %(d, shpout_path))
 
     # Plot atmospheric river areas
     plt.figure(figsize=(10,10))
@@ -484,7 +485,7 @@ if awb_eval:
     x, y = map(point_longitude, point_latitude)
     plt.plot(x, y, 'ok', markersize=4, color='y')
     #plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
-    plt.title('AWB atmospheric river areas\n Lat: %s, Lon: %s' % (point_latitude, point_longitude))
+    plt.title('AWB atmospheric river areas\n (Lat: %s, Lon: %s)' % (point_latitude, point_longitude))
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
     meridians = np.arange(10., 351., meridians_sep)
