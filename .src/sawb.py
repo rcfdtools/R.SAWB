@@ -73,6 +73,10 @@ lim_east = ppoi.lim_east
 lim_west = ppoi.lim_west
 point_latitude = ppoi.point_latitude
 point_longitude = ppoi.point_longitude
+lim_north_awb = ppoi.lim_north_awb
+lim_south_awb = ppoi.lim_south_awb
+lim_east_awb = ppoi.lim_east_awb
+lim_west_awb = ppoi.lim_west_awb
 year_min = ppoi.year_min
 year_max = ppoi.year_max
 units_mult = ppoi.units_mult
@@ -468,8 +472,8 @@ if awb_eval:
         sawbf.print_log(file_log, '* [%s.shp](%smerge)\n' %(d, shpout_path))
 
     # Plot atmospheric river areas
-    plt.figure(figsize=figsize)
-    map = Basemap(llcrnrlon=lim_west, llcrnrlat=lim_south, urcrnrlon=lim_east, urcrnrlat=lim_north,
+    plt.figure(figsize=(10,10))
+    map = Basemap(llcrnrlon=lim_west_awb, llcrnrlat=lim_south_awb, urcrnrlon=lim_east_awb, urcrnrlat=lim_north_awb,
                   resolution='i', projection='lcc', lat_0=4.6, lon_0=-73.7)
     map.drawmapboundary(fill_color='aqua')
     map.fillcontinents(color='coral', lake_color='aqua')
@@ -479,8 +483,8 @@ if awb_eval:
     map.drawparallels(np.arange(-90, 90, meridians_sep))
     x, y = map(point_longitude, point_latitude)
     plt.plot(x, y, 'ok', markersize=4, color='b')
-    plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
-    plt.title('AWB atmospheric river areas')
+    #plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
+    plt.title('AWB atmospheric river areas\n Lat: %s, Lon: %s' % (point_latitude, point_longitude))
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
     meridians = np.arange(10., 351., meridians_sep)
@@ -488,4 +492,4 @@ if awb_eval:
     if show_plot: plt.show()
     map_fig =  'awb/shpout/watershed/merge/watershed.png'
     plt.savefig(ppoi_path+map_fig, dpi=dpi)
-    sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % map_fig)
+    sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % map_fig, center_div=True)
