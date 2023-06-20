@@ -426,6 +426,7 @@ if awb_eval:
     for d in shpout_class:
         shpout_path = ppoi_path + 'awb/shpout/' + d + '/'
         shp_files = glob.glob(shpout_path + '*.shp')
+        shp_files.sort()
         print('%s\n' % shp_files)
         # Creating the merged empty shapefile
         shp_merge = d + '.shp'
@@ -457,7 +458,34 @@ if awb_eval:
             plt.close()
             shp = gpd.GeoDataFrame(pd.concat([gdf, shp]))
         shp.to_file(shpout_path + 'merge/' + shp_merge)
+        # Shapefile animations
         q_fig = 'awb/shpout/' + d + '/graph/'
         sawbf.make_gif(ppoi_path+q_fig, d, '.png')
         sawbf.print_log(file_log, '<img alt="R.LTWB" src="%s" width="500"></img>' %(q_fig+d+'.gif'))
-        # Shapefile animations
+    sawbf.print_log(file_log, '\n\nMerged shafefiles\n\n')
+    for d in shpout_class:
+        shpout_path = 'awb/shpout/' + d + '/'
+        sawbf.print_log(file_log, '* [%s.shp](%smerge)\n' %(d, shpout_path))
+
+    # Plot atmospheric river areas
+    plt.figure(figsize=figsize)
+    map = Basemap(llcrnrlon=lim_west, llcrnrlat=lim_south, urcrnrlon=lim_east, urcrnrlat=lim_north,
+                  resolution='i', projection='lcc', lat_0=4.6, lon_0=-73.7)
+    map.drawmapboundary(fill_color='aqua')
+    map.fillcontinents(color='coral', lake_color='aqua')
+    # map.drawcoastlines()
+    map.readshapefile(ppoi_path+'awb/shpout/watershed/merge/watershed', 'watershed', drawbounds=True)
+    map.drawmeridians(np.arange(0, 360, meridians_sep))
+    map.drawparallels(np.arange(-90, 90, meridians_sep))
+    x, y = map(point_longitude, point_latitude)
+    plt.plot(x, y, 'ok', markersize=4, color='b')
+    plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
+    plt.title('AWB atmospheric river areas')
+    parallels = np.arange(0., 81, meridians_sep)
+    map.drawparallels(parallels, labels=[False, True, True, False])
+    meridians = np.arange(10., 351., meridians_sep)
+    map.drawmeridians(meridians, labels=[True, False, False, True], rotation=45)
+    if show_plot: plt.show()
+    map_fig =  'awb/shpout/watershed/merge/watershed.png'
+    plt.savefig(ppoi_path+map_fig, dpi=dpi)
+    sawbf.print_log(file_log, '\n![R.SAWB](%s)\n' % map_fig)

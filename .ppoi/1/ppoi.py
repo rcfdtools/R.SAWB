@@ -30,16 +30,16 @@ p_max_plot = 20  # ERA5 reanalysis with conversion to millimeters
 # p_max_plot = 500  # CRU
 
 # Study zone limits in decimal degrees, °dd
-lim_north = 14
+lim_north = 14.
 lim_south = -4.8
-lim_east = -66
+lim_east = -66.
 lim_west = -82.5
-polygon_eval = True
+polygon_eval = False
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
 point_longitude = -73.7
-point_eval = True
+point_eval = False
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx

@@ -12,13 +12,11 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* Merge atmospheric basin shapefiles into a unique shapefile (check .gif frames speed)
-* Plot atmospheric areas
-* AWB post-processing - year list from q folder
+* Plot merged atmospheric watershed shapefile borders
+* AWB post-processing - year list from Q (vapor flux) folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
-* Drop `expver` values and featura. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
-* Plot title with datasource information
-* Log record separators in console
+* Drop `expver` values and feature. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
+* Plot titles with datasource information
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
 * PPOI GeoJson map
 * Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
@@ -49,6 +47,8 @@ Q: vapor flux vector in millimeters
 * Gif animations for time-series data map
 * Scientific Markdown report for each PPOI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder
 * General localization map (polygon and point)
+* Plot atmospheric basin and atmospheric watershed areas
+* Merged atmospheric basin shapefiles into a unique shapefile
 
 
 ## System configuration for big NetCDF files over Windows 11
@@ -114,10 +114,12 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://www.kdnuggets.com/2020/09/geographical-plots-python.html
 * https://jakevdp.github.io/PythonDataScienceHandbook/04.13-geographic-data-with-basemap.html
 * https://notebook.community/milancurcic/lunch-bytes/Fall_2019/LB33/Basemap_v_Cartopy
-* https://matplotlib.org/basemap/users/examples.html
-* https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
 * https://spatial-dev.guru/2022/06/05/merging-multiple-shapefiles-into-one-shapefile-using-python-and-geopandas/
 * https://gis.stackexchange.com/questions/433708/writing-empty-geodataframe-to-shapefile-using-python
 * https://towardsdatascience.com/plotting-maps-with-geopandas-428c97295a73
-* https://geopandas.org/en/stable/docs/user_guide/mapping.html
 * https://matplotlib.org/stable/tutorials/colors/colormaps.html
+* https://matplotlib.org/basemap/users/examples.html
+* https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
+* https://geopandas.org/en/stable/docs/user_guide/mapping.html
+* https://matplotlib.org/basemap/api/basemap_api.html
+* https://basemaptutorial.readthedocs.io/en/latest/shapefile.html

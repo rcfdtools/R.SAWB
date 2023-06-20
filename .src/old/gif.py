@@ -4,8 +4,8 @@ from PIL import Image
 def make_gif(frame_folder):
     frame_len = len(glob.glob(f'{frame_folder}/*.png'))
     print('Frames: %d' %frame_len)
-    seconds_frame = 2
-    duration = frame_len * seconds_frame * 60  # miliseconds
+    seconds_frame = 1.25
+    duration = seconds_frame * 1000  # miliseconds
 
     frames = [Image.open(image) for image in glob.glob(f'{frame_folder}/*.png')]
     frame_one = frames[0]
