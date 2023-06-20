@@ -43,7 +43,7 @@ point_eval = False
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx
-# Limits are use for the atmospheric river areas representations
+# Limits are use for the atmospheric river areas representations. May coincide with the original .nc file used
 awb_eval = True
 lim_north_awb = 16
 lim_south_awb = -58
