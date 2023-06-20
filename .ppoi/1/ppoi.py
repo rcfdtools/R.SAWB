@@ -11,7 +11,7 @@ sawb_desc = 'The current research.....'
 meridians_sep = 10  # Separation between meridians or parallels in decimal degrees
 map_polygon_scale_factor = 3  # e.g. 1 for Colombia country, 4 for South America
 year_min = 1980  # Year range
-year_max = 1982  # Year range
+year_max = 1989  # Year range
 
 # SPI - Data source type and NetCDF file
 data_source_num = 1  # 0:CRU, 1:ERA5-Reanalysis
@@ -34,18 +34,18 @@ lim_north = 14.
 lim_south = -4.8
 lim_east = -66.
 lim_west = -82.5
-polygon_eval = False
+polygon_eval = True
 
 # Point location in decimal degrees, °dd
 point_latitude = 4.6
 point_longitude = -73.7
-point_eval = False
+point_eval = True
 
 # AWB
 # Set awb_eval to False if you not executed ArcGIS for Desktop SAWB.tbx
 # Limits are use for the atmospheric river areas representations. May coincide with the original .nc file used
-awb_eval = True
 lim_north_awb = 16
 lim_south_awb = -58
 lim_east_awb = -25
 lim_west_awb = -96
+awb_eval = True
