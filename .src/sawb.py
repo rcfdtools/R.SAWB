@@ -466,10 +466,10 @@ if awb_eval:
         q_fig = 'awb/shpout/' + d + '/graph/'
         sawbf.make_gif(ppoi_path+q_fig, d, '.png')
         sawbf.print_log(file_log, '<img alt="R.LTWB" src="%s" width="500"></img>' %(q_fig+d+'.gif'))
-    sawbf.print_log(file_log, '\n\nMerged shafefiles\n\n')
+    sawbf.print_log(file_log, '\n\nMerged shafefiles: ')
     for d in shpout_class:
         shpout_path = 'awb/shpout/' + d + '/'
-        sawbf.print_log(file_log, '* [%s.shp](%smerge)\n' %(d, shpout_path))
+        sawbf.print_log(file_log, '[`%s.shp`](%smerge)' %(d, shpout_path))
 
     # Plot atmospheric river areas
     plt.figure(figsize=(10,10))
@@ -482,7 +482,7 @@ if awb_eval:
     map.drawmeridians(np.arange(0, 360, meridians_sep))
     map.drawparallels(np.arange(-90, 90, meridians_sep))
     x, y = map(point_longitude, point_latitude)
-    plt.plot(x, y, 'ok', markersize=4, color='b')
+    plt.plot(x, y, 'ok', markersize=4, color='y')
     #plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
     plt.title('AWB atmospheric river areas\n Lat: %s, Lon: %s' % (point_latitude, point_longitude))
     parallels = np.arange(0., 81, meridians_sep)
