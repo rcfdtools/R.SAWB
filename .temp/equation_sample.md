@@ -3,8 +3,8 @@ Generally, the water content in the atmosphere in the solid and liquid phases is
 $\frac{\delta W}{\delta t}=-\nabla_{H}\cdot\vec{Q}+(E-P)$
 
 Where:  
-$\frac{\delta W}{\delta t} =  
-\nabla_{H} =  
-\vec{Q} =  
-E =  
-P =  
+$\frac{\delta W}{\delta t}$ =  
+$\nabla_{H}$ =  
+$\vec{Q}$ =  
+$E$ =  
+$P$ =  
