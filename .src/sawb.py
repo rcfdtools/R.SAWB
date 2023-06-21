@@ -368,6 +368,7 @@ if point_eval:
 if awb_eval:
     sawbf.print_log(file_log, '\n## Atmospheric Water Balance (AWB) with ERA5 monthly through Latitude: %f°, Longitude: %f° or nearest' %(point_latitude, point_longitude))
     sawbf.print_log(file_log, '\n\n%s\n' % sawbd.awb_desc)
+    sawbf.print_log(file_log, '\n\n%s\n' % sawbd.awb_equation_desc)
     awb_dbf_files = glob.glob(ppoi_path + 'awb/q/' + '*.dbf')
     awb_df = pd.DataFrame()
     for i in awb_dbf_files:
