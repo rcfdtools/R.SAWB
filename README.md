@@ -12,16 +12,15 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* Plot merged atmospheric watershed shapefile borders
+* SPI - Reference table
+* SPI - Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
+* AWB - Technical documentation
 * AWB post-processing - year list from Q (vapor flux) folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
-* Drop `expver` values and feature. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
-* Plot titles with datasource information
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
-* PPOI GeoJson map
-* Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
-* Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
+* PPOI GeoJson map like [GISMobile](https://github.com/rcfdtools/R.GISMobile/blob/main/.poi/Readme.md)
 * Download ERA5 1 hour 0.25dd with full Earth coverage. 1 day aggregation
+* For ERA5 global collections, drop `expver` values and feature. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 
 
@@ -49,6 +48,8 @@ Q: vapor flux vector in millimeters
 * General localization map (polygon and point)
 * Plot atmospheric basin and atmospheric watershed areas
 * Merged atmospheric basin shapefiles into a unique shapefile
+* Plot merged atmospheric watershed shapefile borders
+* Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
 
 
 ## System configuration for big NetCDF files over Windows 11
@@ -88,7 +89,7 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * [Conjoint Analysis of Surface and Atmospheric Water Balances in the Andes-Amazon System](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2017WR021338)
 * [An Atmospheric Water Balance Perspective on Extreme Rainfall Potential for the Contiguous US](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2020WR028387)
 * [Atmospheric water balance over oceanic regions as estimated from satellite, merged, and reanalysis data](https://agupubs.onlinelibrary.wiley.com/doi/full/10.1002/jgrd.50414)
-* Global Atmospheric Water Balance and Runoff from Large River Basins
+* [Global Atmospheric Water Balance and Runoff from Large River Basins](http://hydro.iis.u-tokyo.ac.jp/~taikan/Publication/HP95/HP95.html)
 * https://stackoverflow.com/questions/41898561/pandas-transform-a-dbf-table-into-a-dataframe
 * https://sparkbyexamples.com/pandas/sort-pandas-dataframe-by-date/
 * https://www.dataquest.io/blog/plot-dataframe-pandas/
@@ -118,6 +119,7 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://gis.stackexchange.com/questions/433708/writing-empty-geodataframe-to-shapefile-using-python
 * https://towardsdatascience.com/plotting-maps-with-geopandas-428c97295a73
 * https://matplotlib.org/stable/tutorials/colors/colormaps.html
+* https://matplotlib.org/2.0.2/examples/color/named_colors.html
 * https://matplotlib.org/basemap/users/examples.html
 * https://stackoverflow.com/questions/12251189/how-to-draw-rectangles-on-a-basemap
 * https://geopandas.org/en/stable/docs/user_guide/mapping.html

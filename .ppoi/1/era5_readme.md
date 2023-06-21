@@ -1,7 +1,7 @@
 # Colombia - South America - Atmospheric water balance (AWB) and Drought analysis with the Standardized Precipitation Index (SPI)
 Keywords: `SWB` `AWB` `SPI` `ERA5` `CRU`
 
-The current research.....
+This study contains an estimate the Standardized Precipitation Index (SPI) and the water balance over the defined study zone and the convergence to the one specific point using the atmospheric water balance method (AWB).
 
 ## General parameters  
 
@@ -27,11 +27,27 @@ The current research.....
 
 ## Standardized Precipitation Index (SPI)
 
-The Standardized Precipitation Index (SPI) is a widely used index to characterize meteorological drought on a range of timescales. On short timescales, the SPI is closely related to soil moisture, while at longer timescales, the SPI can be related to groundwater and reservoir storage. The SPI can be compared across regions with markedly different climates. It quantifies observed precipitation as a standardized departure from a selected probability distribution function that models the raw precipitation data. The raw precipitation data are typically fitted to a gamma or a Pearson Type III distribution, and then transformed to a normal distribution. The SPI values can be interpreted as the number of standard deviations by which the observed anomaly deviates from the long-term mean. The SPI can be created for differing periods of 1-to-36 months, using monthly input data. For the operational community, the SPI has been recognized as the standard index that should be available worldwide for quantifying and reporting meteorological drought. Concerns have been raised about the utility of the SPI as a measure of changes in drought associated with climate change, as it does not deal with changes in evapotranspiration. [(NCAR)](https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi)
+The Standardized Precipitation Index (SPI) is a widely used index to characterize meteorological drought on a range of timescales. On short timescales, the SPI is closely related to soil moisture, while at longer timescales, the SPI can be related to groundwater and reservoir storage. The SPI can be compared across regions with markedly different climates. It quantifies observed precipitation as a standardized departure from a selected probability distribution function that models the raw precipitation data. The raw precipitation data are typically fitted to a gamma or a Pearson Type III distribution, and then transformed to a normal distribution. The SPI values can be interpreted as the number of standard deviations by which the observed anomaly deviates from the long-term mean. The SPI can be created for differing periods of 1-to-36 months, using monthly input data. For the operational community, the SPI has been recognized as the standard index that should be available worldwide for quantifying and reporting meteorological drought. Concerns have been raised about the utility of the SPI as a measure of changes in drought associated with climate change, as it does not deal with changes in evapotranspiration. [(NCAR)](https://climatedataguide.ucar.edu/climate-data/standardized-precipitation-index-spi).
+
+ The Standardized Precipitation Index (SPI-n) is a statistical indicator comparing the total precipitation received at a particular location during a period of n months with the long-term rainfall distribution for the same period of time at that location. SPI is calculated on a monthly basis for a moving window of n months, where n indicates the rainfall accumulation period, which is typically 1, 3, 6, 9, 12, 24 or 48 months. The corresponding SPIs are denoted as SPI-1, SPI-3, SPI-6, etc.   In order to allow for the statistical comparison of wetter and drier climates, SPI is based on a transformation of the accumulated precipitation into a standard normal variable with zero mean and variance equal to one. SPI results are given in units of standard deviation from the long-term mean of the standardized distribution.   In 2010 WMO selected the SPI as a key meteorological drought indicator to be produced operationally by meteorological services.  [(IES - CRM Unit. 2013)](https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf)
+
+SPI is presented in the form of maps or time series graphs for a single location. The value of the SPI gives a measure of the severity of a wet or dry event as summarised in the next Table.
+
+Table – SPI Classification following McKee et al. (1993)
+
+| SPI Value            |  Class       |  Colour   |  Hex    |
+|:---------------------|:-------------|:----------|:--------|
+| SPI >= 2.00          | Extreme wet  | Blue      | #FF0000 |
+| 1.50 < SPI < 2.00    | Severe wet   | Purple    | #FFAA00 |
+| 1.00 < SPI <= 1.50   | Moderate wet | Lilac     | #FFFF00 |
+| -1.00 < SPI <= 1.00  | Near normal  | White     | #C8C8C8 |
+| -1.50 < SPI <= -1.00 | Moderate dry | Yellow    | #E9CCF9 |
+| -2.00 < SPI <= -1.50 | Severe dry   | Orange    | #833393 |
+| SPI <= -2.00         | Extreme dry  | Red       | #0000FF |
 
 Precipitation: accumulated liquid and frozen water, including rain and snow, that falls to the Earths surface. It is the sum of large-scale precipitation (that precipitation which is generated by large-scale weather patterns, such as troughs and cold fronts) and convective precipitation (generated by convection which occurs when air at lower levels in the atmosphere is warmer and less dense than the air above, so it rises). Precipitation variables do not include fog, dew or the precipitation that evaporates in the atmosphere before it lands at the surface of the Earth. This variable is accumulated from the beginning of the forecast time to the end of the forecast step. The units of precipitation are depth in metres. It is the depth the water would have if it were spread evenly over the grid box. Care should be taken when comparing model variables with observations, because observations are often local to a particular point in space and time, rather than representing averages over a model grid box and model time step. [(www.copernicus.eu)](https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-land-monthly-means)
 
-* SPI index mobile average times: [1, 3, 6]
+* SPI - Index mobile average times current processed: [1, 3, 6]
 
 ### Zonal analysis through N: 14.000000°, S: -4.800000°, E: -66.000000°, W: -82.500000°
 
@@ -143,6 +159,16 @@ Dataset with SPI calculations as comma-separated values: [era5_spi_point.csv](sp
 
 ## Atmospheric Water Balance (AWB) with ERA5 monthly through Latitude: 4.600000°, Longitude: -73.700000° or nearest
 
+Water balance is the most fundamental aspect of the hydrological cycle. Traditionally, water balance has been estimated using observational data at ground surface. Currently, there are many studies in progress that seek to observe or to estimate evapotranspiration and precipitation over large spatial scales using radar or satellite remote sensing. However, it is still difficult to obtain very reliable estimates. On the other hand, water balance estimation using atmospheric data, namely the atmospheric water balance method, is becoming easier to apply than before due to the availability of high resolution atmospheric data.
+
+Three important research areas that need to be investigated by hydrologists addressing the problems of global change are:
+
+1. better understanding of mechanisms associated with global water circulation and balance;
+2. the development of climate models which can represent the regional scale water circulation and balance, including precise hydrological surface models at GCM (general circulation model) grid scales;
+3. the interpretation of the model forecasts for societal benefit.
+
+In each of these research areas, the atmospheric water balance can play a significant role: it can help in the estimation of global water circulation and balance, in the validation of the GCM grid scale hydrological models, and in the interpretation of the model forecasts for water resources assessment. [(Taikan OKI, Katumi MUSIAKE, Hiroshi MATSUYAMA and Kooiti MASUDA, Hydrological Processes, 9, 655-678, 1995.)](http://hydro.iis.u-tokyo.ac.jp/~taikan/Publication/HP95/HP95.html)
+
 Processed years: [1980. 1981. 1982. 1983. 1984. 1985. 1986. 1987. 1988. 1989.]
 
 ### Initial processed dataset ([awb_q.csv](awb/))
@@ -205,7 +231,7 @@ Processed years: [1980. 1981. 1982. 1983. 1984. 1985. 1986. 1987. 1988. 1989.]
 AWB records processed: 147
 
 
-### Atmospheric basins and watersheds
+### Atmospheric basins, watersheds and rivers
 
 <img alt="R.LTWB" src="awb/shpout/basindissolve/graph/basindissolve.gif" width="500"></img><img alt="R.LTWB" src="awb/shpout/watershed/graph/watershed.gif" width="500"></img>
 

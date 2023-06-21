@@ -163,11 +163,15 @@ for i in projection:
 # *****************************************************************************************
 # Standardized Precipitation Index (SPI) - Procedure
 # *****************************************************************************************
+spi_class_df = pd.read_csv('../SPI_Classification.csv')
+spi_class_df.set_index('SPI Value', inplace = True)
 if polygon_eval or point_eval:
     sawbf.print_log(file_log, '\n\n## Standardized Precipitation Index (SPI)\n\n' +
                     sawbd.spi_desc +
-                    '\n\n%s' %sawbd.precipitation_desc +
-                    '\n\n* SPI index mobile average times: %s\n' %ppoi.times)
+                    '\n\n%s' % sawbd.spi_table_desc +
+                    '\n\n%s' % spi_class_df.to_markdown() +
+                    '\n\n%s' % sawbd.precipitation_desc +
+                    '\n\n* SPI - Index mobile average times current processed: %s\n' %ppoi.times)
 
 # SPI - Polygon processing
 if polygon_eval:
@@ -362,7 +366,8 @@ if point_eval:
 # AWB - Post-processing procedure (ArcGIS for Desktop SAWB.tbx need to be run before)
 # *****************************************************************************************
 if awb_eval:
-    sawbf.print_log(file_log, '\n## Atmospheric Water Balance (AWB) with ERA5 monthly through Latitude: %f°, Longitude: %f° or nearest\n' %(point_latitude, point_longitude))
+    sawbf.print_log(file_log, '\n## Atmospheric Water Balance (AWB) with ERA5 monthly through Latitude: %f°, Longitude: %f° or nearest' %(point_latitude, point_longitude))
+    sawbf.print_log(file_log, '\n\n%s\n' % sawbd.awb_desc)
     awb_dbf_files = glob.glob(ppoi_path + 'awb/q/' + '*.dbf')
     awb_df = pd.DataFrame()
     for i in awb_dbf_files:
@@ -425,7 +430,7 @@ if awb_eval:
     sawbf.print_log(file_log, '\n\nAWB records processed: %d\n' % len(awb_df))
 
     # Merge and show basin & watershed shapefiles
-    sawbf.print_log(file_log,'\n\n### Atmospheric basins and watersheds\n\n')
+    sawbf.print_log(file_log,'\n\n### Atmospheric basins, watersheds and rivers\n\n')
     shpout_class = ['basindissolve', 'watershed']
     for d in shpout_class:
         shpout_path = ppoi_path + 'awb/shpout/' + d + '/'
@@ -485,7 +490,7 @@ if awb_eval:
     x, y = map(point_longitude, point_latitude)
     plt.plot(x, y, 'ok', markersize=4, color='y')
     #plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
-    plt.title('AWB atmospheric river areas\n (Lat: %s, Lon: %s)' % (point_latitude, point_longitude))
+    plt.title('AWB - Atmospheric river areas\n (Lat: %s, Lon: %s)' % (point_latitude, point_longitude))
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
     meridians = np.arange(10., 351., meridians_sep)
