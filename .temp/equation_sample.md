@@ -1,1 +1,15 @@
-Generally, the water content in the atmosphere in the solid and liquid phases is negligible, and the simplified equation will be described as:<br><div align="center"><br><br>$\frac{\delta W}{\delta t}=-\nabla_{H}\cdot\vec{Q}+(E-P)$<br><br></div><br><br>Where:<br><br>$\frac{\delta W}{\delta t}$ = variation of precipitable water in the time<br>$\nabla_{H}$ = horizontal divergence<br>$\vec{Q} = (Q_{\alpha},Q_{\phi})$ = vapor flux vector, and the components are directed towards east and north<br>$E$ = evapotranspiration<br>$P$ =  precipitation<br>
+Generally, the water content in the atmosphere in the solid and liquid phases is negligible, and the simplified equation will be described as:
+
+<div align="center">
+
+$\frac{\delta W}{\delta t}=-\nabla_{H}\cdot\vec{Q}+(E-P)$
+
+</div>
+
+Where:  
+
+$\frac{\delta W}{\delta t}$ = variation of precipitable water in the time  
+$\nabla_{H}$ = horizontal divergence  
+$\vec{Q} = (Q_{\alpha},Q_{\phi})$ = vapor flux vector, and the components are directed towards east and north  
+$E$ = evapotranspiration  
+$P$ =  precipitation<br>  
