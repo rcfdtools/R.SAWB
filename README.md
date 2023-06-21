@@ -125,3 +125,4 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://geopandas.org/en/stable/docs/user_guide/mapping.html
 * https://matplotlib.org/basemap/api/basemap_api.html
 * https://basemaptutorial.readthedocs.io/en/latest/shapefile.html
+* https://www.physicsread.com/latex-vector/#:~:
