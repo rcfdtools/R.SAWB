@@ -8,7 +8,8 @@ $\frac{\delta W}{\delta t}=-\nabla_{H}\cdot\vec{Q}+(E-P)$
 
 Where:  
 
-$\frac{\delta W}{\delta t}$ = variation of precipitable water in the time  
+$W$ = precipitable water  
+$t$ = time  
 $\nabla_{H}$ = horizontal divergence  
 $\vec{Q} = (Q_{\alpha},Q_{\phi})$ = vapor flux vector, and the components are directed towards east and north  
 $E$ = evapotranspiration  
