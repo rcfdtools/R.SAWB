@@ -130,7 +130,7 @@ projection = ['ortho', 'lcc']
 for i in projection:
     if i == 'ortho':
         fig = plt.figure(figsize=figsize)
-        title = 'Global location'
+        title = 'Global point location'
         map_file = 'global_map.png'
         meridians_sep = meridians_sep * 2
     else:
@@ -491,7 +491,7 @@ if awb_eval:
     x, y = map(point_longitude, point_latitude)
     plt.plot(x, y, 'ok', markersize=4, color='y')
     #plt.text(x, y, ' Lat: %s\nLon: %s)' % (point_latitude, point_longitude), fontsize=8);
-    plt.title('AWB - Atmospheric river areas\n (Lat: %s, Lon: %s)' % (point_latitude, point_longitude))
+    plt.title('AWB - Converged atmospheric river vectors\n (Point over Lat: %s, Lon: %s)' % (point_latitude, point_longitude))
     parallels = np.arange(0., 81, meridians_sep)
     map.drawparallels(parallels, labels=[False, True, True, False])
     meridians = np.arange(10., 351., meridians_sep)

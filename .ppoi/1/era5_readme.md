@@ -159,6 +159,8 @@ Dataset with SPI calculations as comma-separated values: [era5_spi_point.csv](sp
 
 ## Atmospheric Water Balance (AWB) with ERA5 monthly through Latitude: 4.600000°, Longitude: -73.700000° or nearest
 
+[Reference: Taikan OKI, Katumi MUSIAKE, Hiroshi MATSUYAMA and Kooiti MASUDA, Hydrological Processes, 9, 655-678, 1995.](http://hydro.iis.u-tokyo.ac.jp/~taikan/Publication/HP95/HP95.html)
+
 Water balance is the most fundamental aspect of the hydrological cycle. Traditionally, water balance has been estimated using observational data at ground surface. Currently, there are many studies in progress that seek to observe or to estimate evapotranspiration and precipitation over large spatial scales using radar or satellite remote sensing. However, it is still difficult to obtain very reliable estimates. On the other hand, water balance estimation using atmospheric data, namely the atmospheric water balance method, is becoming easier to apply than before due to the availability of high resolution atmospheric data.
 
 Three important research areas that need to be investigated by hydrologists addressing the problems of global change are:
@@ -167,7 +169,7 @@ Three important research areas that need to be investigated by hydrologists addr
 2. the development of climate models which can represent the regional scale water circulation and balance, including precise hydrological surface models at GCM (general circulation model) grid scales;
 3. the interpretation of the model forecasts for societal benefit.
 
-In each of these research areas, the atmospheric water balance can play a significant role: it can help in the estimation of global water circulation and balance, in the validation of the GCM grid scale hydrological models, and in the interpretation of the model forecasts for water resources assessment. [(Taikan OKI, Katumi MUSIAKE, Hiroshi MATSUYAMA and Kooiti MASUDA, Hydrological Processes, 9, 655-678, 1995.)](http://hydro.iis.u-tokyo.ac.jp/~taikan/Publication/HP95/HP95.html)
+In each of these research areas, the atmospheric water balance can play a significant role: it can help in the estimation of global water circulation and balance, in the validation of the GCM grid scale hydrological models, and in the interpretation of the model forecasts for water resources assessment.
 
 
 Generally, the water content in the atmosphere in the solid and liquid phases is negligible, and the simplified equation will be described as:
@@ -180,11 +182,11 @@ $\frac{\delta W}{\delta t}=-\nabla_{H}\cdot\vec{Q}+(E-P)$
 
 Where:
 
-$W$ = precipitable water
-$t$ = time
-$\nabla_{H}$ = horizontal divergence
-$\vec{Q} = (Q_{\alpha},Q_{\phi})$ = vapor flux vector, and the components are directed towards east and north
-$E$ = evapotranspiration
+$W$ = precipitable water  
+$t$ = time  
+$\nabla_{H}$ = horizontal divergence  
+$\vec{Q} = (Q_{\alpha},Q_{\phi})$ = vapor flux vector, and the components are directed towards east and north  
+$E$ = evapotranspiration  
 $P$ =  precipitation
 
 Processed years: [1980. 1981. 1982. 1983. 1984. 1985. 1986. 1987. 1988. 1989.]

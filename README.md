@@ -12,9 +12,6 @@ Q: vapor flux vector in millimeters
 
 ## Pending tasks
 
-* SPI - Reference table
-* SPI - Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
-* AWB - Technical documentation
 * AWB post-processing - year list from Q (vapor flux) folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
@@ -50,7 +47,9 @@ Q: vapor flux vector in millimeters
 * Merged atmospheric basin shapefiles into a unique shapefile
 * Plot merged atmospheric watershed shapefile borders
 * Location map, world. Rectangle data source, rectangle study zone, point. See https://docs.xarray.dev/en/stable/user-guide/plotting.html
-
+* SPI - Classification reference table
+* SPI - Technical documentation for scientific articles. See https://edo.jrc.ec.europa.eu/documents/factsheets/factsheet_spi_ado.pdf
+* AWB - Technical documentation
 
 ## System configuration for big NetCDF files over Windows 11
 
