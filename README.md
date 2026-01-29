@@ -19,7 +19,7 @@ Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru`
 * Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
 
 
-## [sawb.py](.src/sawb.py) features
+## [sawb.py](file/src/sawb.py) features
 
 * Execution over different data sources as CRU or ERA5 reanalysis
 * Maximum precipitation value for map plots
@@ -33,7 +33,7 @@ Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru`
 * Units conversion, e.g. m to mm for rain or evaporation parameters
 * Polygon processing on demand with limits defined by user
 * Point processing on demand with coordinates defined by user
-* Creates PPOI folder structures for new case studies. The file [.ppoi/1/ppoi.py](.ppoi/1/ppoi.py) used as template
+* Creates PPOI folder structures for new case studies. The file: [file/poi/1/ppoi.py](.ppoi/1/ppoi.py) is used as template
 * Purge last results before a new running
 * Global definitions dictionary as spi_dictionary.py
 * Validate and fix range year_min > year_max
