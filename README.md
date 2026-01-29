@@ -1,3 +1,5 @@
+<div align="center"><img alt="R.HydroTools" src="file/graph/R.HydroTools.svg" width="300px"><br></div>
+
 # R&D: Surface Water Balance (SWB), Atmospheric Water Balance (AWB) and Standardized Precipitation Index (SPI) in Colombia - R.SAWB 
 Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru` 
 
