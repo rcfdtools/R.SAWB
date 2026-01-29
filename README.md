@@ -1,11 +1,11 @@
-<div align="center"><img alt="R.HydroTools" src="file/graph/R.SAWB.svg" width="300px"><br></div>
+<div align="center"><img alt="R.HydroTools" src="file/graph/R.SAWB.svg" width="200px"><br></div>
 
 # R&D: Surface Water Balance (SWB), Atmospheric Water Balance (AWB) and Standardized Precipitation Index (SPI) in Colombia - R.SAWB 
 Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru` 
 
-P: precipitation in millimeters
-E: evaporation in millimeters
-Q: vapor flux vector in millimeters
+* P: precipitation in millimeters  
+* E: evaporation in millimeters  
+* Q: vapor flux vector in millimeters  
 
 
 ## Pending tasks
