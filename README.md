@@ -1,9 +1,5 @@
-# R.SAWB
-Keywords: `SWB` `AWB` `SPI` `ERA5` `CRU` 
-
-Surface Water Balance (SWB) &amp; Atmospheric Water Balance (AWB) &amp; Standardized Precipitation Index (SPI)
-
-AWB
+# R&D: Surface Water Balance (SWB), Atmospheric Water Balance (AWB) and Standardized Precipitation Index (SPI) in Colombia - R.SAWB 
+Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru` 
 
 P: precipitation in millimeters
 E: evaporation in millimeters
