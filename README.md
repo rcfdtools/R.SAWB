@@ -1,6 +1,6 @@
-<div align="center"><img alt="R.SAWB" src="file/graph/R.SAWB.svg" width="200px"><br></div>
+<div align="center"><a href="https://github.com/rcfdtools" target="_blank"><img src="https://github.com/rcfdtools/rcfdtools/blob/main/graph/rcfdtools_banner.png" alt="R.LTWB" width="100%" border="0" /></a></div>
 
-# RESEARCH: Surface Water Balance (SWB), Atmospheric Water Balance (AWB) and Standardized Precipitation Index (SPI) in Colombia - R.SAWB 
+# RESEARCH: Surface Water Balance (SWB), Atmospheric Water Balance (AWB) and Standardized Precipitation Index (SPI) in Colombia - SAWB 
 Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru` 
 
 * P: precipitation in millimeters  
