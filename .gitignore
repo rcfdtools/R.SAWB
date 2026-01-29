@@ -25,18 +25,18 @@ __pycache__/
 .ppoi/1/awb/shpout/watershed/merge/*.cpg
 .ppoi/1/awb/shpout/watershed/merge/*.xml
 
-ppoi/1/awb/shpout/basindissolve/merge/*.shp
-ppoi/1/awb/shpout/basindissolve/merge/*.shx
-ppoi/1/awb/shpout/basindissolve/merge/*.dbf
-ppoi/1/awb/shpout/basindissolve/merge/*.prj
-ppoi/1/awb/shpout/basindissolve/merge/*.cpg
-ppoi/1/awb/shpout/basindissolve/merge/*.xml
-ppoi/1/awb/shpout/watershed/merge/*.shp
-ppoi/1/awb/shpout/watershed/merge/*.shx
-ppoi/1/awb/shpout/watershed/merge/*.dbf
-ppoi/1/awb/shpout/watershed/merge/*.prj
-ppoi/1/awb/shpout/watershed/merge/*.cpg
-ppoi/1/awb/shpout/watershed/merge/*.xml
+poi/1/awb/shpout/basindissolve/merge/*.shp
+poi/1/awb/shpout/basindissolve/merge/*.shx
+poi/1/awb/shpout/basindissolve/merge/*.dbf
+poi/1/awb/shpout/basindissolve/merge/*.prj
+poi/1/awb/shpout/basindissolve/merge/*.cpg
+poi/1/awb/shpout/basindissolve/merge/*.xml
+poi/1/awb/shpout/watershed/merge/*.shp
+poi/1/awb/shpout/watershed/merge/*.shx
+poi/1/awb/shpout/watershed/merge/*.dbf
+poi/1/awb/shpout/watershed/merge/*.prj
+poi/1/awb/shpout/watershed/merge/*.cpg
+poi/1/awb/shpout/watershed/merge/*.xml
 
 
 # Some samples
