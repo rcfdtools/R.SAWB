@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="es"><Esri><CreaDate>20230622</CreaDate><CreaTime>08472500</CreaTime><ArcGISFormat>1.0</ArcGISFormat><SyncOnce>TRUE</SyncOnce><DataProperties><lineage><Process Name="Raster Calculator (3)" ToolSource="c:\program files (x86)\arcgis\desktop10.2\ArcToolbox\Toolboxes\Spatial Analyst Tools.tbx\RasterCalculator" Date="20230622" Time="084725">RasterCalculator (("tp_Layer"-"e_Layer"))*1000 I:\R.SAWB\.ppoi\1\awb\qpot\QPot20070501.tif</Process></lineage></DataProperties></Esri></metadata>
