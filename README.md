@@ -13,7 +13,7 @@ Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru`
 * AWB post-processing - year list from Q (vapor flux) folder
 * General statistics over the data source file .nc and the study zone. Pmin, Pmax, Pavg, Pstd, Emin, Emax, Eavg, Estd.
 * Rain and evaporation time series over point and polygon. P-E. Graph and table
-* PPOI GeoJson map like [GISMobile](https://github.com/rcfdtools/R.GISMobile/blob/main/.poi/Readme.md)
+* POI GeoJson map like [GISMobile](https://github.com/rcfdtools/R.GISMobile/blob/main/.poi/Readme.md)
 * Download ERA5 1 hour 0.25dd with full Earth coverage. 1 day aggregation
 * For ERA5 global collections, drop `expver` values and feature. `expver` is used to tell the difference between the initial release (expver=5, called ERA5T) and validated ERA5 data (expver=1). https://confluence.ecmwf.int/display/CKB/ERA5%3A+data+documentation
 * Compress .nc & .csv into .zip files for GitHub massive uploads (95MB part files)
@@ -29,17 +29,17 @@ Keywords: `research-and-development` `swb` `awb` `spi` `era5` `cru`
 * SPI calculation over multiple moving window of n months defined by the user
 * Precipitation & SPI yearly maps per month (for a range of accumulation periods). Classification and palette color for SPI Classification following McKee et al. (1993) 
 * Exception control for years outside the available data limit, e.g. the datafile .nc contains values between 1980-2022 and the user set a range between 1970-2022.
-* Research point and polygon `ppoi.py` contains the parameters required for the execution, like description, order #, date and description, data source, point location and polygon limits, year ranges, mobile average times, units conversions multipliers and the maximum values used as references for the map global palettes
+* Research point and polygon `poi.py` contains the parameters required for the execution, like description, order #, date and description, data source, point location and polygon limits, year ranges, mobile average times, units conversions multipliers and the maximum values used as references for the map global palettes
 * Units conversion, e.g. m to mm for rain or evaporation parameters
 * Polygon processing on demand with limits defined by user
 * Point processing on demand with coordinates defined by user
-* Creates PPOI folder structures for new case studies. The file: [file/poi/1/ppoi.py](.ppoi/1/ppoi.py) is used as template
+* Creates POI folder structures for new case studies. The file: [file/poi/1/poi.py](file/poi/1/poi.py) is used as template
 * Purge last results before a new running
 * Global definitions dictionary as spi_dictionary.py
 * Validate and fix range year_min > year_max
 * Integrated script sawb.py for run all the proceses. SPI & AWS post-processing are integrated
 * Gif animations for time-series data map
-* Scientific Markdown report for each PPOI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder
+* Scientific Markdown report for each POI and data source. (Note: SPI can run with CRU or EAR5 datasets. The current AWB script only works with EAR-5 monthly datasets). AWB results links. AWB variable description obtained from Model Builder
 * General localization map (polygon and point)
 * Plot atmospheric basin and atmospheric watershed areas
 * Merged atmospheric basin shapefiles into a unique shapefile
