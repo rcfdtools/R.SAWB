@@ -124,4 +124,4 @@ Windows CMD sample: "C:\Program Files\7-Zip\7z.exe" a -v97m "D:\R.SAWB\.nc\File.
 * https://basemaptutorial.readthedocs.io/en/latest/shapefile.html
 * https://www.physicsread.com/latex-vector
 
-<div align="center"><img alt="rcfdtools" src="file/graph/R.SAWB.svg" height="32px"></div>
+<div align="center"><img alt="rcfdtools" src="file/graph/R.SAWB.svg" height="46px"></div>
